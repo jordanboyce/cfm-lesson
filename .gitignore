@@ -1,0 +1,70 @@
+# --- Firebase ---
+# Local CLI cache (hosting deploy manifests, emulator data)
+.firebase/
+# Debug logs written by the firebase CLI
+firebase-debug.log
+firebase-debug.*.log
+firestore-debug.log
+database-debug.log
+pubsub-debug.log
+ui-debug.log
+dataconnect-debug.log
+*-debug.log
+# Emulator exports
+.runtimeconfig.json
+emulator-data/
+
+# NOTE: .firebaserc IS committed on purpose -- it holds the project alias
+# so "firebase deploy" works from a fresh clone.
+
+# --- Vendored agent skills (re-created by `firebase init`) ---
+# `firebase init` drops ~87 skill docs into BOTH of these, byte-identical.
+# They are upstream copies of github.com/firebase/agent-skills, not our code.
+# skills-lock.json IS tracked so the exact set can be restored.
+.agents/skills/
+.claude/skills/
+# Personal / machine-local agent config
+.claude/settings.local.json
+
+# --- Secrets / env ---
+.env
+.env.*
+!.env.example
+*serviceAccount*.json
+*service-account*.json
+*-firebase-adminsdk-*.json
+
+# --- Node (only if tooling is added later) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.cache/
+
+# --- Editors ---
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS cruft ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+$RECYCLE.BIN/
+
+# --- Misc ---
+*.bak
+*.tmp
+*.orig

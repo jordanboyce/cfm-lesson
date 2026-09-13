@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091a30">
+  <meta name="description" content="An interactive youth Sunday School lesson for Proverbs and Ecclesiastes.">
+  <title>He Shall Direct Thy Paths</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23091a30'/%3E%3Cpath d='M17 51C17 37 47 35 47 13' fill='none' stroke='%23f5c35b' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='47' cy='13' r='5' fill='%23ffffff'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #0c1930;
+      --navy: #091a30;
+      --blue: #16385f;
+      --sky: #74b9ff;
+      --gold: #f5c35b;
+      --paper: #f4f8fc;
+      --white: #ffffff;
+      --muted: #5b6879;
+      --line: #ccdae8;
+      --success: #1f7a65;
+      --shadow: 0 18px 48px rgba(7, 25, 49, .14);
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(116, 185, 255, .24), transparent 24rem),
+        linear-gradient(155deg, #eef6fd 0%, #ffffff 45%, #f7f3e8 100%);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    button, textarea { font: inherit; }
+    button { touch-action: manipulation; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(9, 26, 48, .94);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .topbar-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: .72rem 1rem .6rem;
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: .82rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .progress-track {
+      height: 5px;
+      margin-top: .55rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .16);
+    }
+
+    .progress-bar {
+      width: 16.66%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--gold), #fff0ad);
+      transition: width .55s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    main {
+      width: min(100% - 1.25rem, 780px);
+      margin: 0 auto;
+      padding: 1.15rem 0 3.5rem;
+    }
+
+    .lesson-header {
+      position: relative;
+      overflow: hidden;
+      padding: 1.35rem 1.25rem 1.45rem;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--navy), #184a78);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .lesson-header::after {
+      content: "";
+      position: absolute;
+      right: -4rem;
+      bottom: -7rem;
+      width: 15rem;
+      height: 15rem;
+      border: 2px solid rgba(245, 195, 91, .34);
+      border-radius: 50%;
+      box-shadow: 0 0 0 24px rgba(245, 195, 91, .07), 0 0 0 52px rgba(245, 195, 91, .04);
+    }
+
+    .eyebrow {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 .45rem;
+      color: #c8ddf2;
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 13ch;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 9vw, 3.7rem);
+      line-height: 1.03;
+      letter-spacing: -.035em;
+    }
+
+    .reference {
+      position: relative;
+      z-index: 1;
+      margin: .8rem 0 0;
+      color: #dceaf7;
+      font-size: .95rem;
+    }
+
+    .path-map {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: .3rem;
+      margin: 1rem .25rem .7rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .path-map li {
+      position: relative;
+      min-width: 0;
+      padding-top: 1.25rem;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 760;
+      text-align: center;
+    }
+
+    .path-map li::before {
+      content: "";
+      position: absolute;
+      top: .2rem;
+      left: 50%;
+      width: .72rem;
+      height: .72rem;
+      transform: translateX(-50%);
+      border: 3px solid var(--line);
+      border-radius: 50%;
+      background: var(--paper);
+      z-index: 2;
+      transition: background .3s ease, border-color .3s ease, transform .3s ease;
+    }
+
+    .path-map li:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: .48rem;
+      left: calc(50% + .4rem);
+      width: calc(100% - .8rem);
+      height: 3px;
+      background: var(--line);
+      z-index: 1;
+      transition: background .3s ease;
+    }
+
+    .path-map li.done::before,
+    .path-map li.active::before {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+
+    .path-map li.active::before {
+      transform: translateX(-50%) scale(1.28);
+      box-shadow: 0 0 0 6px rgba(245, 195, 91, .2);
+    }
+
+    .path-map li.done::after { background: var(--gold); }
+
+    .stage {
+      display: none;
+      margin-top: .8rem;
+      padding: 1.3rem 1.15rem;
+      border: 1px solid rgba(25, 57, 92, .12);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: var(--shadow);
+    }
+
+    .stage.active {
+      display: block;
+      animation: stageIn .5s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    @keyframes stageIn {
+      from { opacity: 0; transform: translateY(14px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .step-label {
+      margin: 0 0 .3rem;
+      color: #35658f;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0 0 .55rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.65rem, 7vw, 2.35rem);
+      line-height: 1.12;
+      letter-spacing: -.02em;
+    }
+
+    h3 {
+      margin: 1.2rem 0 .45rem;
+      font-size: 1.02rem;
+      line-height: 1.25;
+    }
+
+    .lead { margin: 0 0 1rem; color: #344458; }
+    .question {
+      margin: 1rem 0;
+      padding-left: 1rem;
+      border-left: 4px solid var(--gold);
+      font-size: clamp(1.25rem, 5vw, 1.7rem);
+      font-weight: 760;
+      line-height: 1.3;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: .45rem;
+      border: 0;
+      border-radius: 999px;
+      padding: .72rem 1rem;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 760;
+      cursor: pointer;
+      box-shadow: 0 7px 18px rgba(9, 26, 48, .18);
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .button:hover { background: var(--blue); transform: translateY(-2px); }
+    .button:active { transform: translateY(0) scale(.98); }
+    .button:focus-visible, .choice:focus-visible, .reveal-card:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--sky);
+      outline-offset: 3px;
+    }
+
+    .button.secondary {
+      border: 1px solid #adc2d7;
+      background: var(--white);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    .reveal-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows .45s ease, opacity .4s ease, margin .45s ease;
+    }
+
+    .reveal-panel > div { overflow: hidden; }
+    .reveal-panel.open { grid-template-rows: 1fr; opacity: 1; margin-top: .8rem; }
+
+    .revealed-content {
+      padding: .9rem 1rem;
+      border-radius: 16px;
+      background: #edf5fc;
+      color: #24384e;
+    }
+
+    .revealed-content p:first-child { margin-top: 0; }
+    .revealed-content p:last-child { margin-bottom: 0; }
+
+    .scripture {
+      padding: 1.1rem;
+      border-radius: 18px;
+      background: var(--navy);
+      color: var(--white);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.24rem;
+      line-height: 1.62;
+    }
+
+    .scripture span {
+      opacity: 0;
+      filter: blur(5px);
+      transition: opacity .5s ease, filter .5s ease;
+    }
+
+    .open .scripture span { opacity: 1; filter: blur(0); }
+    .open .scripture span:nth-child(2) { transition-delay: .16s; }
+    .open .scripture span:nth-child(3) { transition-delay: .32s; }
+
+    .reveal-grid {
+      display: grid;
+      gap: .7rem;
+      margin-top: 1rem;
+    }
+
+    .reveal-card {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      min-height: 112px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      padding: 1rem;
+      background: var(--white);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .reveal-card:hover { transform: translateY(-3px); border-color: #83a8ca; box-shadow: 0 10px 24px rgba(16, 53, 87, .1); }
+    .reveal-card .front, .reveal-card .back { transition: opacity .25s ease, transform .35s ease; }
+    .reveal-card .front { font-weight: 800; }
+    .reveal-card .front small { display: block; margin-top: .4rem; color: var(--muted); font-weight: 600; }
+    .reveal-card .back { position: absolute; inset: 1rem; opacity: 0; transform: translateY(12px); }
+    .reveal-card.revealed { border-color: var(--gold); background: #fffaf0; }
+    .reveal-card.revealed .front { opacity: 0; transform: translateY(-10px); }
+    .reveal-card.revealed .back { opacity: 1; transform: translateY(0); }
+
+    .scenario-list, .choice-grid {
+      display: grid;
+      gap: .65rem;
+    }
+
+    .choice {
+      min-height: 54px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: .78rem .9rem;
+      background: var(--white);
+      color: var(--ink);
+      font-weight: 720;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+
+    .choice:hover { transform: translateX(3px); border-color: #78a6cf; }
+    .choice.selected { border-color: var(--blue); background: #e8f2fb; }
+    .choice.correct { border-color: var(--success); background: #e8f7f2; }
+    .choice.miss { border-color: #b47a34; background: #fff5e7; }
+
+    .scenario {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #f8fbfe;
+    }
+
+    .scenario.active { display: block; animation: stageIn .35s ease both; }
+    .scenario p { margin-top: 0; }
+
+    .answer-cover {
+      position: relative;
+      overflow: hidden;
+      margin-top: .8rem;
+      border-radius: 14px;
+      background: #dce8f3;
+    }
+
+    .answer-cover .answer {
+      padding: .9rem;
+      filter: blur(10px);
+      opacity: .25;
+      user-select: none;
+      transition: filter .5s ease, opacity .5s ease;
+    }
+
+    .answer-cover.revealed .answer { filter: blur(0); opacity: 1; user-select: text; }
+    .answer-cover .cover-button {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      border: 0;
+      background: rgba(9, 26, 48, .92);
+      color: var(--white);
+      font-weight: 800;
+      cursor: pointer;
+      transition: opacity .4s ease;
+    }
+
+    .answer-cover.revealed .cover-button { opacity: 0; pointer-events: none; }
+
+    textarea {
+      width: 100%;
+      min-height: 122px;
+      resize: vertical;
+      border: 2px solid var(--line);
+      border-radius: 17px;
+      padding: .9rem;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .privacy-note { color: var(--muted); font-size: .86rem; }
+    .feedback { min-height: 1.7rem; margin: .75rem 0 0; font-weight: 720; color: #294a69; }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .6rem;
+      margin-top: 1.25rem;
+    }
+
+    .nav-row .button:only-child { margin-left: auto; }
+
+    .finish {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .finish-mark {
+      width: 86px;
+      height: 86px;
+      margin: .8rem auto 1rem;
+      border: 5px solid #b8cce0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: transparent;
+      font-size: 2.2rem;
+      font-weight: 900;
+      transition: border-color .45s ease, color .45s ease, transform .55s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .finish.complete .finish-mark { border-color: var(--gold); color: var(--success); transform: scale(1.08) rotate(-5deg); }
+    .finish-message { display: none; }
+    .finish.complete .finish-message { display: block; animation: stageIn .45s ease both; }
+
+    .particle {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      pointer-events: none;
+      animation: burst .9s ease-out forwards;
+    }
+
+    @keyframes burst {
+      to { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+    }
+
+    footer {
+      width: min(100% - 1.25rem, 780px);
+      margin: 0 auto 2rem;
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+    }
+
+    footer a { color: #285e8d; }
+
+    @media (min-width: 620px) {
+      main { padding-top: 1.7rem; }
+      .lesson-header { padding: 2rem; }
+      .stage { padding: 1.8rem; }
+      .reveal-grid { grid-template-columns: repeat(2, 1fr); }
+      .scenario-list, .choice-grid.two { grid-template-columns: repeat(2, 1fr); }
+      .path-map li { font-size: .76rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- WEEKLY CONTENT: update the lesson title, references, questions, scenarios, reveal text, and official lesson link below. -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topline"><span>Class path</span><span id="progressText">1 of 6</span></div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="lesson-header" aria-labelledby="pageTitle">
+      <p class="eyebrow">Proverbs and Ecclesiastes</p>
+      <h1 id="pageTitle">He Shall Direct Thy Paths</h1>
+      <p class="reference">Proverbs 3:5-6</p>
+    </section>
+
+    <ol class="path-map" aria-label="Lesson progress">
+      <li class="active">Advice</li>
+      <li>Scripture</li>
+      <li>Choices</li>
+      <li>Trust</li>
+      <li>Words</li>
+      <li>Next step</li>
+    </ol>
+
+    <section class="stage active" data-stage="0">
+      <p class="step-label">Warm up</p>
+      <h2>Worst advice only</h2>
+      <p class="question">What advice sounds confident but is actually terrible?</p>
+      <p class="lead">Think of your answer before opening the examples.</p>
+      <button class="button reveal-toggle" aria-expanded="false" aria-controls="adviceExamples">Reveal examples</button>
+      <div class="reveal-panel" id="adviceExamples">
+        <div><div class="revealed-content">
+          <p>“Never apologize first.”</p>
+          <p>“If everyone is doing it, it cannot be wrong.”</p>
+          <p>“Do whatever feels easiest right now.”</p>
+        </div></div>
+      </div>
+      <p class="question">How can you tell popular advice from actual wisdom?</p>
+      <div class="nav-row"><button class="button next">Follow the path</button></div>
+    </section>
+
+    <section class="stage" data-stage="1">
+      <p class="step-label">Core scripture</p>
+      <h2>What does trust look like?</h2>
+      <button class="button reveal-toggle" aria-expanded="false" aria-controls="coreVerse">Reveal Proverbs 3:5-6</button>
+      <div class="reveal-panel" id="coreVerse">
+        <div><blockquote class="scripture">
+          <span>“Trust in the Lord with all thine heart; </span>
+          <span>and lean not unto thine own understanding. </span>
+          <span>In all thy ways acknowledge him, and he shall direct thy paths.”</span>
+        </blockquote></div>
+      </div>
+      <h3>Tap each phrase when your teacher says reveal</h3>
+      <div class="reveal-grid">
+        <button class="reveal-card"><span class="front">Trust with all thine heart<small>Tap to uncover</small></span><span class="back">Rely on the Lord wholeheartedly, not only when everything else fails.</span></button>
+        <button class="reveal-card"><span class="front">Lean not<small>Tap to uncover</small></span><span class="back">Do not treat your current view as the only support available.</span></button>
+        <button class="reveal-card"><span class="front">Acknowledge Him<small>Tap to uncover</small></span><span class="back">Include God in every part of life, not only emergencies.</span></button>
+        <button class="reveal-card"><span class="front">Direct thy paths<small>Tap to uncover</small></span><span class="back">The Lord often guides our direction one faithful step at a time.</span></button>
+      </div>
+      <div class="nav-row"><button class="button secondary back">Back</button><button class="button next">Try a decision</button></div>
+    </section>
+
+    <section class="stage" data-stage="2">
+      <p class="step-label">Path decisions</p>
+      <h2>Choose a situation</h2>
+      <p class="lead">Pick one. Discuss the questions before uncovering a possible direction.</p>
+      <div class="scenario-list">
+        <button class="choice scenario-choice" data-target="friend">Friend conflict</button>
+        <button class="choice scenario-choice" data-target="future">Future plans</button>
+        <button class="choice scenario-choice" data-target="repentance">Repentance</button>
+        <button class="choice scenario-choice" data-target="unclear">No clear answer</button>
+      </div>
+
+      <article class="scenario" id="friend">
+        <h3>A friend embarrasses you in a group chat</h3>
+        <p>You want to answer immediately.</p>
+        <p><strong>Discuss:</strong> What would leaning only on your own understanding look like? What would trusting the Lord look like?</p>
+        <div class="answer-cover"><div class="answer">Pause before replying. Pray, cool down, and choose a soft answer or a private conversation instead of trying to win in public.</div><button class="cover-button">Tap to reveal a possible direction</button></div>
+      </article>
+      <article class="scenario" id="future">
+        <h3>You feel pressure to have your future figured out</h3>
+        <p>School, work, a mission, and everything afterward all seem urgent.</p>
+        <p><strong>Discuss:</strong> What do you actually need to decide now? How could the Lord direct one step without showing the whole plan?</p>
+        <div class="answer-cover"><div class="answer">Gather good information, pray, seek wise counsel, and act on the best light you have. Trust does not require seeing ten steps ahead.</div><button class="cover-button">Tap to reveal a possible direction</button></div>
+      </article>
+      <article class="scenario" id="repentance">
+        <h3>You know something needs to change</h3>
+        <p>Admitting it feels worse than hiding it.</p>
+        <p><strong>Discuss:</strong> What story might fear tell you? What truth does Jesus Christ offer instead?</p>
+        <div class="answer-cover"><div class="answer">Bring the problem into the light. Pray honestly, take responsibility, and ask for appropriate help. Christ offers a way forward, not humiliation.</div><button class="cover-button">Tap to reveal a possible direction</button></div>
+      </article>
+      <article class="scenario" id="unclear">
+        <h3>You prayed and still do not feel certain</h3>
+        <p>You are worried that moving at all means choosing wrong.</p>
+        <p><strong>Discuss:</strong> Can moving forward carefully be an act of trust?</p>
+        <div class="answer-cover"><div class="answer">Study the options, keep the commandments, make the wisest choice you can, and move forward. The Lord can redirect someone who is moving.</div><button class="cover-button">Tap to reveal a possible direction</button></div>
+      </article>
+      <div class="nav-row"><button class="button secondary back">Back</button><button class="button next">Why trust is hard</button></div>
+    </section>
+
+    <section class="stage" data-stage="3">
+      <p class="step-label">Quick poll</p>
+      <h2>When is trust hardest?</h2>
+      <p class="lead">Choose the one that feels most difficult. Your choice stays on this phone.</p>
+      <div class="choice-grid two" id="trustPoll">
+        <button class="choice">The timing is unclear</button>
+        <button class="choice">God's direction differs from mine</button>
+        <button class="choice">Other people may disapprove</button>
+        <button class="choice">I feel unworthy</button>
+      </div>
+      <p class="feedback" id="trustFeedback" aria-live="polite"></p>
+      <p class="question">What helps you trust Christ in that situation?</p>
+      <div class="nav-row"><button class="button secondary back">Back</button><button class="button next">Take the word challenge</button></div>
+    </section>
+
+    <section class="stage" data-stage="4">
+      <p class="step-label">Proverbs 15:1</p>
+      <h2>The soft answer challenge</h2>
+      <p class="lead">Someone texts: “Whatever. You clearly don't care.” Which response is most likely to turn away wrath?</p>
+      <div class="choice-grid" id="softAnswer">
+        <button class="choice" data-result="miss">“You're the one making this a big deal.”</button>
+        <button class="choice" data-result="correct">“I can see why you're upset. Can we talk?”</button>
+        <button class="choice" data-result="miss">Leave them on read until they apologize.</button>
+      </div>
+      <p class="feedback" id="answerFeedback" aria-live="polite"></p>
+      <div class="reveal-panel" id="softAnswerInsight">
+        <div><div class="revealed-content"><strong>A soft answer is not weakness.</strong> It lowers the temperature so honesty and repair become possible. Jesus Christ showed strength without adding unnecessary anger.</div></div>
+      </div>
+      <div class="nav-row"><button class="button secondary back">Back</button><button class="button next">Choose your next step</button></div>
+    </section>
+
+    <section class="stage finish" data-stage="5" id="finishStage">
+      <p class="step-label">Personal invitation</p>
+      <h2>Take one faithful step</h2>
+      <p class="question">What path in your life needs the Lord's direction right now?</p>
+      <label for="nextStep"><strong>Write one next step you can take this week</strong></label>
+      <textarea id="nextStep" placeholder="This is private to your screen..."></textarea>
+      <p class="privacy-note">Nothing you type is sent or saved.</p>
+      <button class="button" id="commitButton">Set my next step</button>
+      <div class="finish-mark" aria-hidden="true">✓</div>
+      <div class="finish-message" aria-live="polite">
+        <h3>You do not need to see the whole path.</h3>
+        <p>Trust Jesus Christ enough to take the next faithful step.</p>
+      </div>
+      <div class="nav-row"><button class="button secondary back">Back</button></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Come Follow Me Old Testament 2026</p>
+    <p><a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/37?lang=eng" target="_blank" rel="noopener">Open the official lesson</a></p>
+  </footer>
+
+  <script>
+    (() => {
+      const stages = [...document.querySelectorAll('.stage')];
+      const pathItems = [...document.querySelectorAll('.path-map li')];
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      let current = 0;
+
+      function showStage(index) {
+        current = Math.max(0, Math.min(index, stages.length - 1));
+        stages.forEach((stage, i) => stage.classList.toggle('active', i === current));
+        pathItems.forEach((item, i) => {
+          item.classList.toggle('active', i === current);
+          item.classList.toggle('done', i < current);
+        });
+        progressBar.style.width = `${((current + 1) / stages.length) * 100}%`;
+        progressText.textContent = `${current + 1} of ${stages.length}`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const heading = stages[current].querySelector('h2');
+        if (heading) {
+          heading.setAttribute('tabindex', '-1');
+          setTimeout(() => heading.focus({ preventScroll: true }), 380);
+        }
+      }
+
+      document.querySelectorAll('.next').forEach(button => button.addEventListener('click', () => showStage(current + 1)));
+      document.querySelectorAll('.back').forEach(button => button.addEventListener('click', () => showStage(current - 1)));
+
+      document.querySelectorAll('.reveal-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+          const panel = document.getElementById(button.getAttribute('aria-controls'));
+          const open = panel.classList.toggle('open');
+          button.setAttribute('aria-expanded', String(open));
+          button.textContent = open ? 'Hide again' : button.dataset.original || button.textContent;
+          if (!button.dataset.original) button.dataset.original = open ? (panel.id === 'coreVerse' ? 'Reveal Proverbs 3:5-6' : 'Reveal examples') : button.textContent;
+        });
+      });
+
+      document.querySelectorAll('.reveal-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const revealed = card.classList.toggle('revealed');
+          card.setAttribute('aria-pressed', String(revealed));
+        });
+      });
+
+      document.querySelectorAll('.scenario-choice').forEach(button => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('.scenario-choice').forEach(item => item.classList.toggle('selected', item === button));
+          document.querySelectorAll('.scenario').forEach(item => item.classList.toggle('active', item.id === button.dataset.target));
+        });
+      });
+
+      document.querySelectorAll('.cover-button').forEach(button => {
+        button.addEventListener('click', () => button.parentElement.classList.add('revealed'));
+      });
+
+      const trustFeedback = document.getElementById('trustFeedback');
+      document.querySelectorAll('#trustPoll .choice').forEach(button => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('#trustPoll .choice').forEach(item => item.classList.toggle('selected', item === button));
+          trustFeedback.textContent = 'Choice recorded on this screen. Be ready to explain why.';
+        });
+      });
+
+      const answerFeedback = document.getElementById('answerFeedback');
+      const insight = document.getElementById('softAnswerInsight');
+      document.querySelectorAll('#softAnswer .choice').forEach(button => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('#softAnswer .choice').forEach(item => item.classList.remove('correct', 'miss'));
+          const correct = button.dataset.result === 'correct';
+          button.classList.add(correct ? 'correct' : 'miss');
+          answerFeedback.textContent = correct ? 'That response makes room for understanding.' : 'That response may keep the conflict hot. Try another.';
+          if (correct) insight.classList.add('open');
+        });
+      });
+
+      const finishStage = document.getElementById('finishStage');
+      const commitButton = document.getElementById('commitButton');
+      commitButton.addEventListener('click', () => {
+        const text = document.getElementById('nextStep').value.trim();
+        if (!text) {
+          document.getElementById('nextStep').focus();
+          commitButton.textContent = 'Write your step first';
+          setTimeout(() => { commitButton.textContent = 'Set my next step'; }, 1600);
+          return;
+        }
+        finishStage.classList.add('complete');
+        commitButton.textContent = 'Next step set';
+        commitButton.disabled = true;
+        for (let i = 0; i < 18; i += 1) {
+          const particle = document.createElement('span');
+          particle.className = 'particle';
+          const angle = (Math.PI * 2 * i) / 18;
+          const distance = 70 + (i % 4) * 14;
+          particle.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
+          particle.style.setProperty('--y', `${Math.sin(angle) * distance}px`);
+          particle.style.background = i % 2 ? '#74b9ff' : '#f5c35b';
+          finishStage.appendChild(particle);
+          setTimeout(() => particle.remove(), 1000);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
