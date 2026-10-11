@@ -438,8 +438,7 @@
       display: flex;
       gap: .6rem;
       padding: .6rem .8rem calc(.6rem + env(safe-area-inset-bottom, 0px));
-      background: rgba(255, 255, 255, .94);
-      backdrop-filter: blur(12px);
+      background: var(--white);
       border-top: 1px solid var(--line);
       box-shadow: 0 -8px 24px rgba(26, 21, 54, .08);
     }
@@ -522,11 +521,11 @@
     .flip .front { font-weight: 800; }
     .flip .front .kicker { display: block; margin-bottom: .3rem; color: #8a2f45; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
     .flip .front small { display: block; margin-top: .45rem; color: var(--muted); font-weight: 600; }
-    .flip .back { position: absolute; inset: 1rem; opacity: 0; transform: translateY(12px); font-family: Georgia, serif; font-size: 1.02rem; line-height: 1.4; }
+    .flip .back { position: absolute; inset: 1rem; opacity: 0; pointer-events: none; transform: translateY(12px); font-family: Georgia, serif; font-size: 1.02rem; line-height: 1.4; }
     .flip .back cite { display: block; margin-top: .35rem; color: #8a2f45; font-style: normal; font-family: Inter, system-ui, sans-serif; font-size: .78rem; font-weight: 800; }
     .flip.revealed { border-color: #c48a95; background: #fff5f6; min-height: 150px; }
     .flip.revealed .front { opacity: 0; transform: translateY(-10px); }
-    .flip.revealed .back { opacity: 1; transform: translateY(0); }
+    .flip.revealed .back { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
     /* ---------- Personal pronoun swap ---------- */
     .swap-wrap { margin-top: .9rem; }
@@ -716,7 +715,7 @@
 
 
     @media (max-width: 619px) {
-      body { font-size: 16px; padding-bottom: calc(5.2rem + env(safe-area-inset-bottom, 0px)); }
+      body { font-size: 16px; padding-bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px)); }
       main { width: min(100% - .9rem, 820px); padding-top: .8rem; }
       .lesson-header { border-radius: 20px; }
       .lesson-header .copy { padding: 0 1rem 1.1rem; margin-top: -.9rem; }
@@ -725,7 +724,6 @@
       .stage { padding: 1rem .9rem; border-radius: 20px; }
       .stage-banner { margin: -1rem -.9rem .9rem; padding: .85rem .9rem; border-radius: 20px 20px 0 0; }
       .stage-banner svg { width: 48px; height: 48px; }
-      .stage-nav { display: none; }
       .chip { min-height: 44px; }
       .path-map { margin-top: .8rem; }
       .scripture { padding: .9rem .95rem; font-size: 1.08rem; }
@@ -809,7 +807,7 @@
       <div class="copy">
         <p class="eyebrow">Come, Follow Me · October 5–11 · Isaiah 50–57</p>
         <h1 id="pageTitle">He Hath Borne Our Griefs, and Carried Our Sorrows</h1>
-        <p class="reference">Isaiah 53:4 · A seven-quest lesson. Earn XP, collect badges, and find the Deliverer.</p>
+        <p class="reference">Seven quests. Earn XP, collect badges, and see what Isaiah said about Jesus Christ.</p>
       </div>
     </section>
 
@@ -834,9 +832,9 @@
         <div class="context-body"><div class="context-inner">
         
         <ul>
-          <li><strong>Who is talking?</strong> Isaiah, a prophet in Jerusalem about 700 years before Jesus was born. He wrote in poetry, so it sounds different from a story. Expect pictures and repeated lines.</li>
-          <li><strong>What's the situation?</strong> Isaiah warned that Judah would be conquered and hauled off to Babylon. It happened about a century later. These chapters were written for people who would one day sit in Babylon feeling abandoned, ashamed, and far from home.</li>
-          <li><strong>What's the big idea?</strong> Everyone in captivity wanted a deliverer who could tear down Babylon's walls. God sent a very different kind of deliverer, and that is the whole point of this week.</li>
+          <li><strong>Who is talking?</strong> Isaiah, a prophet in Jerusalem about 700 years before Jesus was born. He wrote in poetry, so it reads differently than a story. He uses word pictures and repeats himself on purpose.</li>
+          <li><strong>What's the situation?</strong> Isaiah warned that Judah would be conquered and taken to Babylon. It happened about 100 years later. These chapters were written for people who would sit in Babylon feeling abandoned, ashamed, and far from home.</li>
+          <li><strong>What's the big idea?</strong> The captives wanted a deliverer who could tear down Babylon's walls. God sent a very different kind of deliverer. That is the point of this week.</li>
         </ul>
         <ol class="timeline" aria-label="Timeline">
           <li><span class="icon">📜</span><span class="year">~700 BC</span>Isaiah writes these chapters</li>
@@ -845,17 +843,17 @@
         </ol></div></div>
       </div>
       <h3><span class="tag">Map</span>What's in Isaiah 50–57</h3>
-      <p class="lead">Tap a chapter block to see what it's about. Each one is a quest today.</p>
+      <p class="lead">Tap a chapter to see what it's about. Each one is a quest today.</p>
       <div class="chapter-map" id="chapterMap">
         <button class="chapter"><span class="ref">Isaiah 50–52</span>Wake up, hope is coming<p class="more">The Lord tells captive Israel He never divorced them and never lost His power to save. “Awake, awake, put on thy strength.” The future is bright.</p></button>
-        <button class="chapter"><span class="ref">Isaiah 53</span>The Servant who suffers<p class="more">The clearest Old Testament description of what Jesus Christ would go through: despised, wounded, silent, carrying our griefs. Written centuries early.</p></button>
+        <button class="chapter"><span class="ref">Isaiah 53</span>The Servant who suffers<p class="more">The clearest Old Testament description of what Jesus Christ would go through: despised, wounded, silent, carrying our griefs. Written hundreds of years early.</p></button>
         <button class="chapter"><span class="ref">Isaiah 54; 57</span>Come back, I haven't given up<p class="more">The Lord speaks like a husband who refuses to walk away. “My kindness shall not depart from thee.” He heals people who feel far from Him.</p></button>
         <button class="chapter"><span class="ref">Isaiah 55–56</span>Everyone is invited<p class="more">“Every one that thirsteth, come ye to the waters.” People the old law kept out of the temple, outsiders and the “utterly separated,” are invited in.</p></button>
       </div>
       <p class="feedback" id="chapterFeedback" aria-live="polite"></p>
 
       <h3><span class="tag">Warm up</span>Picture it</h3>
-      <p class="lead">Israel has been dragged off to Babylon. Massive walls. No way home. For years, people have been reading Isaiah's old prophecies about a mighty deliverer.</p>
+      <p class="lead">Israel has been taken to Babylon. Huge walls. No way home. For years people have been reading Isaiah's prophecies about a deliverer.</p>
       <p class="question">If you were trapped behind Babylon's walls, what kind of rescuer would you be hoping for?</p>
       <div class="choice-grid two" id="rescuerPoll">
         <button class="choice">🦁 A warrior king who crushes Babylon</button>
@@ -866,14 +864,14 @@
       <p class="feedback" id="rescuerFeedback" aria-live="polite"></p>
       <div class="reveal-panel" id="rescuerReveal">
         <div><div class="revealed-content">
-          <p><strong>Plot twist.</strong> Isaiah 52–53 describes a Messiah nobody was expecting: “He is despised and rejected of men; a man of sorrows, and acquainted with grief” (Isaiah 53:3). Where some expected a lion, God sent a lamb (Isaiah 53:7).</p>
+          <p><strong>Here's the twist.</strong> Isaiah 52–53 describes a Messiah nobody expected: “He is despised and rejected of men; a man of sorrows, and acquainted with grief” (Isaiah 53:3). Where some expected a lion, God sent a lamb (Isaiah 53:7).</p>
           <p>Jesus Christ doesn't just unlock the prison. He takes our place in it. He doesn't save us from a distance. He suffers <em>with</em> us.</p>
         </div></div>
       </div>
       <h3><span class="tag">Your mission</span>Seven quests</h3>
-      <p class="lead">Each quest has a game, a scripture, and a question for the class. Correct answers earn XP. Finish a quest to earn its badge. Nothing you tap leaves your phone.</p>
+      <p class="lead">Each quest has a short setup, a game, a scripture, and a question for the class. Right answers earn XP. Finish a quest to earn its badge. Nothing you tap leaves your phone.</p>
       <div class="teacher-note"><strong>Teacher:</strong> Have everyone answer the poll, then ask a couple of students to defend their pick before revealing. The lesson intro says God “taught us about true deliverance” by sending an unexpected deliverer (see Isaiah 55:8–9).</div>
-      <div class="nav-row stage-nav"><button class="button gold next">Begin quest 2 →</button></div>
+      <div class="nav-row stage-nav"><button class="button gold nav-next">Begin quest 2 →</button></div>
     </section>
 
     <!-- ============ QUEST 1: HOPE HUNT (Isaiah 50–52) ============ -->
@@ -887,14 +885,14 @@
         <div class="context-body"><div class="context-inner">
         
         <ul>
-          <li><strong>The feeling:</strong> Israel is in captivity because of their own choices, and they feel like God has divorced them and walked away.</li>
-          <li><strong>The Lord's answer:</strong> Isaiah 50 opens with Him asking, where is the divorce paper? There isn't one. “Is my hand shortened at all, that it cannot redeem?” (50:2). He hasn't left. They wandered.</li>
-          <li><strong>The command:</strong> These chapters keep shouting “Awake! Stand up! Put on thy strength!” He wants captives to look forward with hope, not backward with shame.</li>
+          <li><strong>The feeling:</strong> Israel is in captivity because of their own choices, and they feel like God has given up on them and walked away.</li>
+          <li><strong>The Lord's answer:</strong> Isaiah 50 starts with the Lord asking where the divorce paper is. There isn't one. “Is my hand shortened at all, that it cannot redeem?” (50:2). He didn't leave. They wandered off.</li>
+          <li><strong>The command:</strong> These chapters keep saying “Awake! Stand up! Put on thy strength!” He wants them to look forward with hope instead of backward with shame.</li>
         </ul>
         <blockquote class="scripture">“The redeemed of the Lord shall return, and come with singing unto Zion; and everlasting joy shall be upon their head: they shall obtain gladness and joy; and sorrow and mourning shall flee away.”<cite>Read together · Isaiah 51:11</cite></blockquote></div></div>
       </div>
       <h3><span class="tag">Game</span>Sort the verses</h3>
-      <p class="lead">The lesson's study chart has three columns. Read each verse and tap the column it belongs in. Twelve verses. Go.</p>
+      <p class="lead">The lesson has a study chart with three columns. Read each verse and tap the column it belongs in. There are twelve.</p>
 
       <div id="sortGame">
         <div class="sort-card" id="sortCard">
@@ -922,7 +920,7 @@
       </div>
 
       <h3><span class="tag">Mini game</span>Awake, awake, put on thy strength</h3>
-      <p class="lead">Isaiah 52:1–2 tells Zion to wake up, shake off the dust, and put on strength. Tap as fast as you can for five seconds to fill the strength meter.</p>
+      <p class="lead">Isaiah 52:1–2 tells Zion to wake up, shake off the dust, and put on strength. Stand up, then tap as fast as you can for five seconds to fill the meter.</p>
       <div class="meter-wrap">
         <span class="big" id="tapCount">0</span>
         <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
@@ -935,11 +933,11 @@
       </blockquote>
       <h3>Scripture helps</h3>
       <div class="flip-grid">
-        <button class="flip"><span class="front"><span class="kicker">Decode it</span>“Put on thy beautiful garments”<small>Tap to decode</small></span><span class="back">Clothing yourself in holiness and covenant strength, the way temple garments and covenants clothe us with the Lord's power. It's a command to stand up and look like who you really are.<cite>Isaiah 52:1</cite></span></button>
-        <button class="flip"><span class="front"><span class="kicker">Decode it</span>“How beautiful upon the mountains are the feet of him that bringeth good tidings”<small>Tap to decode</small></span><span class="back">Messengers ran over the mountains to announce victory and peace. Anyone who carries the good news of Jesus Christ, missionaries and you, has beautiful feet.<cite>Isaiah 52:7</cite></span></button>
+        <button class="flip"><span class="front"><span class="kicker">Decode it</span>“Put on thy beautiful garments”<small>Tap to decode</small></span><span class="back">Put on holiness and covenant strength, the way temple covenants clothe us with the Lord's power. In plain words: stand up and act like who you really are.<cite>Isaiah 52:1</cite></span></button>
+        <button class="flip"><span class="front"><span class="kicker">Decode it</span>“How beautiful upon the mountains are the feet of him that bringeth good tidings”<small>Tap to decode</small></span><span class="back">In Isaiah's day, runners crossed the mountains to announce a victory. Anyone who carries the good news about Jesus Christ, missionaries and you included, has beautiful feet.<cite>Isaiah 52:7</cite></span></button>
       </div>
       <div class="teacher-note"><strong>Teacher:</strong> Lesson question: “What do you find in Isaiah's message that gives you hope?” The chart columns and verse lists come straight from the manual. For the tap game, have everyone stand up first (the children's section acts out “awake,” “stand up,” “put on thy strength”). See also Russell M. Nelson, “Embrace the Future with Faith” (Nov. 2020).</div>
-      <div class="nav-row stage-nav"><button class="button secondary back">Back</button><button class="button next">Quest 3: Lion or Lamb →</button></div>
+      <div class="nav-row stage-nav"><button class="button secondary nav-back">Back</button><button class="button nav-next">Quest 3: Lion or Lamb →</button></div>
     </section>
 
     <!-- ============ QUEST 2: LION OR LAMB (Isaiah 53) ============ -->
@@ -954,13 +952,13 @@
         
         <ul>
           <li><strong>What this chapter is:</strong> The clearest description of Jesus Christ's suffering anywhere in the Old Testament, written about 700 years before it happened. Isaiah calls Him “the servant.”</li>
-          <li><strong>Why it shocked people:</strong> Captives in Babylon wanted a conqueror. This chapter describes someone rejected, wounded, and silent, who carries other people's pain instead of fighting.</li>
-          <li><strong>How to read it:</strong> Slowly. Every line is about Him, and the lesson says it is also specifically about you.</li>
+          <li><strong>Why it shocked people:</strong> The captives wanted a conqueror. This chapter describes someone rejected, wounded, and silent, who carries other people's pain instead of fighting back.</li>
+          <li><strong>How to read it:</strong> Slowly. Every line is about Him, and the lesson says it is also about you specifically.</li>
         </ul>
         <blockquote class="scripture">“He is despised and rejected of men; a man of sorrows, and acquainted with grief: and we hid as it were our faces from him; he was despised, and we esteemed him not.”<cite>Read together · Isaiah 53:3</cite></blockquote></div></div>
       </div>
       <h3><span class="tag">Game</span>Movie hero vs. Isaiah 53</h3>
-      <p class="lead">Movies love a hero who kicks the door down. Isaiah 53 describes a very different kind of rescuer. Tap each movie-hero rule to flip it and see what Isaiah actually wrote.</p>
+      <p class="lead">Movies love a hero who kicks the door down. Isaiah 53 describes a very different rescuer. Tap each movie-hero rule to flip it and see what Isaiah actually wrote.</p>
       <div class="flip-grid" id="heroFlips">
         <button class="flip"><span class="front"><span class="kicker">Movie hero rule</span>Everybody loves the hero<small>Tap to flip</small></span><span class="back">“He is despised and rejected of men; a man of sorrows, and acquainted with grief: and we hid as it were our faces from him.”<cite>Isaiah 53:3</cite></span></button>
         <button class="flip"><span class="front"><span class="kicker">Movie hero rule</span>The hero looks impressive<small>Tap to flip</small></span><span class="back">“He hath no form nor comeliness; and when we shall see him, there is no beauty that we should desire him.”<cite>Isaiah 53:2</cite></span></button>
@@ -973,12 +971,12 @@
 
 
       <h3><span class="tag">Watch</span>Videos from this week's lesson</h3>
-      <p class="lead">Two videos the lesson points to. Watch together, then mark it to earn XP.</p>
+      <p class="lead">These are the two videos from the lesson. Watch them together, then tap the button to earn XP.</p>
       <div class="video-grid" id="videoGrid"></div>
       <p class="feedback" id="videoFeedback" aria-live="polite"></p>
 
       <h3><span class="tag">Make it personal</span>Swap “we” for “I”</h3>
-      <p class="lead">The lesson suggests reading Isaiah 53 with “we” and “our” replaced by “I” and “my.” Flip the switch and read it again slowly.</p>
+      <p class="lead">The lesson suggests reading Isaiah 53 with “we” and “our” swapped for “I” and “my.” Flip the switch and read it again slowly.</p>
       <div class="swap-wrap">
         <div class="swap-toggle" role="group" aria-label="Pronoun mode">
           <button class="on" id="swapWe">Everyone</button>
@@ -992,7 +990,7 @@
       <p class="question">What feelings or thoughts do these verses give you when they're about <em>you</em>?</p>
 
       <h3><span class="tag">Private</span>What is heavy right now?</h3>
-      <p class="lead">Grief and sorrow feel heavy. Tap anything you're carrying. It stays on your screen only, and you can hand it to Him.</p>
+      <p class="lead">Grief and sorrow feel heavy. Tap anything you're carrying right now. It only shows on your screen.</p>
       <div class="chip-row" id="burdenChips">
         <button class="chip">Guilt</button><button class="chip">Stress</button><button class="chip">Loneliness</button><button class="chip">A mistake</button><button class="chip">Anxiety</button><button class="chip">Family stuff</button><button class="chip">Feeling not enough</button><button class="chip">Sadness</button><button class="chip">Something else</button>
       </div>
@@ -1001,7 +999,7 @@
         <span>“He hath borne our griefs, and carried our sorrows.” He already knows what it weighs.</span>
       </div>
       <div class="teacher-note"><strong>Teacher:</strong> Lesson ideas: contrast movie heroes with Isaiah 53; pause after each verse to consider what He bore “specifically for you”; optional video “My Kingdom Is Not of This World” (Gospel Library); match Gospel Art Book nos. 56–60 to phrases in Isaiah 53. Isaiah wrote this about 700 years before Christ's birth. Hymn: “Behold the Great Redeemer Die,” no. 191.</div>
-      <div class="nav-row stage-nav"><button class="button secondary back">Back</button><button class="button next">Quest 4: Never too far →</button></div>
+      <div class="nav-row stage-nav"><button class="button secondary nav-back">Back</button><button class="button nav-next">Quest 4: Never too far →</button></div>
     </section>
 
     <!-- ============ QUEST 3: NEVER TOO FAR (Isaiah 54; 57:15–19) ============ -->
@@ -1015,14 +1013,14 @@
         <div class="context-body"><div class="context-inner">
         
         <ul>
-          <li><strong>The feeling:</strong> Captivity felt like being abandoned, and a lot of it was their own fault. Shame says, “He's done with me.”</li>
-          <li><strong>Isaiah 54:</strong> The Lord speaks to Israel like a husband who refuses to give up on his wife. He admits there was “a small moment” of distance, then promises mercy and kindness that never leave.</li>
-          <li><strong>Isaiah 57:</strong> He says He lives in the high and holy place, and also with anyone who is humble and sorry. He has seen their ways and still plans to heal them.</li>
+          <li><strong>The feeling:</strong> Captivity felt like being abandoned, and a lot of it was their own fault. Shame tells you, “He's done with me.”</li>
+          <li><strong>Isaiah 54:</strong> The Lord talks to Israel like a husband who won't give up on his wife. He says there was “a small moment” of distance, then promises mercy and kindness that won't leave.</li>
+          <li><strong>Isaiah 57:</strong> He says He lives in the high and holy place, and also with anyone who is humble and sorry. He has seen what they've done and still plans to heal them.</li>
         </ul>
         <blockquote class="scripture">“For a small moment have I forsaken thee; but with great mercies will I gather thee. In a little wrath I hid my face from thee for a moment; but with everlasting kindness will I have mercy on thee, saith the Lord thy Redeemer.”<cite>Read together · Isaiah 54:7–8</cite></blockquote></div></div>
       </div>
       <h3><span class="tag">Game</span>Myth busters</h3>
-      <p class="lead">Everyone has moments of feeling far from the Lord. Some people even give up hope of being forgiven. Isaiah 54 and 57 are the chapters for exactly those moments. Bust these myths. True or false?</p>
+      <p class="lead">Everyone feels far from the Lord sometimes. Some people give up on being forgiven. Isaiah 54 and 57 are for exactly those moments. True or false?</p>
       <div class="deck" id="tfDeck"></div>
       <p class="feedback" id="tfScore" aria-live="polite"></p>
 
@@ -1041,7 +1039,7 @@
         <button class="flip"><span class="front"><span class="kicker">Decode it</span>“Enlarge the place of thy tent … strengthen thy stakes”<small>Tap to decode</small></span><span class="back">A bigger tent needs stronger stakes. The Lord's people are supposed to grow and make room for more, and the Church calls its congregations “stakes” for this reason.<cite>Isaiah 54:2</cite></span></button>
       </div>
       <div class="teacher-note"><strong>Teacher:</strong> Lesson heading: “Jesus Christ wants me to return to Him.” See also Patrick Kearon, “God's Intent Is to Bring You Home” (May 2024). Invite students to mark words in 54:4–10 and 57:15–19 that describe the Savior's feelings toward them.</div>
-      <div class="nav-row stage-nav"><button class="button secondary back">Back</button><button class="button next">Quest 5: Everyone invited →</button></div>
+      <div class="nav-row stage-nav"><button class="button secondary nav-back">Back</button><button class="button nav-next">Quest 5: Everyone invited →</button></div>
     </section>
 
     <!-- ============ QUEST 4: EVERYONE INVITED (Isaiah 55–56) ============ -->
@@ -1055,14 +1053,14 @@
         <div class="context-body"><div class="context-inner">
         
         <ul>
-          <li><strong>The old rules:</strong> Under the law of Moses, foreigners (“strangers”) and eunuchs were kept out of full temple worship. Many of them assumed God's people did not include them.</li>
-          <li><strong>Isaiah 55:</strong> The Lord shouts an invitation like a street vendor: anyone thirsty, anyone broke, come and eat for free. Seek Him while He can be found.</li>
+          <li><strong>The old rules:</strong> Under the law of Moses, foreigners (“strangers”) and eunuchs were kept out of full temple worship. A lot of them figured they could never be part of God's people.</li>
+          <li><strong>Isaiah 55:</strong> The Lord invites anyone who is thirsty or broke to come and eat for free. Seek Him while He can be found.</li>
           <li><strong>Isaiah 56:</strong> He tells the outsider not to say “The Lord hath utterly separated me from his people.” His house is “an house of prayer for all people.”</li>
         </ul>
         <blockquote class="scripture">“Ho, every one that thirsteth, come ye to the waters, and he that hath no money; come ye, buy, and eat; yea, come, buy wine and milk without money and without price.”<cite>Read together · Isaiah 55:1</cite></blockquote></div></div>
       </div>
       <h3><span class="tag">Game</span>Check the guest list</h3>
-      <p class="lead">Israel was God's covenant people, but His plan was never for one nation only. Who gets an invitation to “come to the waters”? Tap a card to check the guest list.</p>
+      <p class="lead">Israel was God's covenant people, but His plan was never just one nation. Who gets invited to “come to the waters”? Tap each card to find out.</p>
       <div class="guest-grid" id="guestGrid">
         <button class="tile"><span class="stamp">Invited</span>Everyone who is thirsty<small>Isaiah 55:1 — “every one that thirsteth, come ye to the waters”</small></button>
         <button class="tile"><span class="stamp">Invited</span>Someone with no money<small>Isaiah 55:1 — “he that hath no money; come ye, buy, and eat … without money and without price”</small></button>
@@ -1075,7 +1073,7 @@
       <p class="question">What is God's message to someone who feels “utterly separated” from Him?</p>
 
       <h3><span class="tag">Checklist</span>“Take hold of my covenant”</h3>
-      <p class="lead">Isaiah 56:4–7 lists what the people who take hold of His covenant actually do. Check any you could do this week.</p>
+      <p class="lead">Isaiah 56:4–7 lists what people who take hold of His covenant actually do. Check any you could do this week.</p>
       <div class="check-list" id="covenantList">
         <label><input type="checkbox"><span>Keep the Sabbath<small>“keep my sabbaths” (56:4)</small></span></label>
         <label><input type="checkbox"><span>Choose what pleases Him<small>“choose the things that please me” (56:4)</small></span></label>
@@ -1086,7 +1084,7 @@
       <p class="feedback" id="covenantFeedback" aria-live="polite"></p>
 
       <h3><span class="tag">Seek</span>Seek ye the Lord while He may be found</h3>
-      <p class="lead">Isaiah 55:6. One card hides the Lamb. You have three taps. Find Him.</p>
+      <p class="lead">Isaiah 55:6 says to seek the Lord while He may be found. One card hides the Lamb. You get three taps.</p>
       <div class="seek-grid" id="seekGrid"></div>
       <p class="feedback" id="seekFeedback" aria-live="polite"></p>
 
@@ -1104,7 +1102,7 @@
       </div>
       <p class="feedback" id="higherFeedback" aria-live="polite"></p>
       <div class="teacher-note"><strong>Teacher:</strong> Lesson heading: “The Lord invites all to ‘take hold of my covenant.’” Ask: what does it mean to be God's people? The hidden-card game adapts the children's idea of hiding a picture of Jesus for Isaiah 55:6. The “higher ways” check uses the manual's references to Mark 2:15–17 and Matthew 20:25–28.</div>
-      <div class="nav-row stage-nav"><button class="button secondary back">Back</button><button class="button next">Quest 6: Lightning round →</button></div>
+      <div class="nav-row stage-nav"><button class="button secondary nav-back">Back</button><button class="button nav-next">Quest 6: Lightning round →</button></div>
     </section>
 
     <!-- ============ QUEST 5: LIGHTNING ROUND ============ -->
@@ -1113,7 +1111,7 @@
         <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M36 6 L14 36 h16 l-4 22 L50 26 H34z" fill="#ffe39b" stroke="#f2b84b" stroke-width="2" stroke-linejoin="round"/></svg>
         <div><p class="step-label">Quest 6 · Isaiah 50–57</p><h2>Lightning Round</h2></div>
       </div>
-      <p class="lead">Everything in this round comes from the quests you just did. Ten questions. Sixty seconds. Faster answers earn more XP. Compare scores when the timer ends.</p>
+      <p class="lead">Everything in this round comes from the quests you just did. Ten questions, sixty seconds. Faster answers earn more XP. Compare scores when the timer ends.</p>
       <div id="lightningIntro">
         <button class="button gold" id="startLightning">⚡ Start the clock</button>
       </div>
@@ -1124,7 +1122,7 @@
       </div>
       <div id="lightningResult" hidden></div>
       <div class="teacher-note"><strong>Teacher:</strong> Everyone starts their own clock at the same time on “go.” Ask for the top score and have that student explain one answer. Then ask: which question surprised you?</div>
-      <div class="nav-row stage-nav"><button class="button secondary back">Back</button><button class="button next">Quest 7: Finish →</button></div>
+      <div class="nav-row stage-nav"><button class="button secondary nav-back">Back</button><button class="button nav-next">Quest 7: Finish →</button></div>
     </section>
 
     <!-- ============ QUEST 6: FINISH ============ -->
@@ -1148,7 +1146,7 @@
       </div>
 
       <h3><span class="tag">Commit</span>One thing this week</h3>
-      <p class="question">He has borne your griefs. What will you let Him carry, and what will you do about it this week?</p>
+      <p class="question">He has carried your griefs. What will you let Him carry, and what will you do about it this week?</p>
       <div class="choice-grid" id="commitPoll">
         <button class="choice">🙏 Pray honestly about something I've been carrying alone</button>
         <button class="choice">📖 Read Isaiah 53 with “I” and “my” before Sunday</button>
@@ -1162,10 +1160,10 @@
       <div class="finish-mark" aria-hidden="true">✓</div>
       <div class="finish-message" aria-live="polite">
         <h3>“With his stripes we are healed.”</h3>
-        <p>He does not save you from a distance. He carries it with you. Awake, arise, and put on thy strength.</p>
+        <p>He doesn't save you from a distance. He carries it with you. Now stand up and put on your strength.</p>
       </div>
       <div class="teacher-note"><strong>Teacher:</strong> Close by sharing how Jesus Christ has helped you with a burden, then invite one or two students to share. Consider the story of Brother David J. Wunderli's son in “Jesus Christ Is Not Our Burden; He Is Our Relief” (Liahona, May 2026).</div>
-      <div class="nav-row stage-nav"><button class="button secondary back">Back</button></div>
+      <div class="nav-row stage-nav"><button class="button secondary nav-back">Back</button></div>
     </section>
   </main>
 
@@ -1293,8 +1291,8 @@
         showStage(target, { fromHistory: true });
       });
 
-      document.querySelectorAll('.next').forEach(button => button.addEventListener('click', () => showStage(current + 1)));
-      document.querySelectorAll('.back').forEach(button => button.addEventListener('click', () => showStage(current - 1)));
+      document.querySelectorAll('.nav-next').forEach(button => button.addEventListener('click', () => showStage(current + 1)));
+      document.querySelectorAll('.nav-back').forEach(button => button.addEventListener('click', () => showStage(current - 1)));
       pathItems.forEach((item, i) => {
         item.setAttribute('role', 'button');
         item.addEventListener('click', () => showStage(i));
@@ -1322,7 +1320,7 @@
             const total = document.querySelectorAll('#heroFlips .flip').length;
             const flipped = document.querySelectorAll('#heroFlips .flip.revealed').length;
             const feedback = document.getElementById('flipFeedback');
-            feedback.textContent = flipped === total ? 'All six flipped. Not the hero anyone expected, but exactly the one we needed.' : `${flipped} of ${total} flipped.`;
+            feedback.textContent = flipped === total ? 'All six flipped. Not the hero anyone expected, but the one we needed.' : `${flipped} of ${total} flipped.`;
             if (flipped === total) awardBadge('lamb');
           }
         });
@@ -1362,7 +1360,7 @@
         const head = card.querySelector('.context-head');
         const hint = document.createElement('p');
         hint.className = 'context-hint';
-        hint.textContent = 'Tap to read the setup before the game.';
+        hint.textContent = 'Tap to read the setup before you play.';
         head.insertAdjacentElement('afterend', hint);
         const setOpen = open => {
           card.classList.toggle('open', open);
@@ -1403,7 +1401,7 @@
             chapter.dataset.scored = '1';
             addXP(5, 'Explored');
             const opened = document.querySelectorAll('#chapterMap .chapter[data-scored]').length;
-            chapterFeedback.textContent = opened === 4 ? 'That is the whole map. Now the warm-up.' : `${opened} of 4 explored.`;
+            chapterFeedback.textContent = opened === 4 ? 'That is the whole map. On to the warm-up.' : `${opened} of 4 opened.`;
           }
         });
       });
@@ -1414,7 +1412,7 @@
       document.querySelectorAll('#rescuerPoll .choice').forEach(button => {
         button.addEventListener('click', () => {
           document.querySelectorAll('#rescuerPoll .choice').forEach(item => item.classList.toggle('selected', item === button));
-          rescuerFeedback.textContent = button.textContent.includes('lamb') ? 'A lamb? Bold choice. Keep reading.' : 'Recorded. Now see who God actually sent.';
+          rescuerFeedback.textContent = button.textContent.includes('lamb') ? 'Good guess. Read on.' : 'Got it. Now see who God actually sent.';
           document.getElementById('rescuerReveal').classList.add('open');
           if (!rescuerAnswered) { rescuerAnswered = true; addXP(10, 'Mission briefed'); awardBadge('start'); }
         });
@@ -1451,7 +1449,7 @@
           sortCount.textContent = '';
           document.getElementById('chartReveal').classList.add('open');
           awardBadge('hope');
-          if (sortCorrect === sortItems.length) { addXP(30, 'Perfect hunt'); confetti(28); }
+          if (sortCorrect === sortItems.length) { addXP(30, 'Perfect sort'); confetti(28); }
           return;
         }
         const item = sortItems[sortIndex];
@@ -1480,14 +1478,14 @@
             counts[item.bin] += 1;
             document.getElementById(item.bin === 'god' ? 'countGod' : item.bin === 'hope' ? 'countHope' : 'countDo').textContent = counts[item.bin];
             sortFeedback.className = 'feedback good';
-            sortFeedback.textContent = item.missed ? 'Got it this time.' : 'Nice. +10 XP';
+            sortFeedback.textContent = item.missed ? 'Got it this time.' : 'Right. +10 XP';
             addXP(item.missed ? 4 : 10, 'Sorted');
             sortLocked = true;
             setTimeout(() => { bin.classList.remove('correct'); sortLocked = false; sortIndex += 1; renderSort(); }, 520);
           } else {
             item.missed = true;
             sortFeedback.className = 'feedback bad';
-            sortFeedback.textContent = 'Not that column. Read it again and try another.';
+            sortFeedback.textContent = 'Not that one. Read it again and try another column.';
             setTimeout(() => bin.classList.remove('miss'), 400);
           }
         });
@@ -1521,7 +1519,7 @@
               tapButton.textContent = taps >= tapGoal ? 'Strength: ON' : 'Time!';
               tapButton.disabled = true;
               const earned = Math.min(40, Math.round(taps / 2));
-              tapFeedback.textContent = taps >= tapGoal ? `${taps} taps. Dust officially shaken off.` : `${taps} taps. Stand up next time and try again on Sunday.`;
+              tapFeedback.textContent = taps >= tapGoal ? `${taps} taps. Meter full.` : `${taps} taps. Close, but the meter didn't fill.`;
               addXP(earned, 'Strength');
               if (taps >= tapGoal) confetti(24);
             }
@@ -1578,7 +1576,7 @@
           button.textContent = 'Watched ✓';
           button.disabled = true;
           addXP(10, 'Watched');
-          videoFeedback.textContent = watched.size === videos.length ? 'Both videos watched. What did Isaiah get right, hundreds of years early?' : 'Logged. What are some of the griefs and sorrows the Savior carries for you?';
+          videoFeedback.textContent = watched.size === videos.length ? 'Both watched. What did Isaiah get right, hundreds of years early?' : 'Got it. What are some of the griefs and sorrows the Savior carries for you?';
         });
         videoGrid.appendChild(card);
       });
@@ -1626,7 +1624,7 @@
 
       function renderTF() {
         if (tfIndex >= tfItems.length) {
-          tfDeck.innerHTML = `<div class="deck-card"><p class="counter">Myths busted</p><p class="statement">${tfCorrect} of ${tfItems.length} correct. Nobody is too far gone.</p></div>`;
+          tfDeck.innerHTML = `<div class="deck-card"><p class="counter">Done</p><p class="statement">${tfCorrect} of ${tfItems.length} correct. Nobody is too far gone.</p></div>`;
           awardBadge('return');
           if (tfCorrect === tfItems.length) { addXP(20, 'Flawless'); confetti(24); }
           return;
@@ -1671,7 +1669,7 @@
           const total = document.querySelectorAll('#guestGrid .tile').length;
           const invited = document.querySelectorAll('#guestGrid .tile.invited').length;
           guestFeedback.className = 'feedback good';
-          guestFeedback.textContent = invited === total ? 'Every single card. Nobody is left off the list.' : `${invited} of ${total} checked. Notice a pattern?`;
+          guestFeedback.textContent = invited === total ? 'Every card. Nobody is left off the list.' : `${invited} of ${total} checked. Notice a pattern?`;
           if (invited === total) awardBadge('invite');
         });
       });
@@ -1681,7 +1679,7 @@
       document.querySelectorAll('#covenantList input').forEach(box => {
         box.addEventListener('change', () => {
           const checked = document.querySelectorAll('#covenantList input:checked').length;
-          covenantFeedback.textContent = checked ? `${checked} chosen. That's what taking hold looks like.` : '';
+          covenantFeedback.textContent = checked ? `${checked} picked. That's what taking hold looks like.` : '';
           if (checked && !covenantScored) { covenantScored = true; addXP(10, 'Took hold'); }
         });
       });
@@ -1717,7 +1715,7 @@
             seekGrid.children[seekTarget].classList.add('open', 'found');
             seekGrid.children[seekTarget].textContent = '🐑';
             seekFeedback.className = 'feedback';
-            seekFeedback.textContent = 'Out of taps, so here He is. The point of Isaiah 55:6: seek Him while He may be found.';
+            seekFeedback.textContent = 'Out of taps. Here He is. Isaiah 55:6 says to seek Him while He may be found.';
             addXP(5, 'Kept seeking');
           } else {
             seekFeedback.className = 'feedback';
@@ -1807,7 +1805,7 @@
         document.getElementById('lightningGame').hidden = true;
         const result = document.getElementById('lightningResult');
         result.hidden = false;
-        const verdict = quizCorrect === quizItems.length ? 'Flawless. Isaiah would be proud.' : quizCorrect >= 7 ? 'Strong round. Compare scores.' : quizCorrect >= 4 ? 'Solid. Those verses are sticking.' : 'Rough round, but you now know ten things about Isaiah 50–57.';
+        const verdict = quizCorrect === quizItems.length ? 'Perfect score.' : quizCorrect >= 7 ? 'Nice work. Compare scores with the person next to you.' : quizCorrect >= 4 ? 'Solid. Those verses are sticking.' : 'Tough round. You still learned ten things about Isaiah 50–57.';
         result.innerHTML = `<div class="score-card"><small>Lightning score</small><span class="big">${quizScore}</span><p style="margin:.4rem 0 0">${quizCorrect} of ${quizItems.length} correct · ${timeLeft}s left</p><p style="margin:.4rem 0 0;font-weight:800">${verdict}</p></div>`;
         awardBadge('lightning');
         if (quizCorrect >= 7) confetti(36);
@@ -1841,7 +1839,7 @@
         const text = document.getElementById('nextStep').value.trim();
         if (!text && !commitChoice) {
           document.getElementById('nextStep').focus();
-          commitButton.textContent = 'Pick or write a plan first';
+          commitButton.textContent = 'Pick one or write a plan first';
           setTimeout(() => { commitButton.textContent = 'Lock it in'; }, 1600);
           return;
         }
