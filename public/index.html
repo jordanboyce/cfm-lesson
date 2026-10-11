@@ -382,6 +382,26 @@
     .teacher-note strong { color: var(--indigo); }
     body.teacher .teacher-note { display: block; }
 
+
+    /* ---------- Context cards (story so far) ---------- */
+    .context { margin: 0 0 1.1rem; padding: 1rem 1.05rem; border-radius: 18px; background: #f3f1fc; border: 1px solid #ddd9f2; }
+    .context h3 { margin: 0 0 .5rem; }
+    .context ul { margin: 0; padding-left: 1.15rem; }
+    .context li { margin: .35rem 0; }
+    .context li strong { color: var(--indigo); }
+    .context .scripture { margin-top: .8rem; font-size: 1.06rem; }
+    .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; margin: .9rem 0 0; padding: 0; list-style: none; }
+    .timeline li { position: relative; padding: .7rem .55rem .6rem; border-radius: 14px; background: var(--white); border: 1px solid var(--line); text-align: center; font-size: .8rem; line-height: 1.3; }
+    .timeline li .year { display: block; color: var(--indigo); font-weight: 900; font-size: .95rem; }
+    .timeline li .icon { display: block; font-size: 1.4rem; margin-bottom: .2rem; }
+    .timeline li:not(:last-child)::after { content: "→"; position: absolute; right: -.55rem; top: 50%; transform: translateY(-50%); color: var(--gold); font-weight: 900; z-index: 1; }
+    .chapter-map { display: grid; gap: .5rem; margin-top: .8rem; }
+    .chapter { border: 1px solid var(--line); border-radius: 14px; padding: .75rem .9rem; background: var(--white); color: var(--ink); text-align: left; cursor: pointer; font-weight: 800; transition: border-color .2s ease, background .2s ease; }
+    .chapter .ref { display: inline-block; min-width: 5.6rem; margin-right: .5rem; padding: .1rem .5rem; border-radius: 999px; background: var(--navy); color: var(--gold-soft); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
+    .chapter .more { display: none; margin: .5rem 0 0; font-weight: 500; color: #3f3d5c; }
+    .chapter.open { border-color: var(--gold); background: #fffaea; }
+    .chapter.open .more { display: block; animation: stageIn .3s ease both; }
+
     /* ---------- Sorting game (Hope Hunt) ---------- */
     .sort-card {
       position: relative;
@@ -642,6 +662,8 @@
       .stage-banner { margin: -1.8rem -1.8rem 1.2rem; padding: 1.2rem 1.8rem; }
       .flip-grid, .guest-grid, .chart, .choice-grid.two { grid-template-columns: repeat(2, 1fr); }
       .chart { grid-template-columns: repeat(3, 1fr); }
+      .chapter-map { grid-template-columns: repeat(2, 1fr); }
+      .timeline li { font-size: .88rem; }
       .bins { grid-template-columns: repeat(3, 1fr); }
       .badge-grid { grid-template-columns: repeat(6, 1fr); }
       .path-map li { font-size: .7rem; }
@@ -731,7 +753,31 @@
         <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="30" width="48" height="26" rx="3" fill="#f2b84b"/><rect x="14" y="20" width="36" height="12" fill="#ffe39b"/><rect x="22" y="12" width="20" height="10" fill="#fff"/><rect x="10" y="26" width="6" height="6" fill="#1a1536"/><rect x="24" y="26" width="6" height="6" fill="#1a1536"/><rect x="38" y="26" width="6" height="6" fill="#1a1536"/><rect x="28" y="42" width="8" height="14" fill="#1a1536"/></svg>
         <div><p class="step-label">Quest 1 · Mission briefing</p><h2>Captive in Babylon</h2></div>
       </div>
-      <p class="lead">Picture it: Israel has been dragged off to Babylon. Massive walls. No way home. For years, people have been reading Isaiah's old prophecies about a mighty deliverer.</p>
+      <div class="context">
+        <h3><span class="tag">Read first</span>The story so far</h3>
+        <ul>
+          <li><strong>Who is talking?</strong> Isaiah, a prophet in Jerusalem about 700 years before Jesus was born. He wrote in poetry, so it sounds different from a story. Expect pictures and repeated lines.</li>
+          <li><strong>What's the situation?</strong> Isaiah warned that Judah would be conquered and hauled off to Babylon. It happened about a century later. These chapters were written for people who would one day sit in Babylon feeling abandoned, ashamed, and far from home.</li>
+          <li><strong>What's the big idea?</strong> Everyone in captivity wanted a deliverer who could tear down Babylon's walls. God sent a very different kind of deliverer, and that is the whole point of this week.</li>
+        </ul>
+        <ol class="timeline" aria-label="Timeline">
+          <li><span class="icon">📜</span><span class="year">~700 BC</span>Isaiah writes these chapters</li>
+          <li><span class="icon">🏰</span><span class="year">~587 BC</span>Jerusalem falls, captivity in Babylon</li>
+          <li><span class="icon">✝️</span><span class="year">~AD 33</span>Jesus Christ fulfills Isaiah 53</li>
+        </ol>
+      </div>
+      <h3><span class="tag">Map</span>What's in Isaiah 50–57</h3>
+      <p class="lead">Tap a chapter block to see what it's about. Each one is a quest today.</p>
+      <div class="chapter-map" id="chapterMap">
+        <button class="chapter"><span class="ref">Isaiah 50–52</span>Wake up, hope is coming<p class="more">The Lord tells captive Israel He never divorced them and never lost His power to save. “Awake, awake, put on thy strength.” The future is bright.</p></button>
+        <button class="chapter"><span class="ref">Isaiah 53</span>The Servant who suffers<p class="more">The clearest Old Testament description of what Jesus Christ would go through: despised, wounded, silent, carrying our griefs. Written centuries early.</p></button>
+        <button class="chapter"><span class="ref">Isaiah 54; 57</span>Come back, I haven't given up<p class="more">The Lord speaks like a husband who refuses to walk away. “My kindness shall not depart from thee.” He heals people who feel far from Him.</p></button>
+        <button class="chapter"><span class="ref">Isaiah 55–56</span>Everyone is invited<p class="more">“Every one that thirsteth, come ye to the waters.” People the old law kept out of the temple, outsiders and the “utterly separated,” are invited in.</p></button>
+      </div>
+      <p class="feedback" id="chapterFeedback" aria-live="polite"></p>
+
+      <h3><span class="tag">Warm up</span>Picture it</h3>
+      <p class="lead">Israel has been dragged off to Babylon. Massive walls. No way home. For years, people have been reading Isaiah's old prophecies about a mighty deliverer.</p>
       <p class="question">If you were trapped behind Babylon's walls, what kind of rescuer would you be hoping for?</p>
       <div class="choice-grid two" id="rescuerPoll">
         <button class="choice">🦁 A warrior king who crushes Babylon</button>
@@ -758,7 +804,17 @@
         <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="36" r="14" fill="#ffe39b"/><g stroke="#f2b84b" stroke-width="4" stroke-linecap="round"><line x1="32" y1="8" x2="32" y2="16"/><line x1="10" y1="22" x2="16" y2="26"/><line x1="54" y1="22" x2="48" y2="26"/><line x1="6" y1="40" x2="14" y2="40"/><line x1="58" y1="40" x2="50" y2="40"/></g><path d="M4 56c10-8 46-8 56 0" fill="#1a1536"/></svg>
         <div><p class="step-label">Quest 2 · Isaiah 50–52</p><h2>Hope Hunt</h2></div>
       </div>
-      <p class="lead">Israel's captivity was the result of their own choices, and still the Lord wanted them to look to the future with hope. Sort each verse into the right column of the lesson's study chart. Twelve verses. Go.</p>
+      <div class="context">
+        <h3><span class="tag">Read first</span>The story so far</h3>
+        <ul>
+          <li><strong>The feeling:</strong> Israel is in captivity because of their own choices, and they feel like God has divorced them and walked away.</li>
+          <li><strong>The Lord's answer:</strong> Isaiah 50 opens with Him asking, where is the divorce paper? There isn't one. “Is my hand shortened at all, that it cannot redeem?” (50:2). He hasn't left. They wandered.</li>
+          <li><strong>The command:</strong> These chapters keep shouting “Awake! Stand up! Put on thy strength!” He wants captives to look forward with hope, not backward with shame.</li>
+        </ul>
+        <blockquote class="scripture">“The redeemed of the Lord shall return, and come with singing unto Zion; and everlasting joy shall be upon their head: they shall obtain gladness and joy; and sorrow and mourning shall flee away.”<cite>Read together · Isaiah 51:11</cite></blockquote>
+      </div>
+      <h3><span class="tag">Game</span>Sort the verses</h3>
+      <p class="lead">The lesson's study chart has three columns. Read each verse and tap the column it belongs in. Twelve verses. Go.</p>
 
       <div id="sortGame">
         <div class="sort-card" id="sortCard">
@@ -812,6 +868,16 @@
         <svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="34" cy="36" rx="20" ry="14" fill="#fbf7ef"/><circle cx="22" cy="40" r="7" fill="#fbf7ef"/><circle cx="46" cy="40" r="7" fill="#fbf7ef"/><circle cx="34" cy="24" r="8" fill="#fbf7ef"/><circle cx="14" cy="32" r="7" fill="#2c2340"/><circle cx="12" cy="31" r="1.3" fill="#fff"/><rect x="22" y="46" width="4" height="12" rx="2" fill="#2c2340"/><rect x="42" y="46" width="4" height="12" rx="2" fill="#2c2340"/></svg>
         <div><p class="step-label">Quest 3 · Isaiah 53</p><h2>Lion or Lamb?</h2></div>
       </div>
+      <div class="context">
+        <h3><span class="tag">Read first</span>The story so far</h3>
+        <ul>
+          <li><strong>What this chapter is:</strong> The clearest description of Jesus Christ's suffering anywhere in the Old Testament, written about 700 years before it happened. Isaiah calls Him “the servant.”</li>
+          <li><strong>Why it shocked people:</strong> Captives in Babylon wanted a conqueror. This chapter describes someone rejected, wounded, and silent, who carries other people's pain instead of fighting.</li>
+          <li><strong>How to read it:</strong> Slowly. Every line is about Him, and the lesson says it is also specifically about you.</li>
+        </ul>
+        <blockquote class="scripture">“He is despised and rejected of men; a man of sorrows, and acquainted with grief: and we hid as it were our faces from him; he was despised, and we esteemed him not.”<cite>Read together · Isaiah 53:3</cite></blockquote>
+      </div>
+      <h3><span class="tag">Game</span>Movie hero vs. Isaiah 53</h3>
       <p class="lead">Movies love a hero who kicks the door down. Isaiah 53 describes a very different kind of rescuer. Tap each movie-hero rule to flip it and see what Isaiah actually wrote.</p>
       <div class="flip-grid" id="heroFlips">
         <button class="flip"><span class="front"><span class="kicker">Movie hero rule</span>Everybody loves the hero<small>Tap to flip</small></span><span class="back">“He is despised and rejected of men; a man of sorrows, and acquainted with grief: and we hid as it were our faces from him.”<cite>Isaiah 53:3</cite></span></button>
@@ -862,6 +928,16 @@
         <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 34 L32 12 L56 34" fill="none" stroke="#ffe39b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="16" y="32" width="32" height="24" rx="2" fill="#fbf7ef"/><rect x="28" y="40" width="8" height="16" fill="#1a3b35"/><circle cx="46" cy="40" r="3" fill="#f2b84b"/></svg>
         <div><p class="step-label">Quest 4 · Isaiah 54; 57:15–19</p><h2>Never Too Far</h2></div>
       </div>
+      <div class="context">
+        <h3><span class="tag">Read first</span>The story so far</h3>
+        <ul>
+          <li><strong>The feeling:</strong> Captivity felt like being abandoned, and a lot of it was their own fault. Shame says, “He's done with me.”</li>
+          <li><strong>Isaiah 54:</strong> The Lord speaks to Israel like a husband who refuses to give up on his wife. He admits there was “a small moment” of distance, then promises mercy and kindness that never leave.</li>
+          <li><strong>Isaiah 57:</strong> He says He lives in the high and holy place, and also with anyone who is humble and sorry. He has seen their ways and still plans to heal them.</li>
+        </ul>
+        <blockquote class="scripture">“For a small moment have I forsaken thee; but with great mercies will I gather thee. In a little wrath I hid my face from thee for a moment; but with everlasting kindness will I have mercy on thee, saith the Lord thy Redeemer.”<cite>Read together · Isaiah 54:7–8</cite></blockquote>
+      </div>
+      <h3><span class="tag">Game</span>Myth busters</h3>
       <p class="lead">Everyone has moments of feeling far from the Lord. Some people even give up hope of being forgiven. Isaiah 54 and 57 are the chapters for exactly those moments. Bust these myths. True or false?</p>
       <div class="deck" id="tfDeck"></div>
       <p class="feedback" id="tfScore" aria-live="polite"></p>
@@ -890,6 +966,16 @@
         <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 8 C22 24 14 30 14 40 a18 18 0 0 0 36 0 c0-10-8-16-18-32z" fill="#8fb8ff"/><path d="M26 40 a8 8 0 0 0 8 10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
         <div><p class="step-label">Quest 5 · Isaiah 55–56</p><h2>Everyone Invited</h2></div>
       </div>
+      <div class="context">
+        <h3><span class="tag">Read first</span>The story so far</h3>
+        <ul>
+          <li><strong>The old rules:</strong> Under the law of Moses, foreigners (“strangers”) and eunuchs were kept out of full temple worship. Many of them assumed God's people did not include them.</li>
+          <li><strong>Isaiah 55:</strong> The Lord shouts an invitation like a street vendor: anyone thirsty, anyone broke, come and eat for free. Seek Him while He can be found.</li>
+          <li><strong>Isaiah 56:</strong> He tells the outsider not to say “The Lord hath utterly separated me from his people.” His house is “an house of prayer for all people.”</li>
+        </ul>
+        <blockquote class="scripture">“Ho, every one that thirsteth, come ye to the waters, and he that hath no money; come ye, buy, and eat; yea, come, buy wine and milk without money and without price.”<cite>Read together · Isaiah 55:1</cite></blockquote>
+      </div>
+      <h3><span class="tag">Game</span>Check the guest list</h3>
       <p class="lead">Israel was God's covenant people, but His plan was never for one nation only. Who gets an invitation to “come to the waters”? Tap a card to check the guest list.</p>
       <div class="guest-grid" id="guestGrid">
         <button class="tile"><span class="stamp">Invited</span>Everyone who is thirsty<small>Isaiah 55:1 — “every one that thirsteth, come ye to the waters”</small></button>
@@ -941,7 +1027,7 @@
         <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M36 6 L14 36 h16 l-4 22 L50 26 H34z" fill="#ffe39b" stroke="#f2b84b" stroke-width="2" stroke-linejoin="round"/></svg>
         <div><p class="step-label">Quest 6 · Isaiah 50–57</p><h2>Lightning Round</h2></div>
       </div>
-      <p class="lead">Ten questions. Sixty seconds. Faster answers earn more XP. Compare scores when the timer ends.</p>
+      <p class="lead">Everything in this round comes from the quests you just did. Ten questions. Sixty seconds. Faster answers earn more XP. Compare scores when the timer ends.</p>
       <div id="lightningIntro">
         <button class="button gold" id="startLightning">⚡ Start the clock</button>
       </div>
@@ -1177,6 +1263,21 @@
         }
         return copy;
       }
+
+      /* ---------------- Quest 1: chapter map ---------------- */
+      const chapterFeedback = document.getElementById('chapterFeedback');
+      document.querySelectorAll('#chapterMap .chapter').forEach(chapter => {
+        chapter.addEventListener('click', () => {
+          const open = chapter.classList.toggle('open');
+          chapter.setAttribute('aria-expanded', String(open));
+          if (open && !chapter.dataset.scored) {
+            chapter.dataset.scored = '1';
+            addXP(5, 'Explored');
+            const opened = document.querySelectorAll('#chapterMap .chapter[data-scored]').length;
+            chapterFeedback.textContent = opened === 4 ? 'That is the whole map. Now the warm-up.' : `${opened} of 4 explored.`;
+          }
+        });
+      });
 
       /* ---------------- Quest 1: rescuer poll ---------------- */
       const rescuerFeedback = document.getElementById('rescuerFeedback');
