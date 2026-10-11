@@ -164,7 +164,9 @@
     .path-map li {
       position: relative;
       min-width: 0;
-      padding-top: 1.55rem;
+      min-height: 3rem;
+      padding: 1.55rem .1rem .3rem;
+      border-radius: 10px;
       color: var(--muted);
       font-size: .62rem;
       font-weight: 800;
@@ -206,6 +208,8 @@
     .path-map li.done .pin, .path-map li.active .pin { border-color: var(--gold); background: var(--gold); }
     .path-map li.active .pin { transform: translateX(-50%) scale(1.25); box-shadow: 0 0 0 6px rgba(242, 184, 75, .22); }
     .path-map li.active { color: var(--ink); }
+    .path-map li.done { color: #4a4a8c; }
+    .path-map li:hover { background: rgba(43, 42, 107, .06); }
     .path-map li.done::after { background: var(--gold); }
 
     /* ---------- Stages ---------- */
@@ -1012,6 +1016,25 @@
       let current = 0;
       let xp = 0;
       const badges = new Set();
+      const visited = new Set();
+      const STORE_KEY = 'cfm-isaiah-50-57';
+
+      function saveState() {
+        try {
+          sessionStorage.setItem(STORE_KEY, JSON.stringify({ current, xp, badges: [...badges], visited: [...visited] }));
+        } catch (error) { /* storage unavailable: the page still works without it */ }
+      }
+
+      function loadState() {
+        try {
+          const saved = JSON.parse(sessionStorage.getItem(STORE_KEY) || 'null');
+          if (!saved) return null;
+          xp = Number(saved.xp) || 0;
+          (saved.badges || []).forEach(id => badges.add(id));
+          (saved.visited || []).forEach(i => visited.add(Number(i)));
+          return Number(saved.current) || 0;
+        } catch (error) { return null; }
+      }
       const levels = [[0, 'Seeker'], [120, 'Watchman'], [300, 'Messenger'], [520, 'Zion Builder'], [800, 'Legend']];
 
       function levelFor(points) {
@@ -1033,6 +1056,7 @@
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => xpToast.classList.remove('show'), 1400);
         updateFinish();
+        saveState();
       }
 
       function awardBadge(id) {
@@ -1040,6 +1064,7 @@
         badges.add(id);
         addXP(25, 'Badge earned');
         updateFinish();
+        renderPath();
       }
 
       function updateFinish() {
@@ -1049,27 +1074,50 @@
         document.querySelectorAll('#badgeGrid .badge').forEach(badge => badge.classList.toggle('earned', badges.has(badge.dataset.badge)));
       }
 
-      function showStage(index) {
-        current = Math.max(0, Math.min(index, stages.length - 1));
-        stages.forEach((stage, i) => stage.classList.toggle('active', i === current));
+      const badgeForStage = ['start', 'hope', 'lamb', 'return', 'invite', 'lightning', null];
+
+      function renderPath() {
         pathItems.forEach((item, i) => {
-          item.classList.toggle('active', i === current);
-          item.classList.toggle('done', i < current);
+          const isActive = i === current;
+          const isDone = !isActive && (visited.has(i) || (badgeForStage[i] && badges.has(badgeForStage[i])));
+          item.classList.toggle('active', isActive);
+          item.classList.toggle('done', isDone);
+          item.setAttribute('aria-current', isActive ? 'step' : 'false');
         });
+      }
+
+      function showStage(index, options = {}) {
+        current = Math.max(0, Math.min(index, stages.length - 1));
+        visited.add(current);
+        stages.forEach((stage, i) => stage.classList.toggle('active', i === current));
+        renderPath();
         progressBar.style.width = `${((current + 1) / stages.length) * 100}%`;
         progressText.textContent = `Quest ${current + 1} of ${stages.length}`;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        const heading = stages[current].querySelector('h2');
-        if (heading) {
-          heading.setAttribute('tabindex', '-1');
-          setTimeout(() => heading.focus({ preventScroll: true }), 380);
+        if (!options.silent) {
+          window.scrollTo({ top: 0, behavior: options.instant ? 'auto' : 'smooth' });
+          const heading = stages[current].querySelector('h2');
+          if (heading) {
+            heading.setAttribute('tabindex', '-1');
+            setTimeout(() => heading.focus({ preventScroll: true }), 380);
+          }
         }
         if (current === stages.length - 1) updateFinish();
+        /* The phone's back button steps to the previous quest instead of leaving the lesson. */
+        const hash = `#q${current + 1}`;
+        if (!options.fromHistory && location.hash !== hash) history.pushState({ stage: current }, '', hash);
+        saveState();
       }
+
+      window.addEventListener('popstate', event => {
+        const fromHash = /^#q(\d+)$/.exec(location.hash);
+        const target = event.state && typeof event.state.stage === 'number' ? event.state.stage : fromHash ? Number(fromHash[1]) - 1 : 0;
+        showStage(target, { fromHistory: true });
+      });
 
       document.querySelectorAll('.next').forEach(button => button.addEventListener('click', () => showStage(current + 1)));
       document.querySelectorAll('.back').forEach(button => button.addEventListener('click', () => showStage(current - 1)));
       pathItems.forEach((item, i) => {
+        item.setAttribute('role', 'button');
         item.addEventListener('click', () => showStage(i));
         item.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showStage(i); } });
       });
@@ -1573,6 +1621,16 @@
         addXP(40, 'Committed');
         confetti(60);
       });
+
+      /* ---------------- Restore where this phone left off ---------------- */
+      const savedStage = loadState();
+      const hashStage = /^#q(\d+)$/.exec(location.hash);
+      const startStage = hashStage ? Number(hashStage[1]) - 1 : savedStage !== null ? savedStage : 0;
+      xpValue.textContent = xp;
+      levelText.textContent = levelFor(xp);
+      updateFinish();
+      history.replaceState({ stage: Math.max(0, Math.min(startStage, stages.length - 1)) }, '', `#q${Math.max(0, Math.min(startStage, stages.length - 1)) + 1}`);
+      showStage(startStage, { silent: true, fromHistory: true });
     })();
   </script>
 </body>

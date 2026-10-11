@@ -17,7 +17,7 @@ A gamified, dependency-free youth Sunday School lesson. Everything (content, sty
 | 6 Round | Whole block | 60-second, 10-question lightning quiz with speed bonus |
 | 7 Finish | Personal application | Badge gallery, rank, commitment |
 
-Students earn XP for correct answers and a badge per quest. XP, badges and anything typed stay in the browser tab and are never sent or saved.
+Students earn XP for correct answers and a badge per quest. The quest stepper lets anyone jump between quests, completed quests stay marked, and an accidental refresh resumes the same quest with XP and badges intact (kept in the browser tab only, never sent anywhere). The phone back button steps to the previous quest instead of leaving the lesson.
 
 The **Teacher notes** link in the footer toggles discussion prompts and manual references inside each quest.
 
