@@ -1,41 +1,56 @@
 # Interactive Come Follow Me Lesson
 
-A gamified, dependency-free youth Sunday School lesson. Everything (content, styling, games, scoring) lives in `public/index.html`. Students open the site on their phones and the class moves through seven "quests" together.
+A youth Sunday School lesson built as a click-through **TV presentation**. Everything (content, styling, animations, games, scoring) lives in `public/index.html`; the only outside request is two Google Fonts (Cormorant Garamond and Inter), and it falls back to system fonts offline. Plug a laptop into the TV, open the site, press **F** for full screen, and click through together.
 
-**Current lesson:** October 5–11, 2026 · "He Hath Borne Our Griefs, and Carried Our Sorrows" · Isaiah 50–57
-([official lesson](https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/41?lang=eng)).
+**Current lesson:** October 26 – November 1, 2026 · "I Will Turn Their Mourning into Joy" · Jeremiah 31–33; 36–39; Lamentations 1; 3
+([official lesson](https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/44?lang=eng)).
 
-## What's on the page
+## What's in the deck
 
-| Quest | Lesson section | Game |
+The background moves from night to sunrise to full day as the lesson goes from mourning to joy. The look is deliberately understated: serif type, gold line-art icons, and quiet animations.
+
+| Slides | Section | What happens |
 | --- | --- | --- |
-| 1 Start | Introduction (captivity in Babylon, lion vs. lamb) | Poll: what kind of rescuer would you want? |
-| 2 Hope | Isaiah 50–52 · The future is bright | Sort 12 verses into the manual's study chart; 5-second "put on thy strength" tap meter; scripture-help flip cards |
-| 3 Lamb | Isaiah 53 · Jesus Christ took upon Himself my sins and sorrows | Movie-hero vs. Isaiah 53 flip cards; lesson videos; "we" to "I" pronoun swap; private burden chips |
-| 4 Return | Isaiah 54; 57:15–19 · Jesus Christ wants me to return to Him | True/false myth-busting deck; President Uchtdorf quote reveal |
-| 5 Invite | Isaiah 55–56 · Take hold of my covenant | Guest-list stamp cards; covenant checklist; "seek the Lord" hidden-card game; His higher ways quiz |
-| 6 Round | Whole block | 60-second, 10-question lightning quiz with speed bonus |
-| 7 Finish | Personal application | Badge gallery, rank, commitment |
+| 1–4 | Intro | Title, "worst day turned around" warm-up, Jeremiah trading card that flips, animated map of Babylon marching on Jerusalem (plus the Lehi / 1 Nephi 7:14 tie-in) |
+| 5–7 | Story 1 · Jeremiah 36 | The scroll is written, cut up and burned, then rewritten with "many like words"; discussion |
+| 8–10 | Story 2 · Jeremiah 37–39 | Jeremiah sinks in the pit; guess what Ebed-melech brought; the class pulls him out five heaves at a time; "old rags" kindness ideas |
+| 11–14 | Story 3 · Jeremiah 39; Lamentations 1; 3 | Jerusalem falls, Lamentations' sad songs, then the sunrise of "new every morning" |
+| 15–16 | Story 4 · Jeremiah 32 | "Would you buy it?" hand-vote, then the deed drops into the clay jar |
+| 17–21 | Jeremiah 31; 33 | Law flies from stone into a heart; "Stone or Heart?" sorting game; everlasting love; "Call unto me"; the Branch grows from a stump |
+| 22–29 | Lightning round | Six team quiz questions with a 20-second timer, scoreboard, and winner reveal |
+| 30–32 | Wrap-up | Mourning → Joy flip-tile recap, pick-one challenge, Jeremiah 31:13 finale |
 
-Students earn XP for correct answers and a badge per quest. The quest stepper lets anyone jump between quests, completed quests stay marked, and an accidental refresh resumes the same quest with XP and badges intact (kept in the browser tab only, never sent anywhere). The phone back button steps to the previous quest instead of leaving the lesson.
+## Controls
 
-The **Teacher notes** link in the footer toggles discussion prompts and manual references inside each quest.
+| Key | Action |
+| --- | --- |
+| → · Space · Page Down · click | Next (reveals the next part of a slide first) |
+| ← · Page Up · click the left edge | Back |
+| N | Teacher notes for the current slide (visible on the TV too) |
+| S | Show or hide the team scoreboard (it shows automatically during the quiz) |
+| B or . | Black screen |
+| F | Fullscreen |
+| M | Sound on/off |
+| ? | Help |
 
-## Lesson videos
+Most presentation clickers send Page Up/Page Down and work as-is. Quiz answers, the PULL button, votes, recap tiles and challenge cards can also be clicked. Your slide and team scores survive a refresh (kept in the browser tab only).
 
-Quest 3 has cards for the videos referenced in the lesson. By default each card is a poster that opens the video on churchofjesuschrist.org. To embed a player instead, find the `videos` array in the script near the comment `Quest 3: lesson videos`, open the video in the Church media library, choose Share > Embed, and paste the iframe `src` URL into that video's `embed` field.
+## Past lessons
+
+Earlier lessons are kept in `public/archive/` (for example `/archive/2026-10-05-isaiah-50-57.html`).
 
 ## Weekly update
 
-1. Replace the lesson title, dates, scripture block, quest content, quiz bank and the official lesson link in `public/index.html`.
-2. Open `public/index.html` locally in a browser and play through every quest on a phone-sized window.
-3. Deploy:
+1. Move the current `public/index.html` into `public/archive/`.
+2. Edit the slides in `public/index.html`: each `<section class="slide">` is one slide, `data-step="n"` makes an element appear on the nth click, `data-mood` sets the sky (night, dusk, dawn, day), and `<aside class="notes">` holds the teacher notes.
+3. Open `public/index.html` locally in a full-screen browser window and click through every slide.
+4. Deploy:
 
 ```bash
 firebase deploy --only hosting
 ```
 
-Pushes to `main` also deploy through the GitHub Actions workflow in `.github/workflows`.
+Pushes to `master` also deploy through the GitHub Actions workflow in `.github/workflows`.
 
 ## First Firebase setup
 
