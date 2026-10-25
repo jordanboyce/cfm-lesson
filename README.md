@@ -18,9 +18,9 @@ The background moves from night to sunrise to full day as the lesson goes from m
 | 12–13 | Story 4 · Jeremiah 32 | "Would you buy it?" hand vote, then the deed is sealed in a clay jar |
 | 14–16 | Jeremiah 31; 33 | Law moves from stone into a heart; "Call unto me"; the Branch grows from a stump |
 | 17–21 | Quick quiz | Four team questions with a 15-second timer, scoreboard, and final score |
-| 22–23 | Wrap-up | Pick-one challenge, Jeremiah 31:13 finale |
+| 22–24 | Wrap-up | "In short" five-point summary, pick-one challenge, Jeremiah 31:13 finale |
 
-The deck is built for a 25-minute class: 23 slides, about 23 minutes at the pace in the teacher script.
+The deck is built for a 25-minute class: 24 slides, about 24 minutes at the pace in the teacher script. If time runs out, press **W** (or the **Wrap up** button) from any slide to jump to the "In short" slide; the script has a 2-minute summary to read aloud there.
 
 ## Controls
 
@@ -33,6 +33,7 @@ The deck is built for a 25-minute class: 23 slides, about 23 minutes at the pace
 | B or . | Black screen |
 | F | Fullscreen |
 | M | Sound on/off |
+| W | Out of time: jump to the "In short" summary |
 | ? | Help |
 
 Most presentation clickers send Page Up/Page Down and work as-is. Quiz answers, the PULL button, votes, recap tiles and challenge cards can also be clicked. Your slide and team scores survive a refresh (kept in the browser tab only).

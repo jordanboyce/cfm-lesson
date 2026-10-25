@@ -533,6 +533,19 @@
     .pick h3 { margin: 22px 0 12px; font-family: var(--serif); font-size: 44px; font-weight: 600; }
     .pick p { font-size: 22px; line-height: 1.5; color: var(--cream-dim); }
     .pick .ref { display: block; margin-top: 18px; font-size: 13px; font-weight: 600; color: var(--gold); letter-spacing: .26em; }
+    /* ---------- In short ---------- */
+    .summary { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+    .summary li { display: flex; align-items: center; gap: 26px; padding-bottom: 18px; border-bottom: 1px solid rgba(214, 178, 110, .22); }
+    .summary li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .summary .icon { flex: none; width: 52px; height: 52px; }
+    .summary b { font-family: var(--serif); font-size: 40px; font-weight: 600; }
+    .summary span.ref { margin-left: 18px; font-size: 15px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+    .slide.current .summary li { animation: rise 1s cubic-bezier(.2, .7, .2, 1) both; }
+    .slide.current .summary li:nth-child(2) { animation-delay: .25s; }
+    .slide.current .summary li:nth-child(3) { animation-delay: .5s; }
+    .slide.current .summary li:nth-child(4) { animation-delay: .75s; }
+    .slide.current .summary li:nth-child(5) { animation-delay: 1s; }
+
     .pick.chosen { border-color: var(--gold); background: rgba(214, 178, 110, .14); transform: translateY(-8px); box-shadow: 0 0 50px rgba(214, 178, 110, .2); }
 
     /* ---------- Chrome around the stage ---------- */
@@ -1073,7 +1086,30 @@
       <aside class="notes"><p>A little gold dust falls automatically. Congratulate both teams.</p></aside>
     </section>
 
-    <!-- 22. Challenge -->
+    <!-- 22. In short (press W from any slide to jump here) -->
+    <section class="slide" data-mood="day" id="summary">
+      <span class="kicker">In short</span>
+      <h2 style="margin-bottom: 36px;">The Lord turns <span class="accent">mourning into joy</span></h2>
+      <ol class="summary">
+        <li><svg class="icon"><use href="#i-scroll"/></svg><p><b>His word can't be burned away.</b><span class="ref">Jeremiah 36</span></p></li>
+        <li><svg class="icon"><use href="#i-pit"/></svg><p><b>We can lift others out of the pit.</b><span class="ref">Jeremiah 38</span></p></li>
+        <li><svg class="icon"><use href="#i-sun"/></svg><p><b>His mercies are new every morning.</b><span class="ref">Lamentations 3</span></p></li>
+        <li><svg class="icon"><use href="#i-wheat"/></svg><p><b>Nothing is too hard for Him.</b><span class="ref">Jeremiah 32</span></p></li>
+        <li><svg class="icon"><use href="#i-heart"/></svg><p><b>He writes His law in our hearts, through Jesus Christ.</b><span class="ref">Jeremiah 31; 33</span></p></li>
+      </ol>
+      <aside class="notes">
+        <p><b>On time?</b> Point to the list and move on (30 seconds).</p>
+        <p><b>Out of time?</b> Press <b>W</b> from any slide to jump here, then read this aloud (about 2 minutes):</p>
+        <p>"Here's the whole lesson in two minutes. Jeremiah spent about forty years warning Jerusalem to turn back to God, and most people wouldn't listen. When the king heard the Lord's words, he cut up the scroll and burned it. But the Lord simply had Jeremiah write it again, with even more. God's word can't be burned away, and He doesn't give up on people.</p>
+        <p>"Later, Jeremiah's enemies lowered him into a muddy pit and left him there. Nobody spoke up except Ebed-melech, a servant from Ethiopia. He went to the king, gathered thirty men, and even brought old rags so the ropes wouldn't hurt Jeremiah's arms. The Lord protected Ebed-melech because he trusted the Lord. We can be like him: notice who's in a pit, and help kindly.</p>
+        <p>"Then the worst day came. Babylon broke through the walls, burned the city and the temple, and carried the people away. The book of Lamentations is full of tears about it. But right in the middle of that sadness it says, 'His compassions fail not. They are new every morning.'</p>
+        <p>"Even before the city fell, the Lord had Jeremiah buy a field, to show that people would live in the land again. Nothing is too hard for Him.</p>
+        <p>"And He made His biggest promise: someday He would write His law not on stone, but in our hearts, and a Branch would grow from David's family. That Branch is Jesus Christ.</p>
+        <p>"So here's the main point: whatever your worst day is, it doesn't get the last word. Through Jesus Christ, the Lord turns mourning into joy."</p>
+      </aside>
+    </section>
+
+    <!-- 23. Challenge -->
     <section class="slide" data-mood="day">
       <span class="kicker">This week</span>
       <h2>Choose one</h2>
@@ -1085,7 +1121,7 @@
       <aside class="notes"><p>Have each person silently choose one. Volunteers can come tap the card they picked.</p></aside>
     </section>
 
-    <!-- 23. Finale -->
+    <!-- 24. Finale -->
     <section class="slide center" data-mood="day" data-fx-enter="dust">
       <svg class="sunrise" viewBox="0 0 360 150" aria-hidden="true" style="margin-bottom: 24px;">
         <defs><clipPath id="above2"><rect x="0" y="0" width="360" height="120"/></clipPath></defs>
@@ -1122,6 +1158,7 @@
     <button type="button" id="scoreBtn" aria-pressed="false" title="Scoreboard (S)">Score</button>
     <button type="button" id="soundBtn" aria-pressed="true" title="Sound (M)">Sound on</button>
     <button type="button" id="fullBtn" title="Full screen (F)">Full screen</button>
+    <button type="button" id="wrapBtn" title="Jump to the summary (W)">Wrap up</button>
     <button type="button" id="helpBtn" title="Help (?)">?</button>
   </nav>
 
@@ -1141,6 +1178,7 @@
         <tr><td>B or .</td><td>Black screen</td></tr>
         <tr><td>F</td><td>Full screen</td></tr>
         <tr><td>M</td><td>Sound on or off</td></tr>
+        <tr><td>W</td><td>Out of time: jump to the "In short" summary</td></tr>
       </table>
       <p style="margin-top: 14px;">Most presentation clickers work as they are. Your place and team scores survive a refresh.</p>
       <p style="margin-top: 8px;">Full teacher script: <a href="notes.html" target="_blank" rel="noopener" style="color: var(--gold-soft);">notes.html</a></p>
@@ -1513,6 +1551,7 @@
         else document.documentElement.requestFullscreen?.().catch(() => {});
       }
       function toggleHelp(force) { document.body.classList.toggle("show-help", force); }
+      function wrapUp() { go(slides.indexOf($("summary")), false); }
       drawSound();
 
       $("prevBtn").addEventListener("click", prev);
@@ -1521,6 +1560,7 @@
       $("scoreBtn").addEventListener("click", toggleScore);
       $("soundBtn").addEventListener("click", toggleSound);
       $("fullBtn").addEventListener("click", toggleFull);
+      $("wrapBtn").addEventListener("click", wrapUp);
       $("helpBtn").addEventListener("click", () => toggleHelp(true));
       $("helpClose").addEventListener("click", () => toggleHelp(false));
       $("help").addEventListener("click", (e) => { if (e.target.id === "help") toggleHelp(false); });
@@ -1540,6 +1580,7 @@
         else if (k === "m" || k === "M") toggleSound();
         else if (k === "f" || k === "F") toggleFull();
         else if (k === "b" || k === "B" || k === ".") document.body.classList.toggle("blackout");
+        else if (k === "w" || k === "W") wrapUp();
         else if (k === "?") toggleHelp(true);
         else if (k === "Escape") document.body.classList.remove("show-notes", "blackout");
       });

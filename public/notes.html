@@ -104,6 +104,10 @@
     .answers { margin: 8px 0 2px; padding: 10px 14px 10px 30px; border-radius: 8px; background: var(--ask-bg); font-weight: 400; font-size: 15px; }
     .answers::before { content: "Listen for"; display: block; margin: 0 0 4px -16px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ask); }
     .answers li { margin: 2px 0; }
+    .readaloud { margin: 6px 0 4px; padding: 18px 22px; border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; background: var(--gold-soft); font-family: var(--serif); font-size: 21px; line-height: 1.55; }
+    .readaloud p { margin: 0 0 12px; }
+    .readaloud p:last-child { margin-bottom: 0; }
+    .outoftime { margin: 0 0 14px; padding: 14px 18px; border-radius: 8px; border: 1px dashed var(--gold); font-size: 15px; }
     .skip { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; vertical-align: middle; }
 
     footer { margin-top: 60px; text-align: center; color: var(--muted); font-size: 14px; }
@@ -135,14 +139,15 @@
     <a class="part" href="#plan">Plan</a>
     <a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a>
     <a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a><a href="#s16">16</a>
-    <a href="#s17">17</a><a href="#s21">21</a><a href="#s22">22</a><a href="#s23">23</a>
+    <a href="#s17">17</a><a href="#s21">21</a><a class="part" href="#s22">22 · In short</a><a href="#s23">23</a><a href="#s24">24</a>
   </nav>
 
   <section class="overview" id="plan">
     <h2>The plan</h2>
     <p>One idea runs through everything: <b>the Lord turns mourning into joy.</b> Each story starts with something broken (a burned scroll, a muddy pit, a city in ruins) and ends with what God made of it.</p>
     <ul>
-      <li><b>23 slides, about 23 minutes,</b> which leaves a couple of minutes of buffer inside 25.</li>
+      <li><b>24 slides, about 24 minutes,</b> which leaves a little buffer inside 25.</li>
+      <li><b>Out of time?</b> Press <b>W</b> on the laptop (or click <b>Wrap up</b>) from any slide. It jumps to the "In short" slide, where you <a href="#s22">read the 2-minute summary</a>, then the challenge and closing verse take another 2½ minutes.</li>
       <li><b>Keep it moving.</b> Each slide has one main question. Take two or three answers, then go on. Don't wait for everyone.</li>
       <li><b>Running long?</b> Use the cuts tagged <span class="skip">If behind</span>: skip the warm-up on slide 2, skip quiz questions two and three (press → twice to pass one), and read the Ebed-melech list without asking for ideas.</li>
       <li><b>Before class:</b> open the deck on the laptop, press <b>F</b> for full screen, and press <b>Home</b> to start at slide 1. Keep this page open on your phone.</li>
@@ -152,7 +157,7 @@
       <div><b>0:10</b>Story Three (slide 9)</div>
       <div><b>0:13</b>Story Four (slide 12)</div>
       <div><b>0:18</b>Quiz (slide 17)</div>
-      <div><b>0:21</b>Challenge (slide 22)</div>
+      <div><b>0:21</b>In short (slide 22)</div>
     </div>
   </section>
 
@@ -388,10 +393,23 @@
 
   <!-- ===================== CLOSING ===================== -->
   <h2 class="part-title">Closing</h2>
-  <p class="part-sub">Slides 22–23 · 2½ minutes</p>
+  <p class="part-sub">Slides 22–24 · 3 minutes on time, about 4½ when wrapping up early</p>
 
   <article class="note" id="s22">
-    <header><span class="num">22</span><h3>Choose one</h3><span class="time">1 min</span></header>
+    <header><span class="num">22</span><h3>In short</h3><span class="time">30 sec · 2 min if wrapping up</span></header>
+    <p class="outoftime"><b>On time?</b> Point to the five lines on screen ("Here's everything in one slide") and press →.<br><b>Out of time?</b> Press <b>W</b> from wherever you are to jump here, and read this aloud:</p>
+    <div class="readaloud">
+      <p>"Here's the whole lesson in two minutes. Jeremiah spent about forty years warning Jerusalem to turn back to God, and most people wouldn't listen. When the king heard the Lord's words, he cut up the scroll and burned it. But the Lord simply had Jeremiah write it again, with even more. God's word can't be burned away, and He doesn't give up on people.</p>
+      <p>"Later, Jeremiah's enemies lowered him into a muddy pit and left him there. Nobody spoke up except Ebed-melech, a servant from Ethiopia. He went to the king, gathered thirty men, and even brought old rags so the ropes wouldn't hurt Jeremiah's arms. The Lord protected Ebed-melech because he trusted the Lord. We can be like him: notice who's in a pit, and help kindly.</p>
+      <p>"Then the worst day came. Babylon broke through the walls, burned the city and the temple, and carried the people away. The book of Lamentations is full of tears about it. But right in the middle of that sadness it says, 'His compassions fail not. They are new every morning.'</p>
+      <p>"Even before the city fell, the Lord had Jeremiah buy a field, to show that people would live in the land again. Nothing is too hard for Him.</p>
+      <p>"And He made His biggest promise: someday He would write His law not on stone, but in our hearts, and a Branch would grow from David's family. That Branch is Jesus Christ.</p>
+      <p>"So here's the main point: whatever your worst day is, it doesn't get the last word. Through Jesus Christ, the Lord turns mourning into joy."</p>
+    </div>
+  </article>
+
+  <article class="note" id="s23">
+    <header><span class="num">23</span><h3>Choose one</h3><span class="time">1 min</span></header>
     <ol class="beats">
       <li class="say">"Pick one of these for this week. Just one." Read the three titles.</li>
       <li class="pause">A quiet moment to choose.</li>
@@ -399,8 +417,8 @@
     </ol>
   </article>
 
-  <article class="note" id="s23">
-    <header><span class="num">23</span><h3>I will turn their mourning into joy</h3><span class="time">1½ min</span></header>
+  <article class="note" id="s24">
+    <header><span class="num">24</span><h3>I will turn their mourning into joy</h3><span class="time">1½ min</span></header>
     <ol class="beats">
       <li class="say">"We started at night." Read the verse.</li>
       <li class="say">"Whatever your hardest day is, it doesn't get the last word."</li>
