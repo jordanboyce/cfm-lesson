@@ -35,6 +35,10 @@ The background moves from night to sunrise to full day as the lesson goes from m
 
 Most presentation clickers send Page Up/Page Down and work as-is. Quiz answers, the PULL button, votes, recap tiles and challenge cards can also be clicked. Your slide and team scores survive a refresh (kept in the browser tab only).
 
+## Teacher script
+
+`public/notes.html` (served at `/notes.html`) is a slide-by-slide script: what to say, when to click, pauses, questions with likely answers, a time budget per slide, and which parts to cut for a shorter class. It works on a phone and prints cleanly. The deck's help screen (press **?**) links to it.
+
 ## Past lessons
 
 Earlier lessons are kept in `public/archive/` (for example `/archive/2026-10-05-isaiah-50-57.html`).
