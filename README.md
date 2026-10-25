@@ -1,13 +1,13 @@
 # Interactive Come Follow Me Lesson
 
-A dependency-free youth Sunday School lesson built as a click-through **TV presentation**. Everything (content, styling, animations, games, scoring) lives in `public/index.html`. Plug a laptop into the TV, open the site, press **F** for fullscreen, and click through together.
+A youth Sunday School lesson built as a click-through **TV presentation**. Everything (content, styling, animations, games, scoring) lives in `public/index.html`; the only outside request is two Google Fonts (Cormorant Garamond and Inter), and it falls back to system fonts offline. Plug a laptop into the TV, open the site, press **F** for full screen, and click through together.
 
 **Current lesson:** October 26 – November 1, 2026 · "I Will Turn Their Mourning into Joy" · Jeremiah 31–33; 36–39; Lamentations 1; 3
 ([official lesson](https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/44?lang=eng)).
 
 ## What's in the deck
 
-The background moves from night to sunrise to full day as the lesson goes from mourning to joy.
+The background moves from night to sunrise to full day as the lesson goes from mourning to joy. The look is deliberately understated: serif type, gold line-art icons, and quiet animations.
 
 | Slides | Section | What happens |
 | --- | --- | --- |
