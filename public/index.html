@@ -403,7 +403,7 @@
     .timer circle { fill: none; stroke-width: 3; }
     .timer .track { stroke: rgba(245, 238, 223, .15); }
     .timer .prog { stroke: var(--gold); stroke-linecap: round; stroke-dasharray: 409; stroke-dashoffset: 0; }
-    .timer.run .prog { animation: countdown 20s linear forwards; }
+    .timer.run .prog { animation: countdown 15s linear forwards; }
     .timer .num { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--serif); font-size: 46px; font-weight: 600; }
     .timer.done .prog { stroke: var(--bad); }
     .timer.done .num { color: var(--bad); }
@@ -644,40 +644,7 @@
       </aside>
     </section>
 
-    <!-- 3. Meet Jeremiah -->
-    <section class="slide" data-mood="night" data-steps="1">
-      <div class="row">
-        <div class="card3d" title="Click to turn the card">
-          <div class="inner">
-            <div class="face front">
-              <div class="hebrew" lang="he">ירמיהו</div>
-              <div class="name">Jeremiah</div>
-              <div class="role">Prophet of Judah</div>
-            </div>
-            <dl class="face back">
-              <h3>At a glance</h3>
-              <div class="fact"><dt>Called</dt><dd>As a youth: "I am a child" (1:6)</dd></div>
-              <div class="fact"><dt>Ministry</dt><dd>About forty years of warnings</dd></div>
-              <div class="fact"><dt>Reception</dt><dd>Mocked, imprisoned, cast into a pit</dd></div>
-              <div class="fact"><dt>Response</dt><dd>He kept speaking</dd></div>
-            </dl>
-          </div>
-        </div>
-        <div class="col grow">
-          <span class="kicker">Meet the prophet</span>
-          <h2 style="margin-bottom: 10px;">Jeremiah had a <span class="accent">hard calling</span></h2>
-          <p class="lead">He spent his life telling Jerusalem: turn back to God, or the city will fall.</p>
-          <p class="lead">Most people did not want to hear it.</p>
-          <p class="hint" style="margin-top: 16px;">Click the card to turn it</p>
-        </div>
-      </div>
-      <aside class="notes">
-        <p>Click the card (or press →) to turn it over.</p>
-        <p>Ask: Would you want a job where almost nobody liked your message? Why did Jeremiah keep going?</p>
-      </aside>
-    </section>
-
-    <!-- 4. Map -->
+    <!-- 3. Map -->
     <section class="slide" data-mood="dusk">
       <span class="kicker">About 600 B.C.</span>
       <h2>An empire is coming</h2>
@@ -702,7 +669,7 @@
       </aside>
     </section>
 
-    <!-- 5. Chapter: The scroll -->
+    <!-- 4. Chapter: The scroll -->
     <section class="slide chapter" data-mood="dusk">
       <div class="chapter-in">
         <svg class="icon"><use class="draw" href="#i-scroll"/></svg>
@@ -713,7 +680,7 @@
       <aside class="notes"><p>Jeremiah 36 happens before the city falls, while King Jehoiakim is in charge.</p></aside>
     </section>
 
-    <!-- 6. Scroll scene -->
+    <!-- 5. Scroll scene -->
     <section class="slide" data-mood="dusk" data-steps="5">
       <div class="row">
         <div class="scene scroll-scene" aria-hidden="true">
@@ -771,24 +738,7 @@
       </aside>
     </section>
 
-    <!-- 7. Scroll discussion -->
-    <section class="slide" data-mood="dusk">
-      <span class="kicker">Discuss</span>
-      <h2>How do people "cut up" God's words today?</h2>
-      <div class="chips">
-        <span class="chip" data-step="1">Ignoring them</span>
-        <span class="chip" data-step="2">Making fun of them</span>
-        <span class="chip" data-step="3">Keeping only the parts we like</span>
-        <span class="chip" data-step="4">"I'll read them… later"</span>
-      </div>
-      <p class="big gold" data-step="5" style="margin-top: 56px;">What does it tell you about God that He had the scroll rewritten, with <em>more</em>?</p>
-      <aside class="notes">
-        <p>Ask the class to guess the ideas before each one appears.</p>
-        <p>Point to look for: God is patient and doesn't give up on people. His words keep coming even when people reject them.</p>
-      </aside>
-    </section>
-
-    <!-- 8. Chapter: The pit -->
+    <!-- 6. Chapter: The pit -->
     <section class="slide chapter" data-mood="night">
       <div class="chapter-in">
         <svg class="icon"><use class="draw" href="#i-pit"/></svg>
@@ -799,7 +749,7 @@
       <aside class="notes"><p>Now King Zedekiah is in charge, and Babylon's army is outside the walls.</p></aside>
     </section>
 
-    <!-- 9. Pit scene -->
+    <!-- 7. Pit scene -->
     <section class="slide" data-mood="night" id="pit" data-steps="8">
       <div class="row" style="align-items: flex-start;">
         <div class="scene pit-scene">
@@ -855,7 +805,7 @@
       </aside>
     </section>
 
-    <!-- 10. Be an Ebed-melech -->
+    <!-- 8. Be an Ebed-melech -->
     <section class="slide" data-mood="night">
       <div class="row" style="align-items: flex-start; gap: 80px;">
         <div class="col grow">
@@ -883,7 +833,7 @@
       </aside>
     </section>
 
-    <!-- 11. Chapter: The worst day -->
+    <!-- 9. Chapter: The worst day -->
     <section class="slide chapter" data-mood="night">
       <div class="chapter-in">
         <svg class="icon"><use class="draw" href="#i-ruins"/></svg>
@@ -894,8 +844,8 @@
       <aside class="notes"><p>Everything Jeremiah warned about now happens.</p></aside>
     </section>
 
-    <!-- 12. City falls -->
-    <section class="slide" data-mood="night" data-steps="3">
+    <!-- 10. City falls -->
+    <section class="slide" data-mood="night" data-steps="4">
       <span class="kicker">About 587 B.C. · Jeremiah 39:8–9</span>
       <h2>Jerusalem falls</h2>
       <div class="city" aria-hidden="true">
@@ -914,36 +864,16 @@
         <p class="lead" data-until="1">The Babylonian army has been camped outside the walls for more than a year…</p>
         <p class="lead" data-step="1" data-until="2">They break through the walls and burn the houses, the king's palace, and the temple.</p>
         <p class="lead" data-step="2" data-until="3">Most of the people are marched hundreds of miles away to Babylon.</p>
-        <p class="big gold" data-step="3">Just as Jeremiah warned. Yet the Lord protected Jeremiah <span class="muted" style="font-size: 32px;">(39:11–12)</span>.</p>
+        <p class="big gold" data-step="3" data-until="4">Just as Jeremiah warned. Yet the Lord protected Jeremiah <span class="muted" style="font-size: 32px;">(39:11–12)</span>.</p>
+        <p class="verse xs" data-step="4">How doth the city sit solitary, that was full of people!… She weepeth sore in the night, and her tears are on her cheeks.<cite>Lamentations 1:1–2</cite></p>
       </div>
       <aside class="notes">
-        <p>Click to bring down the city, then lead the people away to Babylon.</p>
+        <p>Click to bring down the city, then lead the people away to Babylon. The last click is Lamentations 1, a book of sorrowful poems written after the fall.</p>
         <p>The temple was burned too (Jeremiah 52:13; 2 Kings 25:9).</p>
       </aside>
     </section>
 
-    <!-- 13. Lamentations -->
-    <section class="slide" data-mood="night">
-      <span class="kicker">Lamentations 1</span>
-      <h2>A book of sorrowful songs</h2>
-      <div class="row" style="align-items: flex-start;">
-        <div class="col grow">
-          <p class="verse small">How doth the city sit solitary, that was full of people!… She weepeth sore in the night, and her tears are on her cheeks.<cite>Lamentations 1:1–2</cite></p>
-          <p class="verse small" data-step="1">For these things I weep; mine eye, mine eye runneth down with water.<cite>Lamentations 1:16</cite></p>
-        </div>
-        <div class="col" style="width: 470px;">
-          <p class="big" data-step="2">How would you feel if you were there?</p>
-          <p class="lead gold" data-step="3">Sadness is not the same as a lack of faith. God placed a whole book of grief in the scriptures.</p>
-          <p class="lead muted" data-step="4">But the author does not stop at chapter one…</p>
-        </div>
-      </div>
-      <aside class="notes">
-        <p>"Lamentations" means sorrowful poems or cries. Tradition says Jeremiah wrote it.</p>
-        <p>Let the class talk about the question. It's okay to admit that hard things feel hard.</p>
-      </aside>
-    </section>
-
-    <!-- 14. New every morning -->
+    <!-- 11. New every morning -->
     <section class="slide center" data-mood="dawn" data-fx-enter="chime">
       <span class="kicker">Lamentations 3:22–24</span>
       <h2>But then, morning</h2>
@@ -961,7 +891,7 @@
       </aside>
     </section>
 
-    <!-- 15. Chapter: The field -->
+    <!-- 12. Chapter: The field -->
     <section class="slide chapter" data-mood="dawn">
       <div class="chapter-in">
         <svg class="icon"><use class="draw" href="#i-wheat"/></svg>
@@ -972,7 +902,7 @@
       <aside class="notes"><p>This one happens during the siege, before the city falls. Jeremiah is locked in the prison court.</p></aside>
     </section>
 
-    <!-- 16. Would you buy it? -->
+    <!-- 13. Would you buy it? -->
     <section class="slide" data-mood="dawn" data-steps="3" style="padding-top: 50px; padding-bottom: 50px;">
       <div class="row" style="align-items: flex-start;">
         <div class="col grow">
@@ -1008,7 +938,7 @@
       </aside>
     </section>
 
-    <!-- 17. Chapter: New covenant -->
+    <!-- 14. Chapter: New covenant -->
     <section class="slide chapter" data-mood="dawn">
       <div class="chapter-in">
         <svg class="icon"><use class="draw" href="#i-heart"/></svg>
@@ -1019,7 +949,7 @@
       <aside class="notes"><p>This is one of the best-known promises in Jeremiah: a new covenant.</p></aside>
     </section>
 
-    <!-- 18. Stone vs heart -->
+    <!-- 15. Stone vs heart -->
     <section class="slide" data-mood="dawn" data-steps="3">
       <div class="row" style="justify-content: center; align-items: flex-end; gap: 160px; position: relative;">
         <div class="col center" style="gap: 0;">
@@ -1047,68 +977,7 @@
       </aside>
     </section>
 
-    <!-- 19. Stone or heart sorter -->
-    <section class="slide" data-mood="dawn" data-steps="11">
-      <span class="kicker">Stone or Heart?</span>
-      <h2 style="font-size: 58px;">On the outside, or written in the heart?</h2>
-      <div class="sorter panel">
-        <div class="sort-card" data-until="2">
-          <span class="sort-count">One of six</span>
-          <p class="scenario">Going to church only because your parents make you.</p>
-          <div class="choices" data-reveal="1"><button class="opt" type="button" data-correct><span class="letter"><svg class="icon"><use href="#i-tablet"/></svg></span>Outside</button><button class="opt" type="button"><span class="letter"><svg class="icon"><use href="#i-heart"/></svg></span>Heart</button></div>
-          <p class="why">That is a start, and it's all right. A change of heart takes time.</p>
-        </div>
-        <div class="sort-card" data-step="2" data-until="4">
-          <span class="sort-count">Two of six</span>
-          <p class="scenario">Praying because you truly want to talk with Heavenly Father.</p>
-          <div class="choices" data-reveal="3"><button class="opt" type="button"><span class="letter"><svg class="icon"><use href="#i-tablet"/></svg></span>Outside</button><button class="opt" type="button" data-correct><span class="letter"><svg class="icon"><use href="#i-heart"/></svg></span>Heart</button></div>
-          <p class="why">The new covenant, at work.</p>
-        </div>
-        <div class="sort-card" data-step="4" data-until="6">
-          <span class="sort-count">Three of six</span>
-          <p class="scenario">Being kind to your little brother only when adults are watching.</p>
-          <div class="choices" data-reveal="5"><button class="opt" type="button" data-correct><span class="letter"><svg class="icon"><use href="#i-tablet"/></svg></span>Outside</button><button class="opt" type="button"><span class="letter"><svg class="icon"><use href="#i-heart"/></svg></span>Heart</button></div>
-          <p class="why">Real kindness doesn't need an audience.</p>
-        </div>
-        <div class="sort-card" data-step="6" data-until="8">
-          <span class="sort-count">Four of six</span>
-          <p class="scenario">Telling the truth even when no one would ever find out.</p>
-          <div class="choices" data-reveal="7"><button class="opt" type="button"><span class="letter"><svg class="icon"><use href="#i-tablet"/></svg></span>Outside</button><button class="opt" type="button" data-correct><span class="letter"><svg class="icon"><use href="#i-heart"/></svg></span>Heart</button></div>
-          <p class="why">Written in the heart.</p>
-        </div>
-        <div class="sort-card" data-step="8" data-until="10">
-          <span class="sort-count">Five of six</span>
-          <p class="scenario">Reading one verse just to check it off a list.</p>
-          <div class="choices" data-reveal="9"><button class="opt" type="button" data-correct><span class="letter"><svg class="icon"><use href="#i-tablet"/></svg></span>Outside</button><button class="opt" type="button"><span class="letter"><svg class="icon"><use href="#i-heart"/></svg></span>Heart</button></div>
-          <p class="why">Still good. Ask God to help you want it more.</p>
-        </div>
-        <div class="sort-card" data-step="10">
-          <span class="sort-count">Six of six</span>
-          <p class="scenario">Helping clean up without being asked, simply because you love your family.</p>
-          <div class="choices" data-reveal="11"><button class="opt" type="button"><span class="letter"><svg class="icon"><use href="#i-tablet"/></svg></span>Outside</button><button class="opt" type="button" data-correct><span class="letter"><svg class="icon"><use href="#i-heart"/></svg></span>Heart</button></div>
-          <p class="why">That is the whole idea.</p>
-        </div>
-      </div>
-      <aside class="notes">
-        <p>Read each one, have the class point to the stone (left) or the heart (right), then click an answer or press → to reveal.</p>
-        <p>Keep it gentle: the "outside" ones aren't bad; they're where many of us start. The Lord helps move things from outside to inside.</p>
-      </aside>
-    </section>
-
-    <!-- 20. Everlasting love -->
-    <section class="slide center" data-mood="dawn">
-      <div class="floaters" aria-hidden="true"></div>
-      <span class="kicker">Jeremiah 31</span>
-      <p class="verse" style="max-width: 1180px; text-align: left;">Yea, I have loved thee with an <mark>everlasting love</mark>: therefore with lovingkindness have I drawn thee.<cite>Jeremiah 31:3</cite></p>
-      <p class="verse small" data-step="1" style="max-width: 1180px; text-align: left; margin-top: 30px;">I will forgive their iniquity, and I will <mark>remember their sin no more</mark>.<cite>Jeremiah 31:34</cite></p>
-      <p class="big gold" data-step="2" style="margin-top: 40px;">Why would knowing this make someone want to come back to God?</p>
-      <aside class="notes">
-        <p>Remember who first heard these words: people who had gone badly astray and lost everything. God still says "everlasting love."</p>
-        <p>Through Jesus Christ's Atonement, He forgives, and He doesn't keep bringing up our sins.</p>
-      </aside>
-    </section>
-
-    <!-- 21. Call unto me + Branch -->
+    <!-- 16. Call unto me + Branch -->
     <section class="slide" data-mood="day" data-steps="3">
       <div class="row" style="align-items: flex-end; gap: 70px;">
         <div class="col grow">
@@ -1135,24 +1004,10 @@
       </aside>
     </section>
 
-    <!-- 22. Quiz intro -->
-    <section class="slide chapter" data-mood="day" data-score>
-      <div class="chapter-in">
-        <svg class="icon"><use class="draw" href="#i-star"/></svg>
-        <span class="kicker">Review</span>
-        <h1>Team Quiz</h1>
-        <p class="ref">Two teams · Twenty seconds per question</p>
-      </div>
-      <aside class="notes">
-        <p>Split the class into two teams. Scores are in the top-right corner: click + after each question. Click a team name to rename it.</p>
-        <p>Press <b>S</b> to show or hide the scoreboard on any slide.</p>
-      </aside>
-    </section>
-
-    <!-- 23–28. Quiz -->
+    <!-- 17–20. Quiz -->
     <section class="slide quiz" data-mood="day" data-score data-steps="1">
-      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">20</div></div>
-      <p class="qnum">Question one of six</p>
+      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">15</div></div>
+      <p class="qnum">Question one of four</p>
       <h2>What did King Jehoiakim do with Jeremiah's scroll?</h2>
       <div class="choices" data-reveal="1">
         <button class="opt" type="button"><span class="letter">a</span>Hid it in a cave</button>
@@ -1161,26 +1016,12 @@
         <button class="opt" type="button"><span class="letter">d</span>Sent it to Babylon</button>
       </div>
       <p class="answer-note" data-step="1">Jeremiah 36:23</p>
-      <aside class="notes"><p>Click the answer a team gives, or press → to reveal.</p></aside>
+      <aside class="notes"><p>Split the class into two teams. Scores are in the top-right corner: click + after each question, and click a team name to rename it.</p><p>Click the answer a team gives, or press → to reveal.</p></aside>
     </section>
 
     <section class="slide quiz" data-mood="day" data-score data-steps="1">
-      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">20</div></div>
-      <p class="qnum">Question two of six</p>
-      <h2>After the scroll burned, what did the Lord tell Jeremiah to do?</h2>
-      <div class="choices" data-reveal="1">
-        <button class="opt" type="button"><span class="letter">a</span>Stop prophesying</button>
-        <button class="opt" type="button"><span class="letter">b</span>Write a shorter one</button>
-        <button class="opt" type="button" data-correct><span class="letter">c</span>Write it again, with more</button>
-        <button class="opt" type="button"><span class="letter">d</span>Move to Egypt</button>
-      </div>
-      <p class="answer-note" data-step="1">"There were added besides unto them many like words." Jeremiah 36:32</p>
-      <aside class="notes"><p>God's word can't be destroyed.</p></aside>
-    </section>
-
-    <section class="slide quiz" data-mood="day" data-score data-steps="1">
-      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">20</div></div>
-      <p class="qnum">Question three of six</p>
+      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">15</div></div>
+      <p class="qnum">Question two of four</p>
       <h2>What did Ebed-melech put under Jeremiah's arms so the ropes wouldn't hurt?</h2>
       <div class="choices" data-reveal="1">
         <button class="opt" type="button"><span class="letter">a</span>Pillows</button>
@@ -1193,22 +1034,8 @@
     </section>
 
     <section class="slide quiz" data-mood="day" data-score data-steps="1">
-      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">20</div></div>
-      <p class="qnum">Question four of six</p>
-      <h2>Why did Jeremiah buy a field while the army surrounded the city?</h2>
-      <div class="choices" data-reveal="1">
-        <button class="opt" type="button"><span class="letter">a</span>It was inexpensive</button>
-        <button class="opt" type="button"><span class="letter">b</span>He wanted to hide there</button>
-        <button class="opt" type="button" data-correct><span class="letter">c</span>To show the land would be lived in again</button>
-        <button class="opt" type="button"><span class="letter">d</span>He lost a wager</button>
-      </div>
-      <p class="answer-note" data-step="1">"Houses and fields and vineyards shall be possessed again." Jeremiah 32:15</p>
-      <aside class="notes"><p>He showed he trusted God's promise before it happened.</p></aside>
-    </section>
-
-    <section class="slide quiz" data-mood="day" data-score data-steps="1">
-      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">20</div></div>
-      <p class="qnum">Question five of six</p>
+      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">15</div></div>
+      <p class="qnum">Question three of four</p>
       <h2>In the new covenant, where does the Lord write His law?</h2>
       <div class="choices" data-reveal="1">
         <button class="opt" type="button"><span class="letter">a</span>On stone tablets</button>
@@ -1221,8 +1048,8 @@
     </section>
 
     <section class="slide quiz" data-mood="day" data-score data-steps="1">
-      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">20</div></div>
-      <p class="qnum">Question six of six</p>
+      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">15</div></div>
+      <p class="qnum">Question four of four</p>
       <h2>Complete the verse: "His compassions fail not. They are new every ____."</h2>
       <div class="choices" data-reveal="1">
         <button class="opt" type="button"><span class="letter">a</span>Day</button>
@@ -1234,7 +1061,7 @@
       <aside class="notes"><p>Last question. The next slide shows the final score.</p></aside>
     </section>
 
-    <!-- 29. Results -->
+    <!-- 21. Results -->
     <section class="slide center" data-mood="day" id="results" data-fx-enter="fanfare">
       <span class="kicker">Final score</span>
       <h2 id="winner">And the winner is…</h2>
@@ -1246,22 +1073,7 @@
       <aside class="notes"><p>A little gold dust falls automatically. Congratulate both teams.</p></aside>
     </section>
 
-    <!-- 30. Recap flip -->
-    <section class="slide" data-mood="day" data-steps="6">
-      <span class="kicker">In review</span>
-      <h2>From mourning to <span class="accent">joy</span></h2>
-      <div class="tiles">
-        <button class="tile" type="button" data-flip="1"><span class="in"><span class="f"><svg class="icon"><use href="#i-scroll"/></svg><span class="t">A scroll burned</span></span><span class="b"><span class="t">Rewritten, with more</span><span class="r">JEREMIAH 36</span></span></span></button>
-        <button class="tile" type="button" data-flip="2"><span class="in"><span class="f"><svg class="icon"><use href="#i-pit"/></svg><span class="t">Sunk in the mire</span></span><span class="b"><span class="t">Drawn up by a friend</span><span class="r">JEREMIAH 38</span></span></span></button>
-        <button class="tile" type="button" data-flip="3"><span class="in"><span class="f"><svg class="icon"><use href="#i-ruins"/></svg><span class="t">A city in ruins</span></span><span class="b"><span class="t">Fields bought again</span><span class="r">JEREMIAH 32</span></span></span></button>
-        <button class="tile" type="button" data-flip="4"><span class="in"><span class="f"><svg class="icon"><use href="#i-sun"/></svg><span class="t">Tears in the night</span></span><span class="b"><span class="t">Mercies new every morning</span><span class="r">LAMENTATIONS 3</span></span></span></button>
-        <button class="tile" type="button" data-flip="5"><span class="in"><span class="f"><svg class="icon"><use href="#i-tablet"/></svg><span class="t">Law on stone</span></span><span class="b"><span class="t">Law in our hearts</span><span class="r">JEREMIAH 31</span></span></span></button>
-        <button class="tile" type="button" data-flip="6"><span class="in"><span class="f"><svg class="icon"><use href="#i-branch"/></svg><span class="t">A tree cut down</span></span><span class="b"><span class="t">The Branch: Jesus Christ</span><span class="r">JEREMIAH 33</span></span></span></button>
-      </div>
-      <aside class="notes"><p>Before flipping each tile, ask the class: "What did God turn this into?" Click a tile or press → to flip.</p></aside>
-    </section>
-
-    <!-- 31. Challenge -->
+    <!-- 22. Challenge -->
     <section class="slide" data-mood="day">
       <span class="kicker">This week</span>
       <h2>Choose one</h2>
@@ -1273,7 +1085,7 @@
       <aside class="notes"><p>Have each person silently choose one. Volunteers can come tap the card they picked.</p></aside>
     </section>
 
-    <!-- 32. Finale -->
+    <!-- 23. Finale -->
     <section class="slide center" data-mood="day" data-fx-enter="dust">
       <svg class="sunrise" viewBox="0 0 360 150" aria-hidden="true" style="margin-bottom: 24px;">
         <defs><clipPath id="above2"><rect x="0" y="0" width="360" height="120"/></clipPath></defs>
@@ -1514,7 +1326,7 @@
         void timer.offsetWidth;
         if (step > 0) return;
         timer.classList.add("run");
-        let left = 20;
+        let left = 15;
         num.textContent = left;
         timerTick = setInterval(() => {
           if (slides[cur] !== s || step > 0) { clearInterval(timerTick); return; }
