@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f2e7">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Slide-by-slide teacher script for the 25-minute Jeremiah 31–33; 36–39 and Lamentations 1; 3 TV presentation.">
+  <title>Teacher Script</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0e1f'/%3E%3Cpath d='M10 44h44M20 44a12 12 0 0 1 24 0' fill='none' stroke='%23d6b26e' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f7f2e7;
+      --card: #fffdf8;
+      --ink: #1d1b2a;
+      --muted: #6b6578;
+      --line: #e3dccb;
+      --gold: #a8812f;
+      --gold-soft: #f1e4c2;
+      --ask: #2f4f7a;
+      --ask-bg: #eef2f8;
+      --sans: Inter, "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --serif: "Cormorant Garamond", Garamond, Georgia, serif;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #0f1124;
+        --card: #171a33;
+        --ink: #f1ebdd;
+        --muted: #a9a3b8;
+        --line: #2b2f4f;
+        --gold: #d6b26e;
+        --gold-soft: #2c2a3c;
+        --ask: #a9c2ea;
+        --ask-bg: #1c2340;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --paper: #0f1124;
+      --card: #171a33;
+      --ink: #f1ebdd;
+      --muted: #a9a3b8;
+      --line: #2b2f4f;
+      --gold: #d6b26e;
+      --gold-soft: #2c2a3c;
+      --ask: #a9c2ea;
+      --ask-bg: #1c2340;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.6; font-variant-numeric: lining-nums; }
+    main { max-width: 760px; margin: 0 auto; padding: 0 16px 80px; }
+
+    .masthead { padding: 48px 0 26px; text-align: center; }
+    .eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+    h1 { margin: 10px 0 6px; font-family: var(--serif); font-weight: 600; font-size: clamp(36px, 8vw, 54px); line-height: 1.05; }
+    .masthead p.sub { margin: 0; font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--muted); }
+
+    .jump { position: sticky; top: 0; z-index: 5; margin: 0 -16px; padding: 10px 16px; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+    .jump::-webkit-scrollbar { display: none; }
+    .jump a { flex: none; min-width: 34px; height: 34px; display: grid; place-items: center; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; font-size: 13px; font-weight: 600; }
+    .jump a.part { padding: 0 10px; color: var(--gold); }
+
+    .overview { margin: 28px 0; padding: 22px 24px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); }
+    .overview h2 { margin: 0 0 8px; font-family: var(--serif); font-size: 28px; font-weight: 600; }
+    .overview ul { margin: 8px 0 0; padding-left: 20px; }
+    .overview li { margin: 4px 0; }
+    .checkpoints { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-top: 14px; }
+    .checkpoints div { padding: 10px 12px; border-radius: 8px; background: var(--gold-soft); font-size: 14px; }
+    .checkpoints b { display: block; font-family: var(--serif); font-size: 22px; }
+
+    .part-title { margin: 48px 0 4px; font-family: var(--serif); font-size: 32px; font-weight: 600; }
+    .part-sub { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+
+    .note { margin: 16px 0; padding: 22px 24px 18px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); break-inside: avoid; }
+    .note header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; }
+    .num { flex: none; font-family: var(--serif); font-size: 34px; font-weight: 600; color: var(--gold); line-height: 1; min-width: 34px; }
+    .note h3 { margin: 0; flex: 1; font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1.15; }
+    .time { flex: none; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .goal { margin: 0 0 12px; font-size: 15px; color: var(--muted); }
+
+    .beats { list-style: none; margin: 0; padding: 0; }
+    .beats > li { position: relative; margin: 0; padding: 8px 0 8px 86px; border-top: 1px solid var(--line); }
+    .beats > li:first-child { border-top: 0; }
+    .beats > li::before { position: absolute; left: 0; top: 11px; width: 72px; text-align: center; padding: 2px 0; border-radius: 4px; font-family: var(--sans); font-style: normal; line-height: 1.5; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .say::before { content: "Say"; color: var(--gold); border: 1px solid var(--gold); }
+    .click::before { content: "Click"; background: var(--gold); color: var(--card); }
+    .ask::before { content: "Ask"; background: var(--ask); color: var(--card); }
+    .pause::before { content: "Pause"; color: var(--muted); border: 1px dashed var(--muted); }
+    .read::before { content: "Read"; color: var(--gold); border: 1px solid var(--gold); }
+    .tip::before { content: "Tip"; color: var(--muted); border: 1px solid var(--line); }
+    .say { font-family: var(--serif); font-size: 20px; line-height: 1.45; }
+    .read { font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.45; }
+    .click { font-weight: 500; }
+    .pause, .tip { color: var(--muted); font-size: 15px; }
+    .ask { font-weight: 600; }
+    .answers { margin: 8px 0 2px; padding: 10px 14px 10px 30px; border-radius: 8px; background: var(--ask-bg); font-weight: 400; font-size: 15px; }
+    .answers::before { content: "Listen for"; display: block; margin: 0 0 4px -16px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ask); }
+    .answers li { margin: 2px 0; }
+    .skip { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; vertical-align: middle; }
+
+    footer { margin-top: 60px; text-align: center; color: var(--muted); font-size: 14px; }
+    footer a { color: var(--gold); }
+
+    @media (max-width: 520px) {
+      .beats > li { padding-left: 0; padding-top: 34px; }
+      .beats > li::before { top: 8px; }
+      .note { padding: 18px 16px 14px; }
+    }
+    @media print {
+      :root { --paper: #fff; --card: #fff; }
+      body { font-size: 12pt; }
+      .jump { display: none; }
+      .note { border-color: #ccc; }
+      .say, .read { font-size: 14pt; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="masthead">
+    <p class="eyebrow">Teacher Script · 25 minutes · Oct 26 – Nov 1</p>
+    <h1>I Will Turn Their Mourning into Joy</h1>
+    <p class="sub">Jeremiah 31–33; 36–39 · Lamentations 1; 3</p>
+  </header>
+
+  <nav class="jump" aria-label="Jump to slide">
+    <a class="part" href="#plan">Plan</a>
+    <a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a>
+    <a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a><a href="#s16">16</a>
+    <a href="#s17">17</a><a href="#s21">21</a><a href="#s22">22</a><a href="#s23">23</a>
+  </nav>
+
+  <section class="overview" id="plan">
+    <h2>The plan</h2>
+    <p>One idea runs through everything: <b>the Lord turns mourning into joy.</b> Each story starts with something broken (a burned scroll, a muddy pit, a city in ruins) and ends with what God made of it.</p>
+    <ul>
+      <li><b>23 slides, about 23 minutes,</b> which leaves a couple of minutes of buffer inside 25.</li>
+      <li><b>Keep it moving.</b> Each slide has one main question. Take two or three answers, then go on. Don't wait for everyone.</li>
+      <li><b>Running long?</b> Use the cuts tagged <span class="skip">If behind</span>: skip the warm-up on slide 2, skip quiz questions two and three (press → twice to pass one), and read the Ebed-melech list without asking for ideas.</li>
+      <li><b>Before class:</b> open the deck on the laptop, press <b>F</b> for full screen, and press <b>Home</b> to start at slide 1. Keep this page open on your phone.</li>
+    </ul>
+    <div class="checkpoints">
+      <div><b>0:06</b>Story Two (slide 6)</div>
+      <div><b>0:10</b>Story Three (slide 9)</div>
+      <div><b>0:13</b>Story Four (slide 12)</div>
+      <div><b>0:18</b>Quiz (slide 17)</div>
+      <div><b>0:21</b>Challenge (slide 22)</div>
+    </div>
+  </section>
+
+  <!-- ===================== OPENING ===================== -->
+  <h2 class="part-title">Opening</h2>
+  <p class="part-sub">Slides 1–3 · 3 minutes</p>
+
+  <article class="note" id="s1">
+    <header><span class="num">1</span><h3>Title</h3><span class="time">30 sec</span></header>
+    <ol class="beats">
+      <li class="say">"Today starts on the worst day in Jerusalem's history, and ends with a promise: <i>I will turn their mourning into joy.</i> Watch the background: it starts at night. By the end, it's morning."</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s2">
+    <header><span class="num">2</span><h3>A worst day, turned around</h3><span class="time">1 min</span> <span class="skip">If behind: skip</span></header>
+    <ol class="beats">
+      <li class="click">Both questions appear (two clicks).</li>
+      <li class="ask">"Anyone have a bad day that turned out okay? What turned it around?" Take one or two.
+        <ul class="answers"><li>Lost a game, won the next one</li><li>Lost something, then found it</li><li>New school, then a new friend</li><li>"My mom," "a friend," "I prayed"</li></ul>
+      </li>
+      <li class="click">The gold line appears. Read it.</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s3">
+    <header><span class="num">3</span><h3>An empire is coming</h3><span class="time">1½ min</span></header>
+    <ol class="beats">
+      <li class="say">"About 600 B.C. Babylon is the superpower of the world. Jerusalem is a small kingdom in its way. A prophet named Jeremiah spends forty years warning them: turn back to God, or the city will fall. Almost nobody listens."</li>
+      <li class="click">The army's route draws across the map.</li>
+      <li class="ask">"600 B.C., Jerusalem. What other family in the scriptures lived there right then?"
+        <ul class="answers"><li>Lehi's family</li></ul>
+      </li>
+      <li class="click">The Lehi line appears.</li>
+      <li class="say">"Lehi's family got out. Jeremiah stayed."</li>
+    </ol>
+  </article>
+
+  <!-- ===================== STORY ONE ===================== -->
+  <h2 class="part-title">Story One · The scroll</h2>
+  <p class="part-sub">Slides 4–5 · 3 minutes · Jeremiah 36</p>
+
+  <article class="note" id="s4">
+    <header><span class="num">4</span><h3>Chapter: The scroll</h3><span class="time">15 sec</span></header>
+    <ol class="beats">
+      <li class="tip">No need to say anything. Let the title land and press →.</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s5">
+    <header><span class="num">5</span><h3>The scroll scene</h3><span class="time">2½ min</span></header>
+    <ol class="beats">
+      <li class="say">"Jeremiah speaks the Lord's words, and his scribe Baruch writes every one on a scroll."</li>
+      <li class="click">The fire and the king appear.</li>
+      <li class="say">"It's read to King Jehoiakim, who's sitting by a fire in his winter house."</li>
+      <li class="click">Pieces fly into the fire.</li>
+      <li class="say">"Every few columns, he cuts off a piece with a knife and throws it in the fire."</li>
+      <li class="click">The whole scroll burns.</li>
+      <li class="say">"Until the whole thing is gone."</li>
+      <li class="click">"What does the Lord do now?"</li>
+      <li class="ask">"So what does the Lord do?"
+        <ul class="answers"><li>Punish the king</li><li>Give up on him</li><li>"Write it again!" (make a big deal if someone gets this)</li></ul>
+      </li>
+      <li class="click">The new scroll glows.</li>
+      <li class="read">"Take thee again another roll, and write in it all the former words… and there were added besides unto them many like words."</li>
+      <li class="say">"He didn't just replace it. The new one had <i>more.</i> You can't burn God's word away."</li>
+    </ol>
+  </article>
+
+  <!-- ===================== STORY TWO ===================== -->
+  <h2 class="part-title">Story Two · The pit</h2>
+  <p class="part-sub">Slides 6–8 · 4 minutes · Jeremiah 38–39</p>
+
+  <article class="note" id="s6">
+    <header><span class="num">6</span><h3>Chapter: Down in the pit</h3><span class="time">15 sec</span></header>
+    <ol class="beats">
+      <li class="say">"Now Babylon's army is camped outside the walls, and the city's leaders are furious with Jeremiah."</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s7">
+    <header><span class="num">7</span><h3>The pit scene</h3><span class="time">2½ min</span></header>
+    <p class="goal">The most hands-on slide. Keep the energy up.</p>
+    <ol class="beats">
+      <li class="say">"So they lower him on ropes into a deep, dry well. No water. Just mud. He sinks."</li>
+      <li class="click">The three men appear.</li>
+      <li class="say">"Then Ebed-melech, an Ethiopian servant in the palace, an outsider, does what nobody else will. He goes to the king and speaks up. The king says: take thirty men and get him out."</li>
+      <li class="click">The question appears.</li>
+      <li class="ask">"Besides ropes, he brought something else. Guess." Click the answer they call out.</li>
+      <li class="click">Old rags, with the verse.</li>
+      <li class="say">"So the ropes wouldn't cut his arms. He didn't just rescue Jeremiah; he thought about how the rescue would <i>feel.</i>"</li>
+      <li class="click">"Everybody grab the rope!" Click <b>Pull</b> (or press →) five times. Each time, the class pulls and says "heave!" The first pull also brings up "Why the rags?"</li>
+      <li class="click">On the fifth pull he's out, and gold dust falls.</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s8">
+    <header><span class="num">8</span><h3>Be an Ebed-melech</h3><span class="time">1½ min</span></header>
+    <ol class="beats">
+      <li class="say">"When Jerusalem fell, the Lord kept Ebed-melech safe 'because thou hast put thy trust in me.'"</li>
+      <li class="click">The question appears.</li>
+      <li class="ask">"Who might be 'in a pit' around you? Don't say names. Just think."</li>
+      <li class="pause">Five seconds of quiet.</li>
+      <li class="click">"Your old rags," then the list (four clicks).</li>
+      <li class="say">"Small things that make help feel kind instead of awkward." Read the list as it appears. <span class="skip">If behind: just read it</span></li>
+    </ol>
+  </article>
+
+  <!-- ===================== STORY THREE ===================== -->
+  <h2 class="part-title">Story Three · The worst day</h2>
+  <p class="part-sub">Slides 9–11 · 3 minutes · Jeremiah 39; Lamentations 1; 3</p>
+
+  <article class="note" id="s9">
+    <header><span class="num">9</span><h3>Chapter: The worst day</h3><span class="time">15 sec</span></header>
+    <ol class="beats">
+      <li class="tip">Slow your voice down. The tone changes here.</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s10">
+    <header><span class="num">10</span><h3>Jerusalem falls</h3><span class="time">1½ min</span></header>
+    <ol class="beats">
+      <li class="click">The city cracks and burns.</li>
+      <li class="say">"The army breaks through. They burn the houses, the palace, and the temple."</li>
+      <li class="click">People walk away to Babylon.</li>
+      <li class="say">"Most of the people are marched hundreds of miles away."</li>
+      <li class="click">The gold line appears.</li>
+      <li class="say">"Just as Jeremiah warned. But the Lord kept His promise to protect him."</li>
+      <li class="click">Lamentations 1 appears.</li>
+      <li class="say">"Afterward, someone wrote a book of sad poems about it, called Lamentations. Listen:" Read the verse slowly.</li>
+      <li class="pause">Let it sit for a moment. Don't rush to the sunrise.</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s11">
+    <header><span class="num">11</span><h3>But then, morning</h3><span class="time">1 min</span></header>
+    <p class="goal">The turning point of the lesson.</p>
+    <ol class="beats">
+      <li class="say">"Look at the background." Point to the sunrise. "Same book, two chapters later:"</li>
+      <li class="click">Read each line as it appears (two clicks).</li>
+      <li class="read">"…his compassions fail not. They are new every morning: great is thy faithfulness."</li>
+      <li class="click">The gold line appears.</li>
+      <li class="say">"Everything's still in ruins, and he's still finding mercy. Every morning is a fresh start from the Lord."</li>
+      <li class="click">The question appears.</li>
+      <li class="ask">"What's one good thing you noticed today?" Take two quick answers.</li>
+    </ol>
+  </article>
+
+  <!-- ===================== STORY FOUR ===================== -->
+  <h2 class="part-title">Story Four · The field</h2>
+  <p class="part-sub">Slides 12–13 · 2 minutes · Jeremiah 32</p>
+
+  <article class="note" id="s12">
+    <header><span class="num">12</span><h3>Chapter: A field bought in wartime</h3><span class="time">15 sec</span></header>
+    <ol class="beats">
+      <li class="say">"Back up a little, to just before the city fell. Jeremiah is in prison, and he does something that looks crazy."</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s13">
+    <header><span class="num">13</span><h3>Would you buy it?</h3><span class="time">1½ min</span></header>
+    <ol class="beats">
+      <li class="ask">Read the three lines in the box. "Would you buy it? Hands up." Tap once per hand for each side.</li>
+      <li class="click">The jar appears and the seal stamps.</li>
+      <li class="say">"He bought it. Signed, sealed, deed in a clay jar."</li>
+      <li class="click">Verse 15 appears.</li>
+      <li class="say">"It was a promise you could hold: people will live here again."</li>
+      <li class="click">Verse 17 appears.</li>
+      <li class="read">"Ah Lord God!… there is nothing too hard for thee."</li>
+    </ol>
+  </article>
+
+  <!-- ===================== THE PROMISE ===================== -->
+  <h2 class="part-title">The great promise</h2>
+  <p class="part-sub">Slides 14–16 · 3 minutes · Jeremiah 31; 33</p>
+
+  <article class="note" id="s14">
+    <header><span class="num">14</span><h3>Chapter: Written in the heart</h3><span class="time">15 sec</span></header>
+    <ol class="beats">
+      <li class="say">"In the middle of all this, the Lord makes His biggest promise."</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s15">
+    <header><span class="num">15</span><h3>Stone and heart</h3><span class="time">1½ min</span></header>
+    <ol class="beats">
+      <li class="say">"Under Moses, the law was carved on stone. Rules on the outside."</li>
+      <li class="click">The verse appears. Read it.</li>
+      <li class="click">The words fly from the stone into the heart.</li>
+      <li class="click">The main idea appears.</li>
+      <li class="ask">"What's the difference between doing what's right because you <i>have</i> to and because you <i>want</i> to?"
+        <ul class="answers"><li>"Want to" still works when nobody's watching</li><li>It feels like joy instead of a chore</li><li>It becomes who you are</li></ul>
+      </li>
+    </ol>
+  </article>
+
+  <article class="note" id="s16">
+    <header><span class="num">16</span><h3>Call unto me · The Branch</h3><span class="time">1½ min</span></header>
+    <ol class="beats">
+      <li class="click">Verse 3 appears.</li>
+      <li class="read">"Call unto me, and I will answer thee, and shew thee great and mighty things, which thou knowest not."</li>
+      <li class="say">"He said this to Jeremiah while he was still in prison."</li>
+      <li class="click">A branch grows from the stump.</li>
+      <li class="say">"After this, Israel had no more kings. David's family tree looked chopped down. But a Branch would grow out of it."</li>
+      <li class="ask">"Who's the Branch?"
+        <ul class="answers"><li>Jesus Christ</li></ul>
+      </li>
+      <li class="click">The gold line appears. "He's how mourning turns into joy."</li>
+    </ol>
+  </article>
+
+  <!-- ===================== QUIZ ===================== -->
+  <h2 class="part-title">Quick quiz</h2>
+  <p class="part-sub">Slides 17–21 · 3 minutes</p>
+
+  <article class="note" id="s17">
+    <header><span class="num">17–20</span><h3>Four questions</h3><span class="time">3 min</span> <span class="skip">If behind: 2 questions</span></header>
+    <p class="goal">Split the room into two teams on slide 17. Each question has a 15-second timer that starts on its own. Click the team's answer to reveal it, and add a point with the + buttons in the top-right corner.</p>
+    <ol class="beats">
+      <li class="tip"><b>1 · The scroll → b, cut it up and burned it.</b></li>
+      <li class="tip"><b>2 · Under Jeremiah's arms → b, old rags.</b></li>
+      <li class="tip"><b>3 · Where the law is written → d, in our hearts.</b></li>
+      <li class="tip"><b>4 · New every ____ → c, morning.</b></li>
+    </ol>
+  </article>
+
+  <article class="note" id="s21">
+    <header><span class="num">21</span><h3>Final score</h3><span class="time">15 sec</span></header>
+    <ol class="beats">
+      <li class="say">"Well played, everyone." Then settle the room for the close.</li>
+    </ol>
+  </article>
+
+  <!-- ===================== CLOSING ===================== -->
+  <h2 class="part-title">Closing</h2>
+  <p class="part-sub">Slides 22–23 · 2½ minutes</p>
+
+  <article class="note" id="s22">
+    <header><span class="num">22</span><h3>Choose one</h3><span class="time">1 min</span></header>
+    <ol class="beats">
+      <li class="say">"Pick one of these for this week. Just one." Read the three titles.</li>
+      <li class="pause">A quiet moment to choose.</li>
+      <li class="say">"Next week I'll ask how it went."</li>
+    </ol>
+  </article>
+
+  <article class="note" id="s23">
+    <header><span class="num">23</span><h3>I will turn their mourning into joy</h3><span class="time">1½ min</span></header>
+    <ol class="beats">
+      <li class="say">"We started at night." Read the verse.</li>
+      <li class="say">"Whatever your hardest day is, it doesn't get the last word."</li>
+      <li class="say">Bear a short testimony, three or four sentences: that Jesus Christ turns mourning into joy, and a time you've seen it.</li>
+      <li class="tip">Press <b>B</b> to black out the screen for the closing prayer.</li>
+    </ol>
+  </article>
+
+  <footer>
+    <p><a href="./">Open the presentation</a> · Scripture quotations are from the King James Version.</p>
+  </footer>
+</main>
+</body>
+</html>

@@ -11,14 +11,16 @@ The background moves from night to sunrise to full day as the lesson goes from m
 
 | Slides | Section | What happens |
 | --- | --- | --- |
-| 1–4 | Intro | Title, "worst day turned around" warm-up, Jeremiah trading card that flips, animated map of Babylon marching on Jerusalem (plus the Lehi / 1 Nephi 7:14 tie-in) |
-| 5–7 | Story 1 · Jeremiah 36 | The scroll is written, cut up and burned, then rewritten with "many like words"; discussion |
-| 8–10 | Story 2 · Jeremiah 37–39 | Jeremiah sinks in the pit; guess what Ebed-melech brought; the class pulls him out five heaves at a time; "old rags" kindness ideas |
-| 11–14 | Story 3 · Jeremiah 39; Lamentations 1; 3 | Jerusalem falls, Lamentations' sad songs, then the sunrise of "new every morning" |
-| 15–16 | Story 4 · Jeremiah 32 | "Would you buy it?" hand-vote, then the deed drops into the clay jar |
-| 17–21 | Jeremiah 31; 33 | Law flies from stone into a heart; "Stone or Heart?" sorting game; everlasting love; "Call unto me"; the Branch grows from a stump |
-| 22–29 | Lightning round | Six team quiz questions with a 20-second timer, scoreboard, and winner reveal |
-| 30–32 | Wrap-up | Mourning → Joy flip-tile recap, pick-one challenge, Jeremiah 31:13 finale |
+| 1–3 | Intro | Title, "worst day turned around" warm-up, animated map of Babylon marching on Jerusalem (plus the Lehi / 1 Nephi 7:14 tie-in) |
+| 4–5 | Story 1 · Jeremiah 36 | The scroll is written, cut up and burned, then rewritten with "many like words" |
+| 6–8 | Story 2 · Jeremiah 38–39 | Jeremiah sinks in the pit; guess what Ebed-melech brought; the class pulls him out five heaves at a time; "old rags" kindness ideas |
+| 9–11 | Story 3 · Jeremiah 39; Lamentations 1; 3 | Jerusalem falls, Lamentations 1, then the sunrise of "new every morning" |
+| 12–13 | Story 4 · Jeremiah 32 | "Would you buy it?" hand vote, then the deed is sealed in a clay jar |
+| 14–16 | Jeremiah 31; 33 | Law moves from stone into a heart; "Call unto me"; the Branch grows from a stump |
+| 17–21 | Quick quiz | Four team questions with a 15-second timer, scoreboard, and final score |
+| 22–23 | Wrap-up | Pick-one challenge, Jeremiah 31:13 finale |
+
+The deck is built for a 25-minute class: 23 slides, about 23 minutes at the pace in the teacher script.
 
 ## Controls
 
@@ -34,6 +36,10 @@ The background moves from night to sunrise to full day as the lesson goes from m
 | ? | Help |
 
 Most presentation clickers send Page Up/Page Down and work as-is. Quiz answers, the PULL button, votes, recap tiles and challenge cards can also be clicked. Your slide and team scores survive a refresh (kept in the browser tab only).
+
+## Teacher script
+
+`public/notes.html` (served at `/notes.html`) is a slide-by-slide script: what to say, when to click, pauses, questions with likely answers, a time budget per slide that fits a 25-minute class, and what to cut if you run behind. It works on a phone and prints cleanly. The deck's help screen (press **?**) links to it.
 
 ## Past lessons
 
