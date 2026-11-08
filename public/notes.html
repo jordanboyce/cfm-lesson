@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7f2e7">
   <meta name="robots" content="noindex">
-  <meta name="description" content="Slide-by-slide teacher script for the 25-minute Jeremiah 31–33; 36–39 and Lamentations 1; 3 TV presentation.">
+  <meta name="description" content="Slide-by-slide teacher script for the 25-minute Daniel 1–7 TV presentation.">
   <title>Teacher Script</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0e1f'/%3E%3Cpath d='M10 44h44M20 44a12 12 0 0 1 24 0' fill='none' stroke='%23d6b26e' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a1c'/%3E%3Cpath d='M14 50h36M20 50V36h24v14M26 36V24h12v12M30 24v-8h4v8' fill='none' stroke='%23d4ae62' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -76,11 +76,18 @@
     .checkpoints div { padding: 10px 12px; border-radius: 8px; background: var(--gold-soft); font-size: 14px; }
     .checkpoints b { display: block; font-family: var(--serif); font-size: 22px; }
 
+    .cast { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 15px; }
+    .cast td { padding: 7px 8px 7px 0; border-top: 1px solid var(--line); vertical-align: top; }
+    .cast td:first-child { font-weight: 600; white-space: nowrap; }
+    .cast .say-it { color: var(--muted); font-style: italic; white-space: nowrap; }
+    .faq dt { margin-top: 12px; font-weight: 600; }
+    .faq dd { margin: 2px 0 0; color: var(--ink); font-size: 15px; }
+
     .part-title { margin: 48px 0 4px; font-family: var(--serif); font-size: 32px; font-weight: 600; }
     .part-sub { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
 
     .note { margin: 16px 0; padding: 22px 24px 18px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); break-inside: avoid; }
-    .note header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; }
+    .note header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
     .num { flex: none; font-family: var(--serif); font-size: 34px; font-weight: 600; color: var(--gold); line-height: 1; min-width: 34px; }
     .note h3 { margin: 0; flex: 1; font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1.15; }
     .time { flex: none; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
@@ -130,302 +137,345 @@
 <body>
 <main>
   <header class="masthead">
-    <p class="eyebrow">Teacher Script · 25 minutes · Oct 26 – Nov 1</p>
-    <h1>I Will Turn Their Mourning into Joy</h1>
-    <p class="sub">Jeremiah 31–33; 36–39 · Lamentations 1; 3</p>
+    <p class="eyebrow">Teacher Script · 25 minutes · Nov 9–15</p>
+    <h1>There Is No Other God That Can Deliver</h1>
+    <p class="sub">Daniel 1–7</p>
   </header>
 
   <nav class="jump" aria-label="Jump to slide">
     <a class="part" href="#plan">Plan</a>
+    <a class="part" href="#prep">Prep</a>
     <a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a>
-    <a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a><a href="#s16">16</a>
-    <a href="#s17">17</a><a href="#s21">21</a><a class="part" href="#s22">22 · In short</a><a href="#s23">23</a><a href="#s24">24</a>
+    <a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a>
+    <a class="part" href="#s16">16 · In short</a><a href="#s17">17</a><a href="#s18">18</a>
+    <a class="part" href="#faq">If they ask</a>
   </nav>
 
   <section class="overview" id="plan">
     <h2>The plan</h2>
-    <p>One idea runs through everything: <b>the Lord turns mourning into joy.</b> Each story starts with something broken (a burned scroll, a muddy pit, a city in ruins) and ends with what God made of it.</p>
+    <p>One idea runs through everything: <b>there is no other God that can deliver.</b> A pagan king said that out loud after watching three teenagers walk out of a furnace (Daniel 3:29). Four stories, each one a hard choice made with everyone watching, each one ending with God showing up in a way nobody expected.</p>
     <ul>
-      <li><b>24 slides, about 24 minutes,</b> which leaves a little buffer inside 25.</li>
-      <li><b>Out of time?</b> Press <b>W</b> on the laptop (or click <b>Wrap up</b>) from any slide. It jumps to the "In short" slide, where you <a href="#s22">read the 2-minute summary</a>, then the challenge and closing verse take another 2½ minutes.</li>
+      <li><b>18 slides, about 23½ minutes,</b> which leaves a little buffer inside 25.</li>
+      <li><b>Keep the words simple.</b> The slides put a plain-English line under every hard verse. Read the verse, then the plain line, and move on. You don't need to explain old words.</li>
+      <li><b>Out of time?</b> Press <b>W</b> on the laptop (or click <b>Wrap up</b>) from any slide. It jumps to the "In short" slide, where you <a href="#s16">read the 2-minute summary</a>, then the challenge and closing verse take another 2½ minutes.</li>
       <li><b>Keep it moving.</b> Each slide has one main question. Take two or three answers, then go on. Don't wait for everyone.</li>
-      <li><b>Running long?</b> Use the cuts tagged <span class="skip">If behind</span>: skip the warm-up on slide 2, skip quiz questions two and three (press → twice to pass one), and read the Ebed-melech list without asking for ideas.</li>
-      <li><b>Before class:</b> open the deck on the laptop, press <b>F</b> for full screen, and press <b>Home</b> to start at slide 1. Keep this page open on your phone.</li>
+      <li><b>Running long?</b> Use the cuts tagged <span class="skip">If behind</span>: skip the warm-up on slide 2, skip the "Two proud kings" slide (12), and read the Daniel 7 slide (15) without stopping to discuss. Those three cuts save about 4 minutes.</li>
+      <li><b>Before class:</b> open the deck on the laptop, press <b>F</b> for full screen, and press <b>Home</b> to start at slide 1. Keep this page open on your phone. Press <b>N</b> on the laptop if you want short notes on the TV itself.</li>
     </ul>
     <div class="checkpoints">
-      <div><b>0:06</b>Story Two (slide 6)</div>
-      <div><b>0:10</b>Story Three (slide 9)</div>
-      <div><b>0:13</b>Story Four (slide 12)</div>
-      <div><b>0:18</b>Quiz (slide 17)</div>
-      <div><b>0:21</b>In short (slide 22)</div>
+      <div><b>0:04</b>Story One (slide 4)</div>
+      <div><b>0:06½</b>Story Two (slide 6)</div>
+      <div><b>0:11</b>The Furnace (slide 9)</div>
+      <div><b>0:16½</b>Lions' Den (slide 13)</div>
+      <div><b>0:21</b>In short (slide 16)</div>
     </div>
+  </section>
+
+  <section class="overview" id="prep">
+    <h2>Five-minute prep</h2>
+    <p>Read this once before class and you'll know enough to teach it.</p>
+    <p><b>The story so far.</b> Last week Jeremiah warned Jerusalem that Babylon was coming. This week it has come. Babylon was the superpower of its day: the biggest, richest, most powerful city in the world. In 605 B.C. its king, Nebuchadnezzar, took a first group of captives from Jerusalem, including some of the city's smartest young people. Daniel and his three friends were among them, probably in their mid-teens. They were put through a three-year training program at the palace, given Babylonian names, and fed from the king's own table. The book covers about seventy years: Daniel is a teenager in chapter 1 and roughly eighty in chapter 6. Babylon falls to the Persians in chapter 5. Chapter 7 is a vision Daniel had years earlier, placed at the end of the story section.</p>
+    <p><b>What you'll tell.</b> Four main stories (chapters 1, 2, 3, 6), two quick ones (4 and 5), and one vision (7). Everything you need to say is in the slide-by-slide notes below. Each story has one everyday example you can use: the party (chapter 1), the champion who gets beaten by the next champion (chapter 2), tryouts (chapter 3), brushing your teeth (chapter 6).</p>
+    <p><b>The one verse to have marked:</b> Daniel 3:17–18, "our God whom we serve is able to deliver us… <i>But if not</i>…" If the class remembers one thing, it's those three words.</p>
+    <table class="cast">
+      <tr><td>Nebuchadnezzar</td><td class="say-it">neb-yuh-kud-NEZ-er</td><td>King of Babylon in chapters 1–4. Proud and scary, but he keeps getting humbled and keeps admitting that Daniel's God is real.</td></tr>
+      <tr><td>Daniel</td><td class="say-it">"God is my judge"</td><td>Renamed Belteshazzar (bel-tuh-SHAZ-er). Explains dreams, works for four kings in two empires, prays three times a day his whole life.</td></tr>
+      <tr><td>Hananiah, Mishael, Azariah</td><td class="say-it">han-uh-NYE-uh, MISH-ay-el, az-uh-RYE-uh</td><td>Daniel's three friends, better known by their Babylonian names Shadrach, Meshach, and Abed-nego (SHAD-rak, MEE-shak, uh-BED-nee-go). The furnace is their story.</td></tr>
+      <tr><td>Belshazzar</td><td class="say-it">bel-SHAZ-er</td><td>Babylon's last ruler, chapter 5. Throws the party, sees the writing on the wall, dies that night.</td></tr>
+      <tr><td>Darius the Mede</td><td class="say-it">duh-RYE-us</td><td>Ruler after Babylon falls, chapter 6. Likes Daniel, gets tricked into the no-prayer law, can't sleep while Daniel is in the den.</td></tr>
+      <tr><td>Pulse</td><td class="say-it">1:12</td><td>Old word for food that grows from seeds: vegetables, grains, beans.</td></tr>
+    </table>
   </section>
 
   <!-- ===================== OPENING ===================== -->
   <h2 class="part-title">Opening</h2>
-  <p class="part-sub">Slides 1–3 · 3 minutes</p>
+  <p class="part-sub">Slides 1–3 · 3½ minutes</p>
 
   <article class="note" id="s1">
     <header><span class="num">1</span><h3>Title</h3><span class="time">30 sec</span></header>
     <ol class="beats">
-      <li class="say">"Today starts on the worst day in Jerusalem's history, and ends with a promise: <i>I will turn their mourning into joy.</i> Watch the background: it starts at night. By the end, it's morning."</li>
+      <li class="say">"Last week Jeremiah warned Jerusalem that Babylon was coming. This week, it came. Today is about four teenagers who got taken to the biggest city in the world, and what happened when they wouldn't give in. The title is something a king who didn't even believe in God ended up saying: <i>there is no other God that can deliver.</i> Deliver just means rescue."</li>
     </ol>
   </article>
 
   <article class="note" id="s2">
-    <header><span class="num">2</span><h3>A worst day, turned around</h3><span class="time">1 min</span> <span class="skip">If behind: skip</span></header>
+    <header><span class="num">2</span><h3>The only one in the room</h3><span class="time">1 min</span> <span class="skip">If behind: skip</span></header>
     <ol class="beats">
       <li class="click">Both questions appear (two clicks).</li>
-      <li class="ask">"Anyone have a bad day that turned out okay? What turned it around?" Take one or two.
-        <ul class="answers"><li>Lost a game, won the next one</li><li>Lost something, then found it</li><li>New school, then a new friend</li><li>"My mom," "a friend," "I prayed"</li></ul>
+      <li class="ask">"Has anyone been the only one? The only one not laughing at the joke. The only one who left the party. The only one who didn't send the text. What made it hard?" Take one or two.
+        <ul class="answers"><li>Everyone's looking at you</li><li>You don't want to seem judgy</li><li>You might lose friends</li><li>"I just left," "I'd already decided," "a friend backed me up"</li></ul>
       </li>
       <li class="click">The gold line appears. Read it.</li>
+      <li class="say">"Hold onto that feeling. Daniel and his friends felt it at fifteen, and Daniel still felt it at eighty."</li>
     </ol>
   </article>
 
   <article class="note" id="s3">
-    <header><span class="num">3</span><h3>An empire is coming</h3><span class="time">1½ min</span></header>
+    <header><span class="num">3</span><h3>Carried off to Babylon</h3><span class="time">2 min</span></header>
     <ol class="beats">
-      <li class="say">"About 600 B.C. Babylon is the superpower of the world. Jerusalem is a small kingdom in its way. A prophet named Jeremiah spends forty years warning them: turn back to God, or the city will fall. Almost nobody listens."</li>
-      <li class="click">The army's route draws across the map.</li>
-      <li class="ask">"600 B.C., Jerusalem. What other family in the scriptures lived there right then?"
-        <ul class="answers"><li>Lehi's family</li></ul>
+      <li class="say">"Babylon was the superpower of the world. Think of the biggest, richest, most powerful country today, and then its capital city. That's Babylon. Its king shows up at Jerusalem, takes the treasure, and takes the smartest young people back with him to train at his palace."</li>
+      <li class="click">The route draws across the map, about 900 miles, on foot.</li>
+      <li class="click">The four names appear.</li>
+      <li class="say">"Daniel, Hananiah, Mishael, Azariah. Probably about your age. No parents. No church. Nobody from home watching what they did. Think about that: nobody would ever know."</li>
+      <li class="click">The cards flip to their Babylonian names.</li>
+      <li class="say">"First thing Babylon does: give them new names. Look at the old names. God is my judge. The Lord is gracious. Who is like God? The Lord has helped. Every one has God in it. The new names are all about Babylon's gods. It's like starting a new school where they hand you a new name and expect you to forget who you were."</li>
+      <li class="ask">"What does the world try to rename in you?" One or two quick answers, or just let it hang and move on.
+        <ul class="answers"><li>What's normal</li><li>What's cool</li><li>What "everyone" does</li><li>How you see yourself</li></ul>
       </li>
-      <li class="click">The Lehi line appears.</li>
-      <li class="say">"Lehi's family got out. Jeremiah stayed."</li>
     </ol>
   </article>
 
   <!-- ===================== STORY ONE ===================== -->
-  <h2 class="part-title">Story One · The scroll</h2>
-  <p class="part-sub">Slides 4–5 · 3 minutes · Jeremiah 36</p>
+  <h2 class="part-title">Story One · The king's table</h2>
+  <p class="part-sub">Slides 4–5 · 2¾ minutes · Daniel 1</p>
 
   <article class="note" id="s4">
-    <header><span class="num">4</span><h3>Chapter: The scroll</h3><span class="time">15 sec</span></header>
+    <header><span class="num">4</span><h3>Chapter: The king's table</h3><span class="time">15 sec</span></header>
     <ol class="beats">
-      <li class="tip">No need to say anything. Let the title land and press →.</li>
+      <li class="say">"Their first test isn't dramatic. It's dinner."</li>
     </ol>
   </article>
 
   <article class="note" id="s5">
-    <header><span class="num">5</span><h3>The scroll scene</h3><span class="time">2½ min</span></header>
+    <header><span class="num">5</span><h3>Purposed in his heart</h3><span class="time">2½ min</span></header>
+    <p class="goal">The point is not vegetables. The point is that Daniel decided ahead of time.</p>
     <ol class="beats">
-      <li class="say">"Jeremiah speaks the Lord's words, and his scribe Baruch writes every one on a scroll."</li>
-      <li class="click">The fire and the king appear.</li>
-      <li class="say">"It's read to King Jehoiakim, who's sitting by a fire in his winter house."</li>
-      <li class="click">Pieces fly into the fire.</li>
-      <li class="say">"Every few columns, he cuts off a piece with a knife and throws it in the fire."</li>
-      <li class="click">The whole scroll burns.</li>
-      <li class="say">"Until the whole thing is gone."</li>
-      <li class="click">"What does the Lord do now?"</li>
-      <li class="ask">"So what does the Lord do?"
-        <ul class="answers"><li>Punish the king</li><li>Give up on him</li><li>"Write it again!" (make a big deal if someone gets this)</li></ul>
+      <li class="read">"But Daniel purposed in his heart that he would not defile himself with the portion of the king's meat, nor with the wine which he drank."</li>
+      <li class="say">"In plain words: Daniel decided ahead of time he wasn't going to eat the king's food or drink his wine. Picture the best food you've ever seen, served by the most powerful person alive, and everybody around you is eating it. Why would Daniel say no? Probably because it had been offered to idols, and it broke God's rules for his people. But notice the word <i>purposed</i>. He'd settled it before the plate was in front of him. And then he does something smart. He doesn't just refuse. He offers a test."</li>
+      <li class="click">The ten-day counter runs.</li>
+      <li class="read">"Prove thy servants, I beseech thee, ten days; and let them give us pulse to eat, and water to drink."</li>
+      <li class="say">"Prove means test. Pulse means plain food that grows from seeds: vegetables, grains, beans. Ten days on that and water, then compare us to the guys eating the king's food."</li>
+      <li class="click">The pulse plate glows and the king's plate fades.</li>
+      <li class="say">"Ten days later they look healthier than everyone else. And God made them wise. When the king tested them, they were ten times better than all his experts."</li>
+      <li class="click">The main idea.</li>
+      <li class="say">"Here's the thing to take home. Daniel decided <i>before</i> the moment. Deciding in the moment is hard: everyone's watching, you're tired, the food smells good. Deciding ahead of time means the choice is already made. It's like deciding you don't drink before you ever get to the party. Then when somebody hands you a cup, you don't have to think. You already know."</li>
+      <li class="ask">"What's one thing you've already decided?" Take two or three. Affirm every single one.
+        <ul class="answers"><li>Not drinking, not vaping</li><li>Serving a mission</li><li>Getting married in the temple</li><li>No pornography</li><li>Keeping the Sabbath, being honest</li></ul>
       </li>
-      <li class="click">The new scroll glows.</li>
-      <li class="read">"Take thee again another roll, and write in it all the former words… and there were added besides unto them many like words."</li>
-      <li class="say">"He didn't just replace it. The new one had <i>more.</i> You can't burn God's word away."</li>
+      <li class="tip">If nobody answers, share one of yours, then ask again. Teenagers answer faster once an adult goes first.</li>
     </ol>
   </article>
 
   <!-- ===================== STORY TWO ===================== -->
-  <h2 class="part-title">Story Two · The pit</h2>
-  <p class="part-sub">Slides 6–8 · 4 minutes · Jeremiah 38–39</p>
+  <h2 class="part-title">Story Two · The statue and the stone</h2>
+  <p class="part-sub">Slides 6–8 · 4¼ minutes · Daniel 2</p>
 
   <article class="note" id="s6">
-    <header><span class="num">6</span><h3>Chapter: Down in the pit</h3><span class="time">15 sec</span></header>
+    <header><span class="num">6</span><h3>Chapter: The statue and the stone</h3><span class="time">15 sec</span></header>
     <ol class="beats">
-      <li class="say">"Now Babylon's army is camped outside the walls, and the city's leaders are furious with Jeremiah."</li>
+      <li class="say">"Now the king has a dream nobody can explain."</li>
     </ol>
   </article>
 
   <article class="note" id="s7">
-    <header><span class="num">7</span><h3>The pit scene</h3><span class="time">2½ min</span></header>
-    <p class="goal">The most hands-on slide. Keep the energy up.</p>
+    <header><span class="num">7</span><h3>The dream</h3><span class="time">2½ min</span></header>
+    <p class="goal">Nine clicks, but they go fast. Tell it like a story.</p>
     <ol class="beats">
-      <li class="say">"So they lower him on ropes into a deep, dry well. No water. Just mud. He sinks."</li>
-      <li class="click">The three men appear.</li>
-      <li class="say">"Then Ebed-melech, an Ethiopian servant in the palace, an outsider, does what nobody else will. He goes to the king and speaks up. The king says: take thirty men and get him out."</li>
-      <li class="click">The question appears.</li>
-      <li class="ask">"Besides ropes, he brought something else. Guess." Click the answer they call out.</li>
-      <li class="click">Old rags, with the verse.</li>
-      <li class="say">"So the ropes wouldn't cut his arms. He didn't just rescue Jeremiah; he thought about how the rescue would <i>feel.</i>"</li>
-      <li class="click">"Everybody grab the rope!" Click <b>Pull</b> (or press →) five times. Each time, the class pulls and says "heave!" The first pull also brings up "Why the rags?"</li>
-      <li class="click">On the fifth pull he's out, and gold dust falls.</li>
+      <li class="say">"The king has a nightmare. He calls in all his wise men and says: tell me what I dreamed, and what it means. Not just the meaning. The dream itself. They say, nobody can do that. He says, then you all die. And that order includes Daniel and his friends."</li>
+      <li class="click">The prayer.</li>
+      <li class="say">"Daniel asks for one night. He goes home, gets his three friends, and they pray. That night God shows him the dream. Daniel says God 'revealeth the deep and secret things': God knows what nobody else can see."</li>
+      <li class="click">The statue introduction, then one click per metal (five clicks). Say each as it appears.</li>
+      <li class="say">"The king saw a giant statue. Head of gold: that's you, Babylon. Chest and arms of silver: the empire that beats you, Persia. Belly of brass: Greece. Legs of iron: Rome. Feet of iron mixed with clay: the kingdoms that broke apart after Rome. It's like a line of champions, each one beaten by the next. And the feet are the weak spot."</li>
+      <li class="click">The stone rolls from the mountain and the statue shatters.</li>
+      <li class="read">"A stone was cut out without hands, which smote the image… and the stone that smote the image became a great mountain, and filled the whole earth."</li>
+      <li class="say">"In plain words: a stone that no person made hits the statue, the whole thing crumbles to dust, and the stone grows until it fills the whole earth."</li>
+      <li class="click">The stone grows to fill the screen; the meaning appears.</li>
+      <li class="read">"The God of heaven shall set up a kingdom, which shall never be destroyed… and it shall stand for ever."</li>
+      <li class="say">"Every kingdom on that statue is gone. Babylon, Persia, Greece, Rome. You'd need a history book to find them. God's kingdom isn't gone."</li>
     </ol>
   </article>
 
   <article class="note" id="s8">
-    <header><span class="num">8</span><h3>Be an Ebed-melech</h3><span class="time">1½ min</span></header>
+    <header><span class="num">8</span><h3>The stone is still rolling</h3><span class="time">1½ min</span></header>
     <ol class="beats">
-      <li class="say">"When Jerusalem fell, the Lord kept Ebed-melech safe 'because thou hast put thy trust in me.'"</li>
-      <li class="click">The question appears.</li>
-      <li class="ask">"Who might be 'in a pit' around you? Don't say names. Just think."</li>
-      <li class="pause">Five seconds of quiet.</li>
-      <li class="click">"Your old rags," then the list (four clicks).</li>
-      <li class="say">"Small things that make help feel kind instead of awkward." Read the list as it appears. <span class="skip">If behind: just read it</span></li>
+      <li class="say">"So what's the stone? Here's the Lord in 1831, using Daniel's exact words." Read Doctrine and Covenants 65:2 on screen.</li>
+      <li class="click">"The stone is God's kingdom today: the Church of Jesus Christ. It started in 1830 with six members in a farmhouse. Now it's in almost every country on earth."</li>
+      <li class="click">The question.</li>
+      <li class="ask">"Where have you seen the stone rolling?" Take two or three.
+        <ul class="answers"><li>A friend or family member got baptized</li><li>New temples announced every conference</li><li>Missionaries in the family</li><li>Their own testimony growing</li></ul>
+      </li>
+      <li class="click">Examples appear if they need a nudge.</li>
+      <li class="click">The gold line.</li>
+      <li class="say">"You're not watching the stone roll. You're part of it. Every time you keep a promise, invite a friend, or just show up, that's the stone moving."</li>
     </ol>
   </article>
 
   <!-- ===================== STORY THREE ===================== -->
-  <h2 class="part-title">Story Three · The worst day</h2>
-  <p class="part-sub">Slides 9–11 · 3 minutes · Jeremiah 39; Lamentations 1; 3</p>
+  <h2 class="part-title">Story Three · The furnace</h2>
+  <p class="part-sub">Slides 9–11 · 4¼ minutes · Daniel 3</p>
 
   <article class="note" id="s9">
-    <header><span class="num">9</span><h3>Chapter: The worst day</h3><span class="time">15 sec</span></header>
+    <header><span class="num">9</span><h3>Chapter: The furnace</h3><span class="time">15 sec</span></header>
     <ol class="beats">
-      <li class="tip">Slow your voice down. The tone changes here.</li>
+      <li class="say">"The king just heard that God's kingdom would outlast his. His answer? Build a giant gold statue of his own, and make everyone bow to it."</li>
     </ol>
   </article>
 
   <article class="note" id="s10">
-    <header><span class="num">10</span><h3>Jerusalem falls</h3><span class="time">1½ min</span></header>
+    <header><span class="num">10</span><h3>Bow or stand</h3><span class="time">2 min</span></header>
+    <p class="goal">Spend your time on "but if not." It's the heart of the chapter.</p>
     <ol class="beats">
-      <li class="click">The city cracks and burns.</li>
-      <li class="say">"The army breaks through. They burn the houses, the palace, and the temple."</li>
-      <li class="click">People walk away to Babylon.</li>
-      <li class="say">"Most of the people are marched hundreds of miles away."</li>
-      <li class="click">The gold line appears.</li>
-      <li class="say">"Just as Jeremiah warned. But the Lord kept His promise to protect him."</li>
-      <li class="click">Lamentations 1 appears.</li>
-      <li class="say">"Afterward, someone wrote a book of sad poems about it, called Lamentations. Listen:" Read the verse slowly.</li>
-      <li class="pause">Let it sit for a moment. Don't rush to the sunrise.</li>
+      <li class="say">"The king builds a gold statue as tall as a nine-story building and calls in every leader from the whole empire. The rule is simple: when you hear the music, you bow. Anyone who stays standing goes into a furnace."</li>
+      <li class="click">The music plays and the crowd bows. Three gold figures stay standing.</li>
+      <li class="say">"The music plays. Thousands of people hit the ground. And three stay standing. Shadrach, Meshach, and Abed-nego. Think how visible that is. Everyone else is face down, and these three are standing up in plain sight. Somebody runs and tells the king."</li>
+      <li class="click">Their answer.</li>
+      <li class="read">"Our God whom we serve is able to deliver us from the burning fiery furnace, and he will deliver us out of thine hand, O king. <b>But if not</b>, be it known unto thee, O king, that we will not serve thy gods."</li>
+      <li class="click">"But if not."</li>
+      <li class="say">"In plain words: God can save us, and we think He will. But even if He doesn't, we still won't bow. Look at those three words. <i>But if not.</i> Their faith wasn't a deal with God: get us out of this and we'll be good. It was: we'll be good either way. It's like praying really hard to make the team, and still trusting God when you get cut."</li>
+      <li class="ask">"What would change if your faith had a 'but if not' in it?"
+        <ul class="answers"><li>Less scared about how things turn out</li><li>You stop bargaining with God</li><li>You can keep going when a prayer isn't answered the way you wanted</li><li>Your faith doesn't depend on good news</li></ul>
+      </li>
     </ol>
   </article>
 
   <article class="note" id="s11">
-    <header><span class="num">11</span><h3>But then, morning</h3><span class="time">1 min</span></header>
-    <p class="goal">The turning point of the lesson.</p>
+    <header><span class="num">11</span><h3>Into the fire</h3><span class="time">2 min</span></header>
+    <p class="goal">Let the fourth figure sit on the screen before you say anything.</p>
     <ol class="beats">
-      <li class="say">"Look at the background." Point to the sunrise. "Same book, two chapters later:"</li>
-      <li class="click">Read each line as it appears (two clicks).</li>
-      <li class="read">"…his compassions fail not. They are new every morning: great is thy faithfulness."</li>
-      <li class="click">The gold line appears.</li>
-      <li class="say">"Everything's still in ruins, and he's still finding mercy. Every morning is a fresh start from the Lord."</li>
-      <li class="click">The question appears.</li>
-      <li class="ask">"What's one good thing you noticed today?" Take two quick answers.</li>
+      <li class="say">"The king is furious. He has the furnace heated seven times hotter than normal. It's so hot that the soldiers who throw them in die from the heat. The three are tied up and dropped in."</li>
+      <li class="click">The flames roar up and the three men drop in.</li>
+      <li class="click">A fourth, glowing figure appears.</li>
+      <li class="pause">Wait. Let them look.</li>
+      <li class="read">"Did not we cast three men bound into the midst of the fire?… Lo, I see four men loose, walking in the midst of the fire, and they have no hurt; and the form of the fourth is like the Son of God."</li>
+      <li class="say">"The king jumps up. We threw in three. I see four. They're walking around. And the fourth one looks like the Son of God."</li>
+      <li class="click">Not even the smell of fire.</li>
+      <li class="say">"They walk out. Not a hair burned. Their clothes aren't even scorched. They don't smell like smoke. Now notice what God did <i>not</i> do. He didn't put the fire out. He didn't stop the king. He let them get thrown in, and then He was in there with them."</li>
+      <li class="click">The question.</li>
+      <li class="ask">"When has the Lord been with you <i>in</i> a hard thing, instead of taking it away?" Go first with a short example of your own: a loss, an illness, a move, a hard year. The hard thing didn't disappear, but you weren't alone in it.</li>
+      <li class="click">The king's confession.</li>
+      <li class="read">"Blessed be the God of Shadrach, Meshach, and Abed-nego, who hath sent his angel, and delivered his servants that trusted in him… because there is no other God that can deliver after this sort."</li>
+      <li class="say">"That's the title of today's lesson, and a king who didn't believe in God is the one who said it."</li>
+    </ol>
+  </article>
+
+  <!-- ===================== TWO KINGS ===================== -->
+  <h2 class="part-title">Interlude · Two proud kings</h2>
+  <p class="part-sub">Slide 12 · 1½ minutes · Daniel 4–5</p>
+
+  <article class="note" id="s12">
+    <header><span class="num">12</span><h3>Two proud kings</h3><span class="time">1½ min</span> <span class="skip">If behind: skip</span></header>
+    <p class="goal">Quick. Two stories in ninety seconds. Don't get pulled into details.</p>
+    <ol class="beats">
+      <li class="say">"Two quick stories about pride. Pride is thinking you did it all yourself. Like someone who wins the game and forgets the coach, the team, and whoever drove them to practice. Nebuchadnezzar walks on his palace roof and says, 'Look at this great Babylon, that I built.'"</li>
+      <li class="click">The tree becomes a stump.</li>
+      <li class="say">"He'd had a dream about a huge tree chopped down to a stump, and Daniel had warned him what it meant. The second he says those words, it happens. He loses his mind and lives outside like an animal for seven years, until he finally looks up and admits God is in charge. Then his mind comes back, and he says God 'is able to abase' the proud. Abase means bring down."</li>
+      <li class="click">Belshazzar's feast.</li>
+      <li class="say">"Years later the new king, Belshazzar, throws a party for a thousand guests, and to show off he uses the sacred cups stolen from God's temple as party cups. And a hand appears and starts writing on the wall."</li>
+      <li class="click">The writing appears word by word.</li>
+      <li class="say">"Mene, mene, tekel, upharsin. Nobody can read it. They call in Daniel, who's an old man by now. He tells the king: you've been tested, and you failed. God has counted your days, and they're done."</li>
+      <li class="click">The city falls and the verse appears.</li>
+      <li class="say">"That same night the Persians took Babylon, and Belshazzar was dead. Same lesson both times: God is the one really in charge. One king was humbled and came back. The other was warned and ignored it."</li>
     </ol>
   </article>
 
   <!-- ===================== STORY FOUR ===================== -->
-  <h2 class="part-title">Story Four · The field</h2>
-  <p class="part-sub">Slides 12–13 · 2 minutes · Jeremiah 32</p>
-
-  <article class="note" id="s12">
-    <header><span class="num">12</span><h3>Chapter: A field bought in wartime</h3><span class="time">15 sec</span></header>
-    <ol class="beats">
-      <li class="say">"Back up a little, to just before the city fell. Jeremiah is in prison, and he does something that looks crazy."</li>
-    </ol>
-  </article>
+  <h2 class="part-title">Story Four · The lions' den</h2>
+  <p class="part-sub">Slides 13–14 · 2¾ minutes · Daniel 6</p>
 
   <article class="note" id="s13">
-    <header><span class="num">13</span><h3>Would you buy it?</h3><span class="time">1½ min</span></header>
+    <header><span class="num">13</span><h3>Chapter: The lions' den</h3><span class="time">15 sec</span></header>
     <ol class="beats">
-      <li class="ask">Read the three lines in the box. "Would you buy it? Hands up." Tap once per hand for each side.</li>
-      <li class="click">The jar appears and the seal stamps.</li>
-      <li class="say">"He bought it. Signed, sealed, deed in a clay jar."</li>
-      <li class="click">Verse 15 appears.</li>
-      <li class="say">"It was a promise you could hold: people will live here again."</li>
-      <li class="click">Verse 17 appears.</li>
-      <li class="read">"Ah Lord God!… there is nothing too hard for thee."</li>
+      <li class="say">"New empire. New king. And Daniel is an old man now."</li>
     </ol>
   </article>
-
-  <!-- ===================== THE PROMISE ===================== -->
-  <h2 class="part-title">The great promise</h2>
-  <p class="part-sub">Slides 14–16 · 3 minutes · Jeremiah 31; 33</p>
 
   <article class="note" id="s14">
-    <header><span class="num">14</span><h3>Chapter: Written in the heart</h3><span class="time">15 sec</span></header>
+    <header><span class="num">14</span><h3>Three times a day</h3><span class="time">2½ min</span></header>
+    <p class="goal">"As he did aforetime" means "the same as always." That's the key phrase. The law didn't make Daniel brave; his habits did.</p>
     <ol class="beats">
-      <li class="say">"In the middle of all this, the Lord makes His biggest promise."</li>
+      <li class="say">"Daniel is about eighty. He's the king's right-hand man, and the other leaders hate it. They go digging for dirt on him and find nothing. The only way to get him is through his religion. So they talk the king into signing a law: for thirty days, nobody prays to anyone but the king. Break it, and it's the lions."</li>
+      <li class="click">Daniel 6:10.</li>
+      <li class="read">"He went into his house; and his windows being open… he kneeled upon his knees three times a day, and prayed, and gave thanks before his God, as he did aforetime."</li>
+      <li class="say">"In plain words: he went home and prayed three times a day, the same as always. Windows open. Nothing hidden. And nothing changed. He didn't pray more to make a point. He didn't pray less to stay safe. He prayed exactly the way he'd prayed every day for sixty-five years."</li>
+      <li class="click">The stone rolls over the den and lions' eyes glow in the dark.</li>
+      <li class="say">"They catch him, of course. The king realizes he's been tricked, and he likes Daniel, but a law is a law. As they seal the den he says, 'Your God will save you.' Then he goes home and can't eat or sleep."</li>
+      <li class="click">Morning. The stone rolls away, light pours in, the lions lie down.</li>
+      <li class="say">"At first light the king runs to the den and calls out. And Daniel answers."</li>
+      <li class="read">"My God hath sent his angel, and hath shut the lions' mouths, that they have not hurt me."</li>
+      <li class="say">"They pull him out. Not a scratch. And the reason the scripture gives: 'because he believed in his God.'"</li>
+      <li class="click">The question.</li>
+      <li class="say">"Here's the point. Daniel's prayer was like brushing your teeth. You don't decide every night whether to do it. It's just what you do. That habit he built as a teenager was still there at eighty, and that's what saved him. Not a burst of courage in the moment. Sixty-five years of the same thing every morning, noon, and night."</li>
+      <li class="ask">"What habit are you building right now that you want to still have at eighty?"
+        <ul class="answers"><li>Praying every day</li><li>Reading scriptures</li><li>Church every week</li><li>Being honest</li><li>Keeping the Sabbath</li></ul>
+      </li>
     </ol>
   </article>
+
+  <!-- ===================== DANIEL 7 ===================== -->
+  <h2 class="part-title">The vision · Son of man</h2>
+  <p class="part-sub">Slide 15 · 1½ minutes · Daniel 7</p>
 
   <article class="note" id="s15">
-    <header><span class="num">15</span><h3>Stone and heart</h3><span class="time">1½ min</span></header>
+    <header><span class="num">15</span><h3>Son of man</h3><span class="time">1½ min</span> <span class="skip">If behind: read it, don't discuss</span></header>
     <ol class="beats">
-      <li class="say">"Under Moses, the law was carved on stone. Rules on the outside."</li>
-      <li class="click">The verse appears. Read it.</li>
-      <li class="click">The words fly from the stone into the heart.</li>
-      <li class="click">The main idea appears.</li>
-      <li class="ask">"What's the difference between doing what's right because you <i>have</i> to and because you <i>want</i> to?"
-        <ul class="answers"><li>"Want to" still works when nobody's watching</li><li>It feels like joy instead of a chore</li><li>It becomes who you are</li></ul>
-      </li>
-    </ol>
-  </article>
-
-  <article class="note" id="s16">
-    <header><span class="num">16</span><h3>Call unto me · The Branch</h3><span class="time">1½ min</span></header>
-    <ol class="beats">
-      <li class="click">Verse 3 appears.</li>
-      <li class="read">"Call unto me, and I will answer thee, and shew thee great and mighty things, which thou knowest not."</li>
-      <li class="say">"He said this to Jeremiah while he was still in prison."</li>
-      <li class="click">A branch grows from the stump.</li>
-      <li class="say">"After this, Israel had no more kings. David's family tree looked chopped down. But a Branch would grow out of it."</li>
-      <li class="ask">"Who's the Branch?"
-        <ul class="answers"><li>Jesus Christ</li></ul>
-      </li>
-      <li class="click">The gold line appears. "He's how mourning turns into joy."</li>
-    </ol>
-  </article>
-
-  <!-- ===================== QUIZ ===================== -->
-  <h2 class="part-title">Quick quiz</h2>
-  <p class="part-sub">Slides 17–21 · 3 minutes</p>
-
-  <article class="note" id="s17">
-    <header><span class="num">17–20</span><h3>Four questions</h3><span class="time">3 min</span> <span class="skip">If behind: 2 questions</span></header>
-    <p class="goal">Split the room into two teams on slide 17. Each question has a 15-second timer that starts on its own. Click the team's answer to reveal it, and add a point with the + buttons in the top-right corner.</p>
-    <ol class="beats">
-      <li class="tip"><b>1 · The scroll → b, cut it up and burned it.</b></li>
-      <li class="tip"><b>2 · Under Jeremiah's arms → b, old rags.</b></li>
-      <li class="tip"><b>3 · Where the law is written → d, in our hearts.</b></li>
-      <li class="tip"><b>4 · New every ____ → c, morning.</b></li>
-    </ol>
-  </article>
-
-  <article class="note" id="s21">
-    <header><span class="num">21</span><h3>Final score</h3><span class="time">15 sec</span></header>
-    <ol class="beats">
-      <li class="say">"Well played, everyone." Then settle the room for the close.</li>
+      <li class="say">"Daniel also saw visions of the future. In chapter 7 he sees how the story ends. Four beasts rise and fall, one empire after another, and then this."</li>
+      <li class="read">"I saw in the night visions, and, behold, one like the Son of man came with the clouds of heaven… And there was given him dominion, and glory, and a kingdom… his dominion is an everlasting dominion, which shall not pass away."</li>
+      <li class="say">"In plain words: Daniel saw the Savior coming in the clouds, and He was given a kingdom that lasts forever."</li>
+      <li class="click">"Son of man."</li>
+      <li class="say">"Six hundred years later, Jesus used this name for Himself more than any other. He said the Son of man came to serve, 'and to give his life a ransom for many.' Daniel saw Him coming."</li>
+      <li class="click">"Ancient of days."</li>
+      <li class="say">"In the same vision the Son of man comes to 'the Ancient of days.' Modern revelation tells us that's Adam. Before Jesus comes again, Adam will gather his family at a place in Missouri called Adam-ondi-Ahman, and the Savior will come to them."</li>
+      <li class="click">The gold line.</li>
+      <li class="say">"Here's the whole book of Daniel in one sentence. The statue falls. The beasts fall. Babylon falls. Persia falls. You need a history book to find any of them now. Christ's kingdom is still growing, and it never ends."</li>
     </ol>
   </article>
 
   <!-- ===================== CLOSING ===================== -->
   <h2 class="part-title">Closing</h2>
-  <p class="part-sub">Slides 22–24 · 3 minutes on time, about 4½ when wrapping up early</p>
+  <p class="part-sub">Slides 16–18 · 3 minutes on time, about 4½ when wrapping up early</p>
 
-  <article class="note" id="s22">
-    <header><span class="num">22</span><h3>In short</h3><span class="time">30 sec · 2 min if wrapping up</span></header>
-    <p class="outoftime"><b>On time?</b> Point to the five lines on screen ("Here's everything in one slide") and press →.<br><b>Out of time?</b> Press <b>W</b> from wherever you are to jump here, and read this aloud:</p>
+  <article class="note" id="s16">
+    <header><span class="num">16</span><h3>In short</h3><span class="time">30 sec · 2 min if wrapping up</span></header>
+    <p class="outoftime"><b>On time?</b> Point to the six lines on screen ("Here's everything in one slide") and press →.<br><b>Out of time?</b> Press <b>W</b> from wherever you are to jump here, and read this aloud:</p>
     <div class="readaloud">
-      <p>"Here's the whole lesson in two minutes. Jeremiah spent about forty years warning Jerusalem to turn back to God, and most people wouldn't listen. When the king heard the Lord's words, he cut up the scroll and burned it. But the Lord simply had Jeremiah write it again, with even more. God's word can't be burned away, and He doesn't give up on people.</p>
-      <p>"Later, Jeremiah's enemies lowered him into a muddy pit and left him there. Nobody spoke up except Ebed-melech, a servant from Ethiopia. He went to the king, gathered thirty men, and even brought old rags so the ropes wouldn't hurt Jeremiah's arms. The Lord protected Ebed-melech because he trusted the Lord. We can be like him: notice who's in a pit, and help kindly.</p>
-      <p>"Then the worst day came. Babylon broke through the walls, burned the city and the temple, and carried the people away. The book of Lamentations is full of tears about it. But right in the middle of that sadness it says, 'His compassions fail not. They are new every morning.'</p>
-      <p>"Even before the city fell, the Lord had Jeremiah buy a field, to show that people would live in the land again. Nothing is too hard for Him.</p>
-      <p>"And He made His biggest promise: someday He would write His law not on stone, but in our hearts, and a Branch would grow from David's family. That Branch is Jesus Christ.</p>
-      <p>"So here's the main point: whatever your worst day is, it doesn't get the last word. Through Jesus Christ, the Lord turns mourning into joy."</p>
+      <p>"Here's the whole lesson in two minutes. Babylon, the superpower of the world, carried off a group of smart teenagers from Jerusalem, including Daniel and his three friends. They got new names and the best food in the empire. Daniel had already decided, before the food was in front of him, that he wouldn't eat it. He asked for ten days on vegetables and water, and at the end he and his friends were healthier and ten times wiser than anyone in the palace. Decide before the moment comes.</p>
+      <p>"The king dreamed of a giant statue made of gold, silver, brass, and iron. Every part was a kingdom. A stone that no person made smashed it and grew to fill the whole earth. That stone is God's kingdom, the Church, and it's still rolling today. You're part of it.</p>
+      <p>"Then the king built a giant gold statue and ordered everyone to bow. Three friends stood. They told him God could save them, 'but if not,' they still wouldn't bow. They were thrown into a furnace heated seven times hotter, and the king saw four men walking in the fire. They came out without even smelling like smoke. God didn't keep them out of the fire. He got in it with them. The king said, 'There is no other God that can deliver after this sort.'</p>
+      <p>"Years later, Daniel, now about eighty, kept praying three times a day when a law said he couldn't. He was thrown to the lions, and God shut their mouths, because he believed in his God. The habit he built as a teenager was still there at eighty.</p>
+      <p>"And Daniel saw the end: every kingdom falls, and Jesus Christ comes in the clouds to rule a kingdom that never ends.</p>
+      <p>"So: decide now. Trust Him either way. Pray like you always have. He is the only God who can deliver, and He will be with you in the fire."</p>
     </div>
   </article>
 
-  <article class="note" id="s23">
-    <header><span class="num">23</span><h3>Choose one</h3><span class="time">1 min</span></header>
+  <article class="note" id="s17">
+    <header><span class="num">17</span><h3>Choose one</h3><span class="time">1 min</span></header>
     <ol class="beats">
-      <li class="say">"Pick one of these for this week. Just one." Read the three titles.</li>
-      <li class="pause">A quiet moment to choose.</li>
+      <li class="say">"Pick one of these for this week. Just one." Read the three titles: Purpose in your heart (write down one decision you've made in advance). Three times a day (pray morning, midday, and night, like Daniel). But if not (hand one worry to God and trust Him with how it turns out).</li>
+      <li class="pause">A quiet moment to choose. Volunteers can come tap the card they picked.</li>
       <li class="say">"Next week I'll ask how it went."</li>
     </ol>
   </article>
 
-  <article class="note" id="s24">
-    <header><span class="num">24</span><h3>I will turn their mourning into joy</h3><span class="time">1½ min</span></header>
+  <article class="note" id="s18">
+    <header><span class="num">18</span><h3>But if not</h3><span class="time">1½ min</span></header>
     <ol class="beats">
-      <li class="say">"We started at night." Read the verse.</li>
-      <li class="say">"Whatever your hardest day is, it doesn't get the last word."</li>
-      <li class="say">Bear a short testimony, three or four sentences: that Jesus Christ turns mourning into joy, and a time you've seen it.</li>
+      <li class="read">"Our God whom we serve is able to deliver us… But if not, be it known unto thee, O king, that we will not serve thy gods."</li>
+      <li class="say">"He may not keep you out of the fire. He will be in it with you."</li>
+      <li class="say">Bear a short testimony, three or four sentences: that Jesus Christ is the God who rescues, and a time you felt Him with you in something hard that didn't go away.</li>
       <li class="tip">Press <b>B</b> to black out the screen for the closing prayer.</li>
     </ol>
   </article>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="overview" id="faq">
+    <h2>If they ask</h2>
+    <dl class="faq">
+      <dt>Why wouldn't Daniel eat the king's food? Was it bad for him?</dt>
+      <dd>The scripture says he didn't want to "defile himself," which means make himself unclean. The food probably included meat that God's law said not to eat, and it had probably been offered to Babylon's idols first. The health result was a sign from God, not the reason. The point is deciding ahead of time. It's a fair comparison to our own Word of Wisdom.</dd>
+      <dt>Was the fourth man in the furnace Jesus?</dt>
+      <dd>The king said the fourth looked "like the Son of God," and later called him an angel (3:28). Many Latter-day Saints believe it was Jesus Christ before He was born; others say an angel He sent. Either way, the message is the same: God was in the fire with them.</dd>
+      <dt>Are the kingdoms in the statue really Babylon, Persia, Greece, and Rome?</dt>
+      <dd>That's the usual Latter-day Saint reading, and Daniel himself says the gold head is Nebuchadnezzar (2:38). The exact labels matter less than the point: every kingdom people build ends, and God's kingdom, restored in our day, will fill the earth (D&amp;C 65:2).</dd>
+      <dt>How old was Daniel in the lions' den?</dt>
+      <dd>He was taken as a teenager in 605 B.C., and the den happens after Babylon fell in 539 B.C., so he was at least in his early eighties.</dd>
+      <dt>Who was Darius the Mede?</dt>
+      <dd>Historians aren't sure; he isn't named outside the Bible. Don't get stuck here. The story is about Daniel.</dd>
+      <dt>Why did God let them get thrown in at all?</dt>
+      <dd>Daniel 3:17–18 answers it before it happens: faith isn't a guarantee of rescue. Sometimes He takes the fire away, sometimes He walks through it with us. The friends were ready for either.</dd>
+      <dt>What happened to Daniel after chapter 7?</dt>
+      <dd>Chapters 8–12 are more visions about the future. He worked for the Persian kings into old age and, as far as we know, died in Babylon, never going home to Jerusalem.</dd>
+    </dl>
+  </section>
 
   <footer>
     <p><a href="./">Open the presentation</a> · Scripture quotations are from the King James Version.</p>
