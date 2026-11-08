@@ -1,13 +1,13 @@
 # Interactive Come Follow Me Lesson
 
-A youth Sunday School lesson built as a click-through **TV presentation**. Everything (content, styling, animations, games, scoring) lives in `public/index.html`; the only outside request is two Google Fonts (Cormorant Garamond and Inter), and it falls back to system fonts offline. Plug a laptop into the TV, open the site, press **F** for full screen, and click through together.
+A youth Sunday School lesson built as a click-through **TV presentation**. Everything (content, styling, animations) lives in `public/index.html`; the only outside request is two Google Fonts (Cormorant Garamond and Inter), and it falls back to system fonts offline. Plug a laptop into the TV, open the site, press **F** for full screen, and click through together.
 
 **Current lesson:** November 9–15, 2026 · "There Is No Other God That Can Deliver" · Daniel 1–7
 ([official lesson](https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/46?lang=eng)).
 
 ## What's in the deck
 
-Ordinary slides with builds and animations, no games or scoring this week. The background moves from night in Babylon, to the royal court, to the glow of the furnace, to morning. Slides enter with one of three transitions (rise, sweep, zoom), and each scene animates as you click: the name cards flip, the ten-day test counts up, the statue builds and shatters, the crowd bows while three stand, the fourth figure appears in the flames, the writing appears on the wall, and the lions' den opens to the dawn.
+Ordinary slides with builds and animations, no games, scoring or sound this week. One quiet dark background, serif type, gold line icons, and a plain fade between slides. Each scene animates as you click: the name cards flip, the ten-day test counts up, the statue builds and shatters, the crowd bows while three stand, the fourth figure appears in the flames, the writing appears on the wall, and the lions' den opens to the morning.
 
 | Slides | Section | What happens |
 | --- | --- | --- |
@@ -31,7 +31,6 @@ The deck is built for a 25-minute class: 18 slides, about 23½ minutes at the pa
 | N | Teacher notes for the current slide (visible on the TV too) |
 | B or . | Black screen |
 | F | Fullscreen |
-| M | Sound on/off |
 | W | Out of time: jump to the "In short" summary |
 | ? | Help |
 
@@ -48,7 +47,7 @@ Earlier lessons are kept in `public/archive/` (for example `/archive/2026-10-26-
 ## Weekly update
 
 1. Move the current `public/index.html` and `public/notes.html` into `public/archive/`.
-2. Edit the slides in `public/index.html`: each `<section class="slide">` is one slide, `data-step="n"` makes an element appear on the nth click, `data-steps="n"` sets how many clicks a slide has when the builds are CSS-only (`.s1`, `.s2`, … classes are added to the slide), `data-mood` sets the sky (night, court, fire, dawn, day), `data-mood-steps="3:dawn"` changes the sky part-way through, `data-enter` picks the transition (rise, sweep, zoom), `data-step-fx="2:chime"` plays a sound on a click, and `<aside class="notes">` holds the teacher notes.
+2. Edit the slides in `public/index.html`: each `<section class="slide">` is one slide, `data-step="n"` makes an element appear on the nth click, `data-steps="n"` sets how many clicks a slide has when the builds are CSS-only (`.s1`, `.s2`, … classes are added to the slide), and `<aside class="notes">` holds the teacher notes.
 3. Open `public/index.html` locally in a full-screen browser window and click through every slide.
 4. Deploy:
 
