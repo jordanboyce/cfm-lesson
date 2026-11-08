@@ -7,7 +7,7 @@ A youth Sunday School lesson built as a click-through **TV presentation**. Every
 
 ## What's in the deck
 
-Ordinary slides with builds and animations, no games, scoring or sound this week. One quiet dark background, serif type, gold line icons, and a plain fade between slides. Each scene animates as you click: the name cards flip, the ten-day test counts up, the statue builds and shatters, the crowd bows while three stand, the fourth figure appears in the flames, the writing appears on the wall, and the lions' den opens to the morning.
+Ordinary slides with builds and animations, no games, scoring or sound this week. One quiet dark background, serif type, gold line icons, and a plain fade between slides. The wording is kept simple for teenagers: every hard King James verse has an "In plain words" line under it, and each story has an everyday example (the party, tryouts, brushing your teeth). Each scene animates as you click: the name cards flip, the ten-day test counts up, the statue builds and shatters, the crowd bows while three stand, the fourth figure appears in the flames, the writing appears on the wall, and the lions' den opens to the morning.
 
 | Slides | Section | What happens |
 | --- | --- | --- |
