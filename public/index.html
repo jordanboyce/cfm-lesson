@@ -281,14 +281,14 @@
     .slide.s1 .inmen { opacity: 1; transform: none; }
     .inmen .fourth { width: 0; overflow: visible; transition: width 1.2s ease; display: flex; justify-content: center; }
     .inmen .fourth .fig { fill: #fff6dc; opacity: 0; transform: scale(.6); filter: drop-shadow(0 0 24px rgba(255, 240, 200, .9)); transition: opacity 1.6s ease .6s, transform 1.6s cubic-bezier(.2, .8, .3, 1.2) .6s; }
-    .slide.s2 .inmen .fourth { width: 48px; }
-    .slide.s2 .inmen .fourth .fig { opacity: 1; transform: none; animation: halo 2.4s ease-in-out 2s infinite; }
+    .slide.s1 .inmen .fourth { width: 48px; transition-delay: 1.4s; }
+    .slide.s1 .inmen .fourth .fig { opacity: 1; transform: none; transition-delay: 2s, 2s; animation: halo 2.4s ease-in-out 3.6s infinite; }
     .slide.s2 .inmen .fig:not(.fourth .fig) { fill: #4a2a2a; }
     @keyframes halo { 50% { filter: drop-shadow(0 0 44px rgba(255, 240, 200, 1)); } }
-    .slide.s3 .flame { height: 120px; opacity: .6; }
+    .slide.s2 .flame { height: 120px; opacity: .6; }
     .heat { position: absolute; right: 0; top: 30px; text-align: right; font-family: var(--serif); font-size: 30px; font-style: italic; color: var(--ember-soft); opacity: 0; transition: opacity .8s ease; }
     .slide.s1 .heat { opacity: 1; }
-    .slide.s3 .heat { opacity: 0; }
+    .slide.s2 .heat { opacity: 0; }
 
     /* ---------- Two kings ---------- */
     .kings { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
@@ -625,7 +625,7 @@
         </div>
       </div>
       <aside class="notes">
-        <p>Clicks 1–2: the crisis and the prayer. Clicks 3–7: the statue builds from the head down, one metal per click. Click 8: the stone rolls from the mountain and the statue shatters. Click 9: the stone grows to fill the screen, with the meaning.</p>
+        <p>Click 1: the prayer. Click 2: the statue and its gold head. Clicks 3–6: silver, brass, iron, iron and clay. Click 7: the stone rolls from the mountain and the statue shatters. Click 8: the stone grows to fill the screen, with the meaning.</p>
         <p>The labels are the usual Latter-day Saint reading: Babylon, then the Medes and Persians, then Greece, then Rome, then the broken-up kingdoms after Rome. No need to belabor it.</p>
         <p>"Without hands" means no human built it. The stone is God's doing.</p>
       </aside>
@@ -756,7 +756,7 @@
         </div>
       </div>
       <aside class="notes">
-        <p>Click 1: the flames roar up and the three men drop in. Click 2: a fourth, glowing figure appears beside them. Click 3: not even the smell of fire. Click 4: the question. Click 5: the king's confession, which is the title of the lesson.</p>
+        <p>Click 1: the flames roar up, the three men drop in, and a moment later a fourth, glowing figure appears beside them. Click 2: the flames die down; not even the smell of fire. Click 3: the question. Click 4: the king's confession, which is the title of the lesson.</p>
         <p>Let the fourth figure sit on screen for a moment before you say anything.</p>
         <p>On the question, be ready to share your own example: a loss, an illness, a move, something that didn't go away but that you weren't alone in.</p>
       </aside>
@@ -948,7 +948,7 @@
         <tr><td>W</td><td>Out of time: jump to the "In short" summary</td></tr>
       </table>
       <p style="margin-top: 14px;">Most presentation clickers work as they are. Your place survives a refresh.</p>
-      <p style="margin-top: 8px;">Full teacher script: <a href="notes.html" target="_blank" rel="noopener" style="color: var(--gold-soft);">notes.html</a></p>
+      <p style="margin-top: 8px;">Full teacher script: <a href="notes.html" target="_blank" rel="noopener" style="color: var(--gold-soft);">notes.html</a>. Open it in a second window and it follows this deck slide by slide.</p>
       <button class="close" type="button" id="helpClose">Close</button>
     </div>
   </div>
@@ -1009,6 +1009,15 @@
       }
 
       /* ---------- Navigation ---------- */
+      // Tell notes.html (open in another window) where we are
+      let channel = null;
+      try { channel = new BroadcastChannel("cfm-lesson"); } catch { /* not available */ }
+      function publish() {
+        const msg = { slide: cur + 1, step, t: Date.now() };
+        try { localStorage.setItem("cfm-live", JSON.stringify(msg)); } catch { /* ignore */ }
+        if (channel) channel.postMessage(msg);
+      }
+
       function render(entering) {
         const s = slides[cur];
         slides.forEach((el, i) => {
@@ -1028,6 +1037,7 @@
         const hash = "#" + (cur + 1);
         if (location.hash !== hash) history.replaceState(null, "", hash);
         store.set("cfm-pos", [cur, step]);
+        publish();
       }
 
       function go(index, atEnd) {
@@ -1043,6 +1053,7 @@
           step += 1;
           applyStep(s);
           store.set("cfm-pos", [cur, step]);
+        publish();
         } else {
           go(cur + 1, false);
         }
@@ -1054,6 +1065,7 @@
           step -= 1;
           applyStep(s);
           store.set("cfm-pos", [cur, step]);
+        publish();
         } else {
           go(cur - 1, true);
         }
