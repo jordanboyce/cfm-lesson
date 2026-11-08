@@ -38,7 +38,7 @@ Most presentation clickers send Page Up/Page Down and work as-is. The challenge 
 
 ## Teacher script
 
-`public/notes.html` (served at `/notes.html`) is a slide-by-slide script: a five-minute prep box with who's who and pronunciations, what to say, when to click, pauses, questions with likely answers, a time budget per slide that fits a 25-minute class, what to cut if you run behind, a 2-minute wrap-up to read aloud, and answers to questions the class may ask. It works on a phone and prints cleanly. The deck's help screen (press **?**) links to it.
+`public/notes.html` (served at `/notes.html`) is a slide-by-slide script that mirrors the deck: every card is one slide, with a dark thumbnail of what the TV shows, a big slide number, and each click numbered in the order the deck reveals things. A sticky bar at the top steps through the slides with ‹ › and shows what's next; on a phone you tap › as you move on. Opened in a second window on the laptop, it follows the deck by itself (over a BroadcastChannel and localStorage) and ticks off each click. It also has a five-minute prep box with who's who and pronunciations, what to say, when to click, pauses, questions with likely answers, a time budget per slide that fits a 25-minute class, what to cut if you run behind, a 2-minute wrap-up to read aloud, and answers to questions the class may ask. It works on a phone and prints cleanly. The deck's help screen (press **?**) links to it.
 
 ## Past lessons
 

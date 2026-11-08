@@ -54,7 +54,7 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    html { scroll-behavior: smooth; }
     body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.6; font-variant-numeric: lining-nums; }
     main { max-width: 760px; margin: 0 auto; padding: 0 16px 80px; }
 
@@ -117,10 +117,53 @@
     .outoftime { margin: 0 0 14px; padding: 14px 18px; border-radius: 8px; border: 1px dashed var(--gold); font-size: 15px; }
     .skip { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; vertical-align: middle; }
 
+
+    /* ---------- Follow bar ---------- */
+    .bar { position: sticky; top: 0; z-index: 6; margin: 0 -16px; padding: 8px 10px; background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 52px 1fr 52px; align-items: center; gap: 8px; }
+    .bar button { height: 52px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: 28px; line-height: 1; cursor: pointer; }
+    .bar button:disabled { opacity: .3; }
+    .bar .mid { min-width: 0; text-align: center; }
+    .bar .where { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+    .bar .what { margin: 2px 0 0; font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar .next { margin: 2px 0 0; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar .live { display: none; margin: 4px auto 0; padding: 2px 10px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    body.following .bar .live { display: inline-block; }
+    .jump { position: sticky; top: 88px; z-index: 5; margin: 0 -16px; padding: 8px 16px; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+    .jump a.on { background: var(--gold); border-color: var(--gold); color: var(--card); }
+    html { scroll-padding-top: 150px; }
+
+    /* ---------- Slide thumbnails ---------- */
+    .thumb { position: relative; height: 118px; margin: 0 0 14px; padding: 16px 20px; border-radius: 8px; background: radial-gradient(ellipse at 50% 125%, #1c1f4b 0%, #0d0f2a 52%, #06070f 100%); color: #f4ecdc; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+    .thumb .k { margin: 0 0 6px; font-size: 10px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: #d4ae62; }
+    .thumb .k::before { content: ""; display: inline-block; width: 22px; height: 1px; background: #d4ae62; vertical-align: middle; margin-right: 10px; }
+    .thumb .h { margin: 0; font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1.1; color: #f4ecdc; }
+    .thumb .h i { color: #ead6a3; }
+    .thumb.chapter { align-items: center; text-align: center; }
+    .thumb.chapter .k::after { content: ""; display: inline-block; width: 22px; height: 1px; background: #d4ae62; vertical-align: middle; margin-left: 10px; }
+    .thumb .n { position: absolute; right: 12px; bottom: 8px; font-size: 11px; font-weight: 600; letter-spacing: .1em; color: #d4cbb8; }
+    .thumb .tv { position: absolute; left: 12px; top: 10px; display: none; padding: 2px 8px; border-radius: 4px; background: #d4ae62; color: #0a0a1c; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .note.current .thumb .tv { display: inline-block; }
+
+    /* ---------- Current card ---------- */
+    .note { scroll-margin-top: 150px; transition: opacity .3s ease, box-shadow .3s ease; }
+    .note.current { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); }
+    body.has-current .note:not(.current) { opacity: .62; }
+    .note header { cursor: pointer; }
+    .note .num small { display: block; font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+    .clicks { flex: none; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+
+    /* ---------- Numbered clicks ---------- */
+    .click::before { content: "Click " attr(data-n); background: var(--gold); color: var(--card); }
+    .click.done::before { content: "✓ " attr(data-n); background: var(--muted); }
+    .click.done { color: var(--muted); }
+    .click.now { background: var(--ask-bg); border-radius: 6px; }
+    .click.now::before { background: var(--ask); }
+
     footer { margin-top: 60px; text-align: center; color: var(--muted); font-size: 14px; }
     footer a { color: var(--gold); }
 
     @media (max-width: 520px) {
+      .bar .what { font-size: 17px; }
       .beats > li { padding-left: 0; padding-top: 34px; }
       .beats > li::before { top: 8px; }
       .note { padding: 18px 16px 14px; }
@@ -142,25 +185,35 @@
     <p class="sub">Daniel 1–7</p>
   </header>
 
-  <nav class="jump" aria-label="Jump to slide">
+  <div class="bar" id="bar">
+    <button type="button" id="prevSlide" aria-label="Previous slide">‹</button>
+    <div class="mid">
+      <p class="where" id="barWhere">Slide 1 of 18</p>
+      <p class="what" id="barWhat">Title</p>
+      <p class="next" id="barNext">Next: The only one in the room</p>
+      <span class="live">Following the TV</span>
+    </div>
+    <button type="button" id="nextSlide" aria-label="Next slide">›</button>
+  </div>
+
+  <nav class="jump" aria-label="Jump to slide" id="jump">
     <a class="part" href="#plan">Plan</a>
     <a class="part" href="#prep">Prep</a>
     <a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a>
     <a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a>
-    <a class="part" href="#s16">16 · In short</a><a href="#s17">17</a><a href="#s18">18</a>
+    <a href="#s16">16</a><a href="#s17">17</a><a href="#s18">18</a>
     <a class="part" href="#faq">If they ask</a>
   </nav>
 
   <section class="overview" id="plan">
-    <h2>The plan</h2>
-    <p>One idea runs through everything: <b>there is no other God that can deliver.</b> A pagan king said that out loud after watching three teenagers walk out of a furnace (Daniel 3:29). Four stories, each one a hard choice made with everyone watching, each one ending with God showing up in a way nobody expected.</p>
+    <h2>How to use this page</h2>
+    <p>Each card below is <b>one slide</b>, in order, with a small dark picture of what the TV shows at that moment. The big number on the left is the slide number, the same one in the corner of the TV. Every click you'll make is numbered (<b>Click 1</b>, <b>Click 2</b>, …) in the same order the deck reveals things, so you always know what the next press of the clicker will do.</p>
     <ul>
-      <li><b>18 slides, about 23½ minutes,</b> which leaves a little buffer inside 25.</li>
-      <li><b>Keep the words simple.</b> The slides put a plain-English line under every hard verse. Read the verse, then the plain line, and move on. You don't need to explain old words.</li>
+      <li><b>On your phone:</b> tap <b>›</b> at the top each time you move to a new slide on the laptop. The page scrolls to that slide's card and marks it "On the TV." You can also tap any card's header to make it the current one.</li>
+      <li><b>On the laptop with a second screen:</b> open this page in another window next to the deck. It follows the deck by itself: it jumps to the slide you're on and ticks off each click as you make it. You'll see "Following the TV" under the slide number when that's working.</li>
       <li><b>Out of time?</b> Press <b>W</b> on the laptop (or click <b>Wrap up</b>) from any slide. It jumps to the "In short" slide, where you <a href="#s16">read the 2-minute summary</a>, then the challenge and closing verse take another 2½ minutes.</li>
-      <li><b>Keep it moving.</b> Each slide has one main question. Take two or three answers, then go on. Don't wait for everyone.</li>
       <li><b>Running long?</b> Use the cuts tagged <span class="skip">If behind</span>: skip the warm-up on slide 2, skip the "Two proud kings" slide (12), and read the Daniel 7 slide (15) without stopping to discuss. Those three cuts save about 4 minutes.</li>
-      <li><b>Before class:</b> open the deck on the laptop, press <b>F</b> for full screen, and press <b>Home</b> to start at slide 1. Keep this page open on your phone. Press <b>N</b> on the laptop if you want short notes on the TV itself.</li>
+      <li><b>Keep it moving.</b> Each slide has one main question. Take two or three answers, then go on.</li>
     </ul>
     <div class="checkpoints">
       <div><b>0:04</b>Story One (slide 4)</div>
@@ -173,10 +226,11 @@
 
   <section class="overview" id="prep">
     <h2>Five-minute prep</h2>
-    <p>Read this once before class and you'll know enough to teach it.</p>
+    <p>Read this once before class and you'll know enough to teach it. One idea runs through everything: <b>there is no other God that can deliver.</b> A pagan king said that out loud after watching three teenagers walk out of a furnace (Daniel 3:29).</p>
     <p><b>The story so far.</b> Last week Jeremiah warned Jerusalem that Babylon was coming. This week it has come. Babylon was the superpower of its day: the biggest, richest, most powerful city in the world. In 605 B.C. its king, Nebuchadnezzar, took a first group of captives from Jerusalem, including some of the city's smartest young people. Daniel and his three friends were among them, probably in their mid-teens. They were put through a three-year training program at the palace, given Babylonian names, and fed from the king's own table. The book covers about seventy years: Daniel is a teenager in chapter 1 and roughly eighty in chapter 6. Babylon falls to the Persians in chapter 5. Chapter 7 is a vision Daniel had years earlier, placed at the end of the story section.</p>
-    <p><b>What you'll tell.</b> Four main stories (chapters 1, 2, 3, 6), two quick ones (4 and 5), and one vision (7). Everything you need to say is in the slide-by-slide notes below. Each story has one everyday example you can use: the party (chapter 1), the champion who gets beaten by the next champion (chapter 2), tryouts (chapter 3), brushing your teeth (chapter 6).</p>
+    <p><b>What you'll tell.</b> Four main stories (chapters 1, 2, 3, 6), two quick ones (4 and 5), and one vision (7). Each story has one everyday example you can use: the party (chapter 1), the champion who gets beaten by the next champion (chapter 2), tryouts (chapter 3), brushing your teeth (chapter 6).</p>
     <p><b>The one verse to have marked:</b> Daniel 3:17–18, "our God whom we serve is able to deliver us… <i>But if not</i>…" If the class remembers one thing, it's those three words.</p>
+    <p><b>Before class:</b> open the deck on the laptop, press <b>F</b> for full screen, and press <b>Home</b> to start at slide 1. Press <b>N</b> on the laptop if you also want short notes in the corner of the TV.</p>
     <table class="cast">
       <tr><td>Nebuchadnezzar</td><td class="say-it">neb-yuh-kud-NEZ-er</td><td>King of Babylon in chapters 1–4. Proud and scary, but he keeps getting humbled and keeps admitting that Daniel's God is real.</td></tr>
       <tr><td>Daniel</td><td class="say-it">"God is my judge"</td><td>Renamed Belteshazzar (bel-tuh-SHAZ-er). Explains dreams, works for four kings in two empires, prays three times a day his whole life.</td></tr>
@@ -191,33 +245,38 @@
   <h2 class="part-title">Opening</h2>
   <p class="part-sub">Slides 1–3 · 3½ minutes</p>
 
-  <article class="note" id="s1">
-    <header><span class="num">1</span><h3>Title</h3><span class="time">30 sec</span></header>
+  <article class="note" id="s1" data-slide="1" data-title="Title">
+    <div class="thumb chapter"><span class="tv">On the TV</span><p class="h">There Is No Other God <i>That Can Deliver</i></p><p class="k" style="margin: 8px 0 0;">Daniel 1–7</p><span class="n">1 / 18</span></div>
+    <header><span class="num">1<small>Slide</small></span><h3>Title</h3><span class="clicks">No clicks</span><span class="time">30 sec</span></header>
     <ol class="beats">
       <li class="say">"Last week Jeremiah warned Jerusalem that Babylon was coming. This week, it came. Today is about four teenagers who got taken to the biggest city in the world, and what happened when they wouldn't give in. The title is something a king who didn't even believe in God ended up saying: <i>there is no other God that can deliver.</i> Deliver just means rescue."</li>
+      <li class="tip">Press → once to go to slide 2.</li>
     </ol>
   </article>
 
-  <article class="note" id="s2">
-    <header><span class="num">2</span><h3>The only one in the room</h3><span class="time">1 min</span> <span class="skip">If behind: skip</span></header>
+  <article class="note" id="s2" data-slide="2" data-title="The only one in the room" data-clicks="3">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">To begin</p><p class="h">The only one <i>in the room</i></p><span class="n">2 / 18</span></div>
+    <header><span class="num">2<small>Slide</small></span><h3>The only one in the room</h3><span class="clicks">3 clicks</span><span class="time">1 min</span> <span class="skip">If behind: skip</span></header>
     <ol class="beats">
-      <li class="click">Both questions appear (two clicks).</li>
+      <li class="click" data-n="1">The first question appears: "Think of a time you were the only one…"</li>
+      <li class="click" data-n="2">The second question: "What made it hard? What made it possible?"</li>
       <li class="ask">"Has anyone been the only one? The only one not laughing at the joke. The only one who left the party. The only one who didn't send the text. What made it hard?" Take one or two.
         <ul class="answers"><li>Everyone's looking at you</li><li>You don't want to seem judgy</li><li>You might lose friends</li><li>"I just left," "I'd already decided," "a friend backed me up"</li></ul>
       </li>
-      <li class="click">The gold line appears. Read it.</li>
+      <li class="click" data-n="3">The gold line appears. Read it: "This week: four teenagers, far from home in the biggest city in the world, who would not give in."</li>
       <li class="say">"Hold onto that feeling. Daniel and his friends felt it at fifteen, and Daniel still felt it at eighty."</li>
     </ol>
   </article>
 
-  <article class="note" id="s3">
-    <header><span class="num">3</span><h3>Carried off to Babylon</h3><span class="time">2 min</span></header>
+  <article class="note" id="s3" data-slide="3" data-title="Carried off to Babylon" data-clicks="3">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">About 605 B.C. · Daniel 1:1–7</p><p class="h">Carried off to Babylon</p><span class="n">3 / 18</span></div>
+    <header><span class="num">3<small>Slide</small></span><h3>Carried off to Babylon</h3><span class="clicks">3 clicks</span><span class="time">2 min</span></header>
     <ol class="beats">
       <li class="say">"Babylon was the superpower of the world. Think of the biggest, richest, most powerful country today, and then its capital city. That's Babylon. Its king shows up at Jerusalem, takes the treasure, and takes the smartest young people back with him to train at his palace."</li>
-      <li class="click">The route draws across the map, about 900 miles, on foot.</li>
-      <li class="click">The four names appear.</li>
+      <li class="click" data-n="1">The route draws across the map, about 900 miles, on foot.</li>
+      <li class="click" data-n="2">The four names appear.</li>
       <li class="say">"Daniel, Hananiah, Mishael, Azariah. Probably about your age. No parents. No church. Nobody from home watching what they did. Think about that: nobody would ever know."</li>
-      <li class="click">The cards flip to their Babylonian names.</li>
+      <li class="click" data-n="3">The four cards flip to their Babylonian names.</li>
       <li class="say">"First thing Babylon does: give them new names. Look at the old names. God is my judge. The Lord is gracious. Who is like God? The Lord has helped. Every one has God in it. The new names are all about Babylon's gods. It's like starting a new school where they hand you a new name and expect you to forget who you were."</li>
       <li class="ask">"What does the world try to rename in you?" One or two quick answers, or just let it hang and move on.
         <ul class="answers"><li>What's normal</li><li>What's cool</li><li>What "everyone" does</li><li>How you see yourself</li></ul>
@@ -229,25 +288,28 @@
   <h2 class="part-title">Story One · The king's table</h2>
   <p class="part-sub">Slides 4–5 · 2¾ minutes · Daniel 1</p>
 
-  <article class="note" id="s4">
-    <header><span class="num">4</span><h3>Chapter: The king's table</h3><span class="time">15 sec</span></header>
+  <article class="note" id="s4" data-slide="4" data-title="The King's Table (chapter card)">
+    <div class="thumb chapter"><span class="tv">On the TV</span><p class="k">Story One</p><p class="h">The King's Table</p><span class="n">4 / 18</span></div>
+    <header><span class="num">4<small>Slide</small></span><h3>Chapter card: The King's Table</h3><span class="clicks">No clicks</span><span class="time">15 sec</span></header>
     <ol class="beats">
       <li class="say">"Their first test isn't dramatic. It's dinner."</li>
+      <li class="tip">Press → once to go to slide 5.</li>
     </ol>
   </article>
 
-  <article class="note" id="s5">
-    <header><span class="num">5</span><h3>Purposed in his heart</h3><span class="time">2½ min</span></header>
-    <p class="goal">The point is not vegetables. The point is that Daniel decided ahead of time.</p>
+  <article class="note" id="s5" data-slide="5" data-title="Purposed in his heart" data-clicks="3">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">Daniel 1:8</p><p class="h">"But Daniel <i>purposed in his heart</i>…"</p><span class="n">5 / 18</span></div>
+    <header><span class="num">5<small>Slide</small></span><h3>Purposed in his heart</h3><span class="clicks">3 clicks</span><span class="time">2½ min</span></header>
+    <p class="goal">Two plates on the left: the king's meat and wine, and pulse and water. The point is not vegetables. The point is that Daniel decided ahead of time.</p>
     <ol class="beats">
       <li class="read">"But Daniel purposed in his heart that he would not defile himself with the portion of the king's meat, nor with the wine which he drank."</li>
       <li class="say">"In plain words: Daniel decided ahead of time he wasn't going to eat the king's food or drink his wine. Picture the best food you've ever seen, served by the most powerful person alive, and everybody around you is eating it. Why would Daniel say no? Probably because it had been offered to idols, and it broke God's rules for his people. But notice the word <i>purposed</i>. He'd settled it before the plate was in front of him. And then he does something smart. He doesn't just refuse. He offers a test."</li>
-      <li class="click">The ten-day counter runs.</li>
+      <li class="click" data-n="1">The ten-day counter runs on the left ("Day 1" to "Day 10") and the test verse appears.</li>
       <li class="read">"Prove thy servants, I beseech thee, ten days; and let them give us pulse to eat, and water to drink."</li>
       <li class="say">"Prove means test. Pulse means plain food that grows from seeds: vegetables, grains, beans. Ten days on that and water, then compare us to the guys eating the king's food."</li>
-      <li class="click">The pulse plate glows and the king's plate fades.</li>
+      <li class="click" data-n="2">The pulse plate glows green, the king's plate fades, and the result verse appears.</li>
       <li class="say">"Ten days later they look healthier than everyone else. And God made them wise. When the king tested them, they were ten times better than all his experts."</li>
-      <li class="click">The main idea.</li>
+      <li class="click" data-n="3">The main idea: "Daniel decided before the food was ever in front of him," with the party example and the question.</li>
       <li class="say">"Here's the thing to take home. Daniel decided <i>before</i> the moment. Deciding in the moment is hard: everyone's watching, you're tired, the food smells good. Deciding ahead of time means the choice is already made. It's like deciding you don't drink before you ever get to the party. Then when somebody hands you a cup, you don't have to think. You already know."</li>
       <li class="ask">"What's one thing you've already decided?" Take two or three. Affirm every single one.
         <ul class="answers"><li>Not drinking, not vaping</li><li>Serving a mission</li><li>Getting married in the temple</li><li>No pornography</li><li>Keeping the Sabbath, being honest</li></ul>
@@ -260,42 +322,47 @@
   <h2 class="part-title">Story Two · The statue and the stone</h2>
   <p class="part-sub">Slides 6–8 · 4¼ minutes · Daniel 2</p>
 
-  <article class="note" id="s6">
-    <header><span class="num">6</span><h3>Chapter: The statue and the stone</h3><span class="time">15 sec</span></header>
+  <article class="note" id="s6" data-slide="6" data-title="The Statue and the Stone (chapter card)">
+    <div class="thumb chapter"><span class="tv">On the TV</span><p class="k">Story Two</p><p class="h">The Statue and the Stone</p><span class="n">6 / 18</span></div>
+    <header><span class="num">6<small>Slide</small></span><h3>Chapter card: The Statue and the Stone</h3><span class="clicks">No clicks</span><span class="time">15 sec</span></header>
     <ol class="beats">
       <li class="say">"Now the king has a dream nobody can explain."</li>
+      <li class="tip">Press → once to go to slide 7.</li>
     </ol>
   </article>
 
-  <article class="note" id="s7">
-    <header><span class="num">7</span><h3>The dream</h3><span class="time">2½ min</span></header>
-    <p class="goal">Nine clicks, but they go fast. Tell it like a story.</p>
+  <article class="note" id="s7" data-slide="7" data-title="The dream" data-clicks="8">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">Daniel 2:1–13</p><p class="h">The king has a nightmare…</p><span class="n">7 / 18</span></div>
+    <header><span class="num">7<small>Slide</small></span><h3>The dream</h3><span class="clicks">8 clicks</span><span class="time">2½ min</span></header>
+    <p class="goal">Eight clicks, but they go fast. The statue builds on the left, one metal per click. Tell it like a story.</p>
     <ol class="beats">
       <li class="say">"The king has a nightmare. He calls in all his wise men and says: tell me what I dreamed, and what it means. Not just the meaning. The dream itself. They say, nobody can do that. He says, then you all die. And that order includes Daniel and his friends."</li>
-      <li class="click">The prayer.</li>
+      <li class="click" data-n="1">The prayer: "Daniel asks for one night," with Daniel 2:22.</li>
       <li class="say">"Daniel asks for one night. He goes home, gets his three friends, and they pray. That night God shows him the dream. Daniel says God 'revealeth the deep and secret things': God knows what nobody else can see."</li>
-      <li class="click">The statue introduction, then one click per metal (five clicks). Say each as it appears.</li>
+      <li class="click" data-n="2">"A giant statue, made of four metals," and the <b>gold head</b> appears (Babylon).</li>
+      <li class="click" data-n="3–6">One metal per click: <b>silver</b> chest and arms (Persia), <b>brass</b> belly (Greece), <b>iron</b> legs (Rome), <b>iron and clay</b> feet (the broken-up kingdoms). Say each as it appears.</li>
       <li class="say">"The king saw a giant statue. Head of gold: that's you, Babylon. Chest and arms of silver: the empire that beats you, Persia. Belly of brass: Greece. Legs of iron: Rome. Feet of iron mixed with clay: the kingdoms that broke apart after Rome. It's like a line of champions, each one beaten by the next. And the feet are the weak spot."</li>
-      <li class="click">The stone rolls from the mountain and the statue shatters.</li>
+      <li class="click" data-n="7">The stone rolls from the mountain and the statue shatters. Daniel 2:34–35 appears.</li>
       <li class="read">"A stone was cut out without hands, which smote the image… and the stone that smote the image became a great mountain, and filled the whole earth."</li>
       <li class="say">"In plain words: a stone that no person made hits the statue, the whole thing crumbles to dust, and the stone grows until it fills the whole earth."</li>
-      <li class="click">The stone grows to fill the screen; the meaning appears.</li>
+      <li class="click" data-n="8">The stone grows to fill the screen. Daniel 2:44 and the gold line appear.</li>
       <li class="read">"The God of heaven shall set up a kingdom, which shall never be destroyed… and it shall stand for ever."</li>
       <li class="say">"Every kingdom on that statue is gone. Babylon, Persia, Greece, Rome. You'd need a history book to find them. God's kingdom isn't gone."</li>
     </ol>
   </article>
 
-  <article class="note" id="s8">
-    <header><span class="num">8</span><h3>The stone is still rolling</h3><span class="time">1½ min</span></header>
+  <article class="note" id="s8" data-slide="8" data-title="The stone is still rolling" data-clicks="4">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">The stone today</p><p class="h">The stone is <i>still rolling</i></p><span class="n">8 / 18</span></div>
+    <header><span class="num">8<small>Slide</small></span><h3>The stone is still rolling</h3><span class="clicks">4 clicks</span><span class="time">1½ min</span></header>
     <ol class="beats">
       <li class="say">"So what's the stone? Here's the Lord in 1831, using Daniel's exact words." Read Doctrine and Covenants 65:2 on screen.</li>
-      <li class="click">"The stone is God's kingdom today: the Church of Jesus Christ. It started in 1830 with six members in a farmhouse. Now it's in almost every country on earth."</li>
-      <li class="click">The question.</li>
+      <li class="click" data-n="1">"The stone is God's kingdom today: the Church of Jesus Christ. It started in 1830 with six members in a farmhouse. Now it's in almost every country on earth."</li>
+      <li class="click" data-n="2">The question: "Where have you seen it rolling?"</li>
       <li class="ask">"Where have you seen the stone rolling?" Take two or three.
         <ul class="answers"><li>A friend or family member got baptized</li><li>New temples announced every conference</li><li>Missionaries in the family</li><li>Their own testimony growing</li></ul>
       </li>
-      <li class="click">Examples appear if they need a nudge.</li>
-      <li class="click">The gold line.</li>
+      <li class="click" data-n="3">Four example chips appear on the right, if they need a nudge.</li>
+      <li class="click" data-n="4">The gold line: "You are not watching the stone roll. You are part of it."</li>
       <li class="say">"You're not watching the stone roll. You're part of it. Every time you keep a promise, invite a friend, or just show up, that's the stone moving."</li>
     </ol>
   </article>
@@ -304,23 +371,26 @@
   <h2 class="part-title">Story Three · The furnace</h2>
   <p class="part-sub">Slides 9–11 · 4¼ minutes · Daniel 3</p>
 
-  <article class="note" id="s9">
-    <header><span class="num">9</span><h3>Chapter: The furnace</h3><span class="time">15 sec</span></header>
+  <article class="note" id="s9" data-slide="9" data-title="The Furnace (chapter card)">
+    <div class="thumb chapter"><span class="tv">On the TV</span><p class="k">Story Three</p><p class="h">The Furnace</p><span class="n">9 / 18</span></div>
+    <header><span class="num">9<small>Slide</small></span><h3>Chapter card: The Furnace</h3><span class="clicks">No clicks</span><span class="time">15 sec</span></header>
     <ol class="beats">
       <li class="say">"The king just heard that God's kingdom would outlast his. His answer? Build a giant gold statue of his own, and make everyone bow to it."</li>
+      <li class="tip">Press → once to go to slide 10.</li>
     </ol>
   </article>
 
-  <article class="note" id="s10">
-    <header><span class="num">10</span><h3>Bow or stand</h3><span class="time">2 min</span></header>
-    <p class="goal">Spend your time on "but if not." It's the heart of the chapter.</p>
+  <article class="note" id="s10" data-slide="10" data-title="Bow or stand" data-clicks="3">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">Daniel 3:1–6</p><p class="h">The king builds a gold statue…</p><span class="n">10 / 18</span></div>
+    <header><span class="num">10<small>Slide</small></span><h3>Bow or stand</h3><span class="clicks">3 clicks</span><span class="time">2 min</span></header>
+    <p class="goal">A tall gold statue and a crowd of figures on the left. Spend your time on "but if not." It's the heart of the chapter.</p>
     <ol class="beats">
       <li class="say">"The king builds a gold statue as tall as a nine-story building and calls in every leader from the whole empire. The rule is simple: when you hear the music, you bow. Anyone who stays standing goes into a furnace."</li>
-      <li class="click">The music plays and the crowd bows. Three gold figures stay standing.</li>
+      <li class="click" data-n="1">The music plays and the crowd bows. Three gold figures stay standing. "Three stand."</li>
       <li class="say">"The music plays. Thousands of people hit the ground. And three stay standing. Shadrach, Meshach, and Abed-nego. Think how visible that is. Everyone else is face down, and these three are standing up in plain sight. Somebody runs and tells the king."</li>
-      <li class="click">Their answer.</li>
+      <li class="click" data-n="2">Their answer, Daniel 3:17–18.</li>
       <li class="read">"Our God whom we serve is able to deliver us from the burning fiery furnace, and he will deliver us out of thine hand, O king. <b>But if not</b>, be it known unto thee, O king, that we will not serve thy gods."</li>
-      <li class="click">"But if not."</li>
+      <li class="click" data-n="3">"But if not," with the tryouts example and the question.</li>
       <li class="say">"In plain words: God can save us, and we think He will. But even if He doesn't, we still won't bow. Look at those three words. <i>But if not.</i> Their faith wasn't a deal with God: get us out of this and we'll be good. It was: we'll be good either way. It's like praying really hard to make the team, and still trusting God when you get cut."</li>
       <li class="ask">"What would change if your faith had a 'but if not' in it?"
         <ul class="answers"><li>Less scared about how things turn out</li><li>You stop bargaining with God</li><li>You can keep going when a prayer isn't answered the way you wanted</li><li>Your faith doesn't depend on good news</li></ul>
@@ -328,21 +398,21 @@
     </ol>
   </article>
 
-  <article class="note" id="s11">
-    <header><span class="num">11</span><h3>Into the fire</h3><span class="time">2 min</span></header>
-    <p class="goal">Let the fourth figure sit on the screen before you say anything.</p>
+  <article class="note" id="s11" data-slide="11" data-title="Into the fire" data-clicks="4">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">Daniel 3:19–23</p><p class="h">The king is furious…</p><span class="n">11 / 18</span></div>
+    <header><span class="num">11<small>Slide</small></span><h3>Into the fire</h3><span class="clicks">4 clicks</span><span class="time">2 min</span></header>
+    <p class="goal">A furnace with flames on the left. After click 1, let the fourth figure sit on the screen before you say anything.</p>
     <ol class="beats">
       <li class="say">"The king is furious. He has the furnace heated seven times hotter than normal. It's so hot that the soldiers who throw them in die from the heat. The three are tied up and dropped in."</li>
-      <li class="click">The flames roar up and the three men drop in.</li>
-      <li class="click">A fourth, glowing figure appears.</li>
-      <li class="pause">Wait. Let them look.</li>
+      <li class="click" data-n="1">The flames roar up, the three men drop in, and a moment later a <b>fourth, glowing figure</b> appears beside them. "Then the king jumps to his feet," with Daniel 3:24–25.</li>
+      <li class="pause">Wait. Let them look at the fourth figure.</li>
       <li class="read">"Did not we cast three men bound into the midst of the fire?… Lo, I see four men loose, walking in the midst of the fire, and they have no hurt; and the form of the fourth is like the Son of God."</li>
       <li class="say">"The king jumps up. We threw in three. I see four. They're walking around. And the fourth one looks like the Son of God."</li>
-      <li class="click">Not even the smell of fire.</li>
+      <li class="click" data-n="2">The flames die down. Daniel 3:27, "nor the smell of fire," and the gold line: "He did not keep them out of the fire. He was in it with them."</li>
       <li class="say">"They walk out. Not a hair burned. Their clothes aren't even scorched. They don't smell like smoke. Now notice what God did <i>not</i> do. He didn't put the fire out. He didn't stop the king. He let them get thrown in, and then He was in there with them."</li>
-      <li class="click">The question.</li>
-      <li class="ask">"When has the Lord been with you <i>in</i> a hard thing, instead of taking it away?" Go first with a short example of your own: a loss, an illness, a move, a hard year. The hard thing didn't disappear, but you weren't alone in it.</li>
-      <li class="click">The king's confession.</li>
+      <li class="click" data-n="3">The question: "When has the Lord been with you <i>in</i> a hard thing, rather than taking it away?"</li>
+      <li class="ask">Ask it, and go first with a short example of your own: a loss, an illness, a move, a hard year. The hard thing didn't disappear, but you weren't alone in it.</li>
+      <li class="click" data-n="4">The king's confession, Daniel 3:28–29.</li>
       <li class="read">"Blessed be the God of Shadrach, Meshach, and Abed-nego, who hath sent his angel, and delivered his servants that trusted in him… because there is no other God that can deliver after this sort."</li>
       <li class="say">"That's the title of today's lesson, and a king who didn't believe in God is the one who said it."</li>
     </ol>
@@ -352,18 +422,19 @@
   <h2 class="part-title">Interlude · Two proud kings</h2>
   <p class="part-sub">Slide 12 · 1½ minutes · Daniel 4–5</p>
 
-  <article class="note" id="s12">
-    <header><span class="num">12</span><h3>Two proud kings</h3><span class="time">1½ min</span> <span class="skip">If behind: skip</span></header>
-    <p class="goal">Quick. Two stories in ninety seconds. Don't get pulled into details.</p>
+  <article class="note" id="s12" data-slide="12" data-title="Two proud kings" data-clicks="4">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">Daniel 4–5</p><p class="h">Two proud kings</p><span class="n">12 / 18</span></div>
+    <header><span class="num">12<small>Slide</small></span><h3>Two proud kings</h3><span class="clicks">4 clicks</span><span class="time">1½ min</span> <span class="skip">If behind: skip</span></header>
+    <p class="goal">Two cards side by side: Nebuchadnezzar on the left, Belshazzar on the right. Quick. Two stories in ninety seconds.</p>
     <ol class="beats">
       <li class="say">"Two quick stories about pride. Pride is thinking you did it all yourself. Like someone who wins the game and forgets the coach, the team, and whoever drove them to practice. Nebuchadnezzar walks on his palace roof and says, 'Look at this great Babylon, that I built.'"</li>
-      <li class="click">The tree becomes a stump.</li>
+      <li class="click" data-n="1">The tree on the left card becomes a stump, and the story and Daniel 4:37 appear under it.</li>
       <li class="say">"He'd had a dream about a huge tree chopped down to a stump, and Daniel had warned him what it meant. The second he says those words, it happens. He loses his mind and lives outside like an animal for seven years, until he finally looks up and admits God is in charge. Then his mind comes back, and he says God 'is able to abase' the proud. Abase means bring down."</li>
-      <li class="click">Belshazzar's feast.</li>
+      <li class="click" data-n="2">The right card appears: Belshazzar's party.</li>
       <li class="say">"Years later the new king, Belshazzar, throws a party for a thousand guests, and to show off he uses the sacred cups stolen from God's temple as party cups. And a hand appears and starts writing on the wall."</li>
-      <li class="click">The writing appears word by word.</li>
+      <li class="click" data-n="3">The writing appears on the wall one word at a time, then Daniel 5:27.</li>
       <li class="say">"Mene, mene, tekel, upharsin. Nobody can read it. They call in Daniel, who's an old man by now. He tells the king: you've been tested, and you failed. God has counted your days, and they're done."</li>
-      <li class="click">The city falls and the verse appears.</li>
+      <li class="click" data-n="4">"That same night, Babylon fell to the Persians," and the gold line at the bottom.</li>
       <li class="say">"That same night the Persians took Babylon, and Belshazzar was dead. Same lesson both times: God is the one really in charge. One king was humbled and came back. The other was warned and ignored it."</li>
     </ol>
   </article>
@@ -372,28 +443,31 @@
   <h2 class="part-title">Story Four · The lions' den</h2>
   <p class="part-sub">Slides 13–14 · 2¾ minutes · Daniel 6</p>
 
-  <article class="note" id="s13">
-    <header><span class="num">13</span><h3>Chapter: The lions' den</h3><span class="time">15 sec</span></header>
+  <article class="note" id="s13" data-slide="13" data-title="The Lions' Den (chapter card)">
+    <div class="thumb chapter"><span class="tv">On the TV</span><p class="k">Story Four</p><p class="h">The Lions' Den</p><span class="n">13 / 18</span></div>
+    <header><span class="num">13<small>Slide</small></span><h3>Chapter card: The Lions' Den</h3><span class="clicks">No clicks</span><span class="time">15 sec</span></header>
     <ol class="beats">
       <li class="say">"New empire. New king. And Daniel is an old man now."</li>
+      <li class="tip">Press → once to go to slide 14.</li>
     </ol>
   </article>
 
-  <article class="note" id="s14">
-    <header><span class="num">14</span><h3>Three times a day</h3><span class="time">2½ min</span></header>
-    <p class="goal">"As he did aforetime" means "the same as always." That's the key phrase. The law didn't make Daniel brave; his habits did.</p>
+  <article class="note" id="s14" data-slide="14" data-title="Three times a day" data-clicks="4">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">Daniel 6:1–9</p><p class="h">Daniel is about <i>eighty</i> now…</p><span class="n">14 / 18</span></div>
+    <header><span class="num">14<small>Slide</small></span><h3>Three times a day</h3><span class="clicks">4 clicks</span><span class="time">2½ min</span></header>
+    <p class="goal">A dark den on the left. "As he did aforetime" means "the same as always." That's the key phrase. The law didn't make Daniel brave; his habits did.</p>
     <ol class="beats">
       <li class="say">"Daniel is about eighty. He's the king's right-hand man, and the other leaders hate it. They go digging for dirt on him and find nothing. The only way to get him is through his religion. So they talk the king into signing a law: for thirty days, nobody prays to anyone but the king. Break it, and it's the lions."</li>
-      <li class="click">Daniel 6:10.</li>
+      <li class="click" data-n="1">Daniel 6:10 appears.</li>
       <li class="read">"He went into his house; and his windows being open… he kneeled upon his knees three times a day, and prayed, and gave thanks before his God, as he did aforetime."</li>
       <li class="say">"In plain words: he went home and prayed three times a day, the same as always. Windows open. Nothing hidden. And nothing changed. He didn't pray more to make a point. He didn't pray less to stay safe. He prayed exactly the way he'd prayed every day for sixty-five years."</li>
-      <li class="click">The stone rolls over the den and lions' eyes glow in the dark.</li>
+      <li class="click" data-n="2">A stone slides over the den, Daniel is inside, and lions' eyes glow in the dark. "Into the den."</li>
       <li class="say">"They catch him, of course. The king realizes he's been tricked, and he likes Daniel, but a law is a law. As they seal the den he says, 'Your God will save you.' Then he goes home and can't eat or sleep."</li>
-      <li class="click">Morning. The stone rolls away, light pours in, the lions lie down.</li>
+      <li class="click" data-n="3">Morning. The stone slides away, light pours in, and the lions lie down. Daniel 6:22.</li>
       <li class="say">"At first light the king runs to the den and calls out. And Daniel answers."</li>
       <li class="read">"My God hath sent his angel, and hath shut the lions' mouths, that they have not hurt me."</li>
       <li class="say">"They pull him out. Not a scratch. And the reason the scripture gives: 'because he believed in his God.'"</li>
-      <li class="click">The question.</li>
+      <li class="click" data-n="4">The main idea and the question about habits.</li>
       <li class="say">"Here's the point. Daniel's prayer was like brushing your teeth. You don't decide every night whether to do it. It's just what you do. That habit he built as a teenager was still there at eighty, and that's what saved him. Not a burst of courage in the moment. Sixty-five years of the same thing every morning, noon, and night."</li>
       <li class="ask">"What habit are you building right now that you want to still have at eighty?"
         <ul class="answers"><li>Praying every day</li><li>Reading scriptures</li><li>Church every week</li><li>Being honest</li><li>Keeping the Sabbath</li></ul>
@@ -405,17 +479,18 @@
   <h2 class="part-title">The vision · Son of man</h2>
   <p class="part-sub">Slide 15 · 1½ minutes · Daniel 7</p>
 
-  <article class="note" id="s15">
-    <header><span class="num">15</span><h3>Son of man</h3><span class="time">1½ min</span> <span class="skip">If behind: read it, don't discuss</span></header>
+  <article class="note" id="s15" data-slide="15" data-title="Son of man" data-clicks="3">
+    <div class="thumb chapter"><span class="tv">On the TV</span><p class="k">Daniel 7:13–14</p><p class="h">"…one like the <i>Son of man</i> came with the clouds of heaven"</p><span class="n">15 / 18</span></div>
+    <header><span class="num">15<small>Slide</small></span><h3>Son of man</h3><span class="clicks">3 clicks</span><span class="time">1½ min</span> <span class="skip">If behind: read it, don't discuss</span></header>
     <ol class="beats">
       <li class="say">"Daniel also saw visions of the future. In chapter 7 he sees how the story ends. Four beasts rise and fall, one empire after another, and then this."</li>
       <li class="read">"I saw in the night visions, and, behold, one like the Son of man came with the clouds of heaven… And there was given him dominion, and glory, and a kingdom… his dominion is an everlasting dominion, which shall not pass away."</li>
       <li class="say">"In plain words: Daniel saw the Savior coming in the clouds, and He was given a kingdom that lasts forever."</li>
-      <li class="click">"Son of man."</li>
+      <li class="click" data-n="1">Left column: "Son of man."</li>
       <li class="say">"Six hundred years later, Jesus used this name for Himself more than any other. He said the Son of man came to serve, 'and to give his life a ransom for many.' Daniel saw Him coming."</li>
-      <li class="click">"Ancient of days."</li>
+      <li class="click" data-n="2">Right column: "Ancient of days."</li>
       <li class="say">"In the same vision the Son of man comes to 'the Ancient of days.' Modern revelation tells us that's Adam. Before Jesus comes again, Adam will gather his family at a place in Missouri called Adam-ondi-Ahman, and the Savior will come to them."</li>
-      <li class="click">The gold line.</li>
+      <li class="click" data-n="3">The gold line: "Every kingdom in Daniel falls. Christ's kingdom never will."</li>
       <li class="say">"Here's the whole book of Daniel in one sentence. The statue falls. The beasts fall. Babylon falls. Persia falls. You need a history book to find any of them now. Christ's kingdom is still growing, and it never ends."</li>
     </ol>
   </article>
@@ -424,8 +499,9 @@
   <h2 class="part-title">Closing</h2>
   <p class="part-sub">Slides 16–18 · 3 minutes on time, about 4½ when wrapping up early</p>
 
-  <article class="note" id="s16">
-    <header><span class="num">16</span><h3>In short</h3><span class="time">30 sec · 2 min if wrapping up</span></header>
+  <article class="note" id="s16" data-slide="16" data-title="In short">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">In short</p><p class="h">There is no other God <i>that can deliver</i></p><span class="n">16 / 18</span></div>
+    <header><span class="num">16<small>Slide</small></span><h3>In short</h3><span class="clicks">No clicks</span><span class="time">30 sec · 2 min if wrapping up</span></header>
     <p class="outoftime"><b>On time?</b> Point to the six lines on screen ("Here's everything in one slide") and press →.<br><b>Out of time?</b> Press <b>W</b> from wherever you are to jump here, and read this aloud:</p>
     <div class="readaloud">
       <p>"Here's the whole lesson in two minutes. Babylon, the superpower of the world, carried off a group of smart teenagers from Jerusalem, including Daniel and his three friends. They got new names and the best food in the empire. Daniel had already decided, before the food was in front of him, that he wouldn't eat it. He asked for ten days on vegetables and water, and at the end he and his friends were healthier and ten times wiser than anyone in the palace. Decide before the moment comes.</p>
@@ -437,17 +513,19 @@
     </div>
   </article>
 
-  <article class="note" id="s17">
-    <header><span class="num">17</span><h3>Choose one</h3><span class="time">1 min</span></header>
+  <article class="note" id="s17" data-slide="17" data-title="Choose one">
+    <div class="thumb"><span class="tv">On the TV</span><p class="k">This week</p><p class="h">Choose one</p><span class="n">17 / 18</span></div>
+    <header><span class="num">17<small>Slide</small></span><h3>Choose one</h3><span class="clicks">No clicks</span><span class="time">1 min</span></header>
     <ol class="beats">
-      <li class="say">"Pick one of these for this week. Just one." Read the three titles: Purpose in your heart (write down one decision you've made in advance). Three times a day (pray morning, midday, and night, like Daniel). But if not (hand one worry to God and trust Him with how it turns out).</li>
-      <li class="pause">A quiet moment to choose. Volunteers can come tap the card they picked.</li>
+      <li class="say">"Pick one of these for this week. Just one." Read the three cards: Purpose in your heart (write down one decision you've made in advance). Three times a day (pray morning, midday, and night, like Daniel). But if not (hand one worry to God and trust Him with how it turns out).</li>
+      <li class="pause">A quiet moment to choose. Volunteers can come tap the card they picked; it lights up gold.</li>
       <li class="say">"Next week I'll ask how it went."</li>
     </ol>
   </article>
 
-  <article class="note" id="s18">
-    <header><span class="num">18</span><h3>But if not</h3><span class="time">1½ min</span></header>
+  <article class="note" id="s18" data-slide="18" data-title="But if not">
+    <div class="thumb chapter"><span class="tv">On the TV</span><p class="k">Daniel 3:17–18</p><p class="h">He may not keep you out of the fire.<br>He will be in it with you.</p><span class="n">18 / 18</span></div>
+    <header><span class="num">18<small>Slide</small></span><h3>But if not</h3><span class="clicks">No clicks</span><span class="time">1½ min</span></header>
     <ol class="beats">
       <li class="read">"Our God whom we serve is able to deliver us… But if not, be it known unto thee, O king, that we will not serve thy gods."</li>
       <li class="say">"He may not keep you out of the fire. He will be in it with you."</li>
@@ -481,5 +559,84 @@
     <p><a href="./">Open the presentation</a> · Scripture quotations are from the King James Version.</p>
   </footer>
 </main>
+
+<script>
+  (() => {
+    const cards = [...document.querySelectorAll(".note[data-slide]")];
+    const total = cards.length;
+    const $ = (id) => document.getElementById(id);
+    let cur = 1;
+    let step = 0;
+
+    const store = {
+      get(k, f) { try { const v = localStorage.getItem(k); return v === null ? f : JSON.parse(v); } catch { return f; } },
+      set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ignore */ } }
+    };
+
+    function card(n) { return cards[n - 1]; }
+    function lastNum(text) { const m = (text || "").match(/\d+/g); return m ? +m[m.length - 1] : 0; }
+
+    function paintSteps() {
+      const c = card(cur);
+      cards.forEach((el) => el.querySelectorAll(".click").forEach((li) => li.classList.remove("done", "now")));
+      let next = null;
+      c.querySelectorAll(".click").forEach((li) => {
+        const n = lastNum(li.dataset.n);
+        if (n <= step) li.classList.add("done");
+        else if (!next) next = li;
+      });
+      if (next) next.classList.add("now");
+      const clicks = +c.dataset.clicks || 0;
+      const where = "Slide " + cur + " of " + total + (clicks ? " · click " + Math.min(step, clicks) + " of " + clicks : "");
+      $("barWhere").textContent = where;
+    }
+
+    function setCurrent(n, scroll) {
+      n = Math.max(1, Math.min(total, n));
+      cur = n;
+      cards.forEach((el, i) => el.classList.toggle("current", i === n - 1));
+      document.body.classList.add("has-current");
+      document.querySelectorAll("#jump a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#s" + n));
+      const c = card(n);
+      $("barWhat").textContent = c.dataset.title;
+      const nxt = card(n + 1);
+      $("barNext").textContent = nxt ? "Next: " + nxt.dataset.title : "Last slide";
+      $("prevSlide").disabled = n === 1;
+      $("nextSlide").disabled = n === total;
+      paintSteps();
+      store.set("cfm-notes-cur", n);
+      if (scroll) c.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+
+    function follow(data) {
+      if (!data || !data.slide) return;
+      document.body.classList.add("following");
+      step = data.step || 0;
+      if (data.slide !== cur) setCurrent(data.slide, true); else paintSteps();
+    }
+
+    $("prevSlide").addEventListener("click", () => { step = 0; setCurrent(cur - 1, true); });
+    $("nextSlide").addEventListener("click", () => { step = 0; setCurrent(cur + 1, true); });
+    cards.forEach((c, i) => c.querySelector("header").addEventListener("click", () => { step = 0; setCurrent(i + 1, false); }));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "PageDown") { step = 0; setCurrent(cur + 1, true); }
+      if (e.key === "ArrowLeft" || e.key === "PageUp") { step = 0; setCurrent(cur - 1, true); }
+    });
+
+    // Follow the deck when it is open in another window on this computer
+    try {
+      const bc = new BroadcastChannel("cfm-lesson");
+      bc.onmessage = (e) => follow(e.data);
+    } catch { /* not available */ }
+    window.addEventListener("storage", (e) => { if (e.key === "cfm-live") follow(store.get("cfm-live", null)); });
+
+    // Start on the deck's current slide if it was open recently, else where this page was last
+    const live = store.get("cfm-live", null);
+    const fromHash = /^#s(\d+)$/.exec(location.hash);
+    if (fromHash) setCurrent(+fromHash[1], false);
+    else if (live && Date.now() - (live.t || 0) < 6 * 3600 * 1000) { step = live.step || 0; setCurrent(live.slide, false); }
+    else setCurrent(store.get("cfm-notes-cur", 1), false);
+  })();
+</script>
 </body>
 </html>
