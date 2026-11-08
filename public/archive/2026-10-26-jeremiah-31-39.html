@@ -1,0 +1,1616 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0e1f">
+  <meta name="description" content="A click-through TV presentation for the youth Come, Follow Me lesson on Jeremiah 31–33; 36–39 and Lamentations 1; 3: I Will Turn Their Mourning into Joy.">
+  <title>Mourning into Joy</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0e1f'/%3E%3Cpath d='M10 44h44M20 44a12 12 0 0 1 24 0' fill='none' stroke='%23d6b26e' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0b0e1f;
+      --cream: #f5eedf;
+      --cream-dim: #d9d1c0;
+      --gold: #d6b26e;
+      --gold-soft: #ecd9a8;
+      --rose: #c97a7e;
+      --leaf: #9cc49a;
+      --good: #7fbf98;
+      --bad: #d77a7a;
+      --hair: rgba(214, 178, 110, .38);
+      --veil: rgba(9, 11, 26, .46);
+      --sans: Inter, "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      --serif: "Cormorant Garamond", Garamond, Georgia, "Times New Roman", serif;
+      --scale: 1;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      font-variant-numeric: lining-nums;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+
+    /* ---------- Sky: the whole lesson moves from night to morning ---------- */
+    .sky { position: fixed; inset: 0; overflow: hidden; z-index: 0; }
+    .sky .layer { position: absolute; inset: 0; opacity: 0; transition: opacity 3s ease; }
+    .sky .night { background: radial-gradient(ellipse at 50% 130%, #1d2140 0%, #0d1024 50%, #06070f 100%); }
+    .sky .dusk  { background: radial-gradient(ellipse at 50% 130%, #47283f 0%, #1c1631 45%, #090a17 100%); }
+    .sky .dawn  { background: radial-gradient(ellipse at 50% 122%, #d9996a 0%, #9b5867 26%, #3a2a52 58%, #111226 100%); }
+    .sky .day   { background: radial-gradient(ellipse at 50% 118%, #e7bb7c 0%, #b9806a 20%, #44609a 54%, #18244a 100%); }
+    body[data-mood="night"] .sky .night,
+    body[data-mood="dusk"] .sky .dusk,
+    body[data-mood="dawn"] .sky .dawn,
+    body[data-mood="day"] .sky .day { opacity: 1; }
+    .sky::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0, 0, 0, .45) 100%); }
+
+    .stars { position: absolute; inset: 0; transition: opacity 3s ease; }
+    body[data-mood="dawn"] .stars { opacity: .2; }
+    body[data-mood="day"] .stars { opacity: 0; }
+    .star { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; opacity: .5; animation: twinkle 5s ease-in-out infinite; }
+    @keyframes twinkle { 0%, 100% { opacity: .15; } 50% { opacity: .8; } }
+
+    .sun {
+      position: absolute;
+      left: 50%;
+      bottom: -60vmin;
+      width: 70vmin;
+      height: 70vmin;
+      margin-left: -35vmin;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 240, 205, .9) 0%, rgba(236, 190, 120, .55) 40%, rgba(220, 140, 100, 0) 70%);
+      transform: translateY(40vmin);
+      opacity: 0;
+      transition: transform 4s cubic-bezier(.2, .7, .2, 1), opacity 3.5s ease;
+    }
+    body[data-mood="dusk"] .sun { opacity: .2; transform: translateY(30vmin); }
+    body[data-mood="dawn"] .sun { opacity: .7; transform: translateY(12vmin); }
+    body[data-mood="day"] .sun { opacity: .8; transform: translateY(-4vmin); }
+
+    /* ---------- 16:9 stage, scaled to fit any screen ---------- */
+    .stage {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: 1600px;
+      height: 900px;
+      transform: translate(-50%, -50%) scale(var(--scale));
+      z-index: 1;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 76px 110px 84px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px);
+      transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1), visibility 0s linear .8s;
+    }
+    .slide.past { transform: translateY(-14px); }
+    .slide.current { opacity: 1; visibility: visible; transform: none; transition: opacity .8s ease .1s, transform .8s cubic-bezier(.2, .7, .2, 1) .1s, visibility 0s; }
+    .slide > .notes { display: none; }
+
+    /* Builds: anything with data-step appears on that click */
+    [data-step] { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+    [data-step].on { opacity: 1; transform: none; }
+    [data-until].gone { opacity: 0 !important; transform: translateY(-12px) !important; pointer-events: none; }
+    .swap { position: relative; }
+    .swap > *, .swap > .verse { position: absolute; left: 0; right: 0; top: 0; }
+
+    /* ---------- Type ---------- */
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      align-self: flex-start;
+      margin: 0 0 22px;
+      color: var(--gold);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+    }
+    .kicker::before { content: ""; width: 56px; height: 1px; background: var(--gold); }
+    .center > .kicker, .chapter .kicker { align-self: center; }
+    .center > .kicker::after, .chapter .kicker::after { content: ""; width: 56px; height: 1px; background: var(--gold); }
+
+    h1, h2 { margin: 0; font-family: var(--serif); font-weight: 600; line-height: 1.02; letter-spacing: -.005em; text-shadow: 0 4px 30px rgba(0, 0, 0, .35); }
+    h1 { font-size: 118px; }
+    h2 { font-size: 76px; margin-bottom: 30px; }
+    p { margin: 0; }
+    .accent { font-style: italic; color: var(--gold-soft); }
+    .lead { font-size: 32px; line-height: 1.5; font-weight: 400; color: var(--cream); text-shadow: 0 2px 16px rgba(0, 0, 0, .45); }
+    .big { font-family: var(--serif); font-size: 48px; line-height: 1.25; font-weight: 600; text-shadow: 0 3px 20px rgba(0, 0, 0, .45); }
+    .gold { color: var(--gold-soft); }
+    .center { text-align: center; align-items: center; }
+    .muted { color: var(--cream-dim); }
+
+    .verse {
+      position: relative;
+      margin: 0;
+      padding: 28px 40px;
+      border-left: 2px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      background: linear-gradient(90deg, var(--veil), rgba(9, 11, 26, .22));
+      font-family: var(--serif);
+      font-size: 44px;
+      line-height: 1.35;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--cream);
+      backdrop-filter: blur(4px);
+    }
+    .verse cite { display: block; margin-top: 16px; font-family: var(--sans); font-style: normal; font-size: 16px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+    .verse mark { background: none; color: var(--gold-soft); font-weight: 600; }
+    .verse.small { font-size: 36px; padding: 22px 32px; }
+    .verse.xs { font-size: 30px; padding: 18px 28px; }
+
+    .panel { border-radius: 8px; background: var(--veil); border: 1px solid rgba(245, 238, 223, .14); backdrop-filter: blur(6px); }
+
+    .row { display: flex; gap: 60px; align-items: center; }
+    .col { display: flex; flex-direction: column; gap: 24px; }
+    .grow { flex: 1; min-width: 0; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 14px; }
+    .chip { padding: 14px 24px; border-radius: 4px; border: 1px solid var(--hair); background: rgba(9, 11, 26, .32); font-size: 26px; font-weight: 500; }
+
+    .numbered { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 26px; counter-reset: n; }
+    .numbered li { display: flex; gap: 26px; align-items: baseline; font-size: 34px; line-height: 1.4; }
+    .numbered li::before { counter-increment: n; content: counter(n, upper-roman); flex: none; width: 50px; font-family: var(--serif); font-size: 36px; font-weight: 600; color: var(--gold); }
+
+    /* ---------- Line icons ---------- */
+    .icon { display: block; fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    .slide.current .draw { animation: draw 2.4s ease forwards; stroke-dasharray: 1; stroke-dashoffset: 1; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    /* ---------- Chapter cards ---------- */
+    .chapter { align-items: center; text-align: center; }
+    .chapter .icon { width: 150px; height: 150px; margin: 0 auto 34px; }
+    .chapter h1 { font-size: 108px; }
+    .chapter .ref { margin-top: 28px; font-size: 18px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--cream-dim); }
+    .chapter .kicker { justify-content: center; }
+    .slide.current .chapter-in > * { animation: rise 1.2s cubic-bezier(.2, .7, .2, 1) both; }
+    .slide.current .chapter-in > :nth-child(2) { animation-delay: .15s; }
+    .slide.current .chapter-in > :nth-child(3) { animation-delay: .3s; }
+    .slide.current .chapter-in > :nth-child(4) { animation-delay: .45s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+    /* ---------- Title sunrise ---------- */
+    .sunrise { width: 360px; height: 150px; margin: 0 auto 34px; display: block; overflow: visible; }
+    .sunrise .horizon { stroke: var(--gold); stroke-width: 1.5; }
+    .sunrise .disc { fill: none; stroke: var(--gold-soft); stroke-width: 1.5; }
+    .sunrise .ray { stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; opacity: 0; }
+    .sunrise .lift { transform: translateY(60px); }
+    .slide.current .sunrise .lift { animation: sunUp 3.6s cubic-bezier(.2, .7, .2, 1) .3s forwards; }
+    .slide.current .sunrise .ray { animation: rayIn 1.2s ease forwards; }
+    .sunrise .ray:nth-of-type(1) { animation-delay: 2.4s !important; }
+    .sunrise .ray:nth-of-type(2) { animation-delay: 2.55s !important; }
+    .sunrise .ray:nth-of-type(3) { animation-delay: 2.7s !important; }
+    .sunrise .ray:nth-of-type(4) { animation-delay: 2.85s !important; }
+    .sunrise .ray:nth-of-type(5) { animation-delay: 3s !important; }
+    @keyframes sunUp { to { transform: none; } }
+    @keyframes rayIn { to { opacity: .9; } }
+    .title-sub { margin-top: 34px; font-family: var(--serif); font-size: 36px; font-style: italic; color: var(--gold-soft); }
+    .title-date { margin-top: 18px; font-size: 16px; color: var(--cream-dim); letter-spacing: .32em; text-transform: uppercase; font-weight: 600; }
+    .press { margin-top: 56px; font-size: 15px; letter-spacing: .26em; text-transform: uppercase; color: var(--cream-dim); animation: pulse 3s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: .3; } 50% { opacity: .8; } }
+
+    /* ---------- Jeremiah card ---------- */
+    .card3d { width: 440px; height: 620px; perspective: 1800px; flex: none; cursor: pointer; }
+    .card3d .inner { position: relative; width: 100%; height: 100%; transition: transform 1.2s cubic-bezier(.2, .8, .2, 1); transform-style: preserve-3d; }
+    .slide.s1 .card3d .inner { transform: rotateY(180deg); }
+    .card3d .face {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      border-radius: 6px;
+      padding: 44px 40px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background: linear-gradient(170deg, #1d2140, #0f1226);
+      border: 1px solid var(--hair);
+      outline: 1px solid rgba(214, 178, 110, .2);
+      outline-offset: -14px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
+      display: flex;
+      flex-direction: column;
+    }
+    .card3d .front { align-items: center; justify-content: center; text-align: center; }
+    .card3d .front .hebrew { font-family: "Times New Roman", serif; font-size: 72px; color: var(--gold); direction: rtl; }
+    .card3d .front .name { margin-top: 18px; font-family: var(--serif); font-size: 76px; font-weight: 600; }
+    .card3d .front .role { margin-top: 10px; font-size: 15px; color: var(--cream-dim); font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+    .card3d .back { transform: rotateY(180deg); gap: 22px; justify-content: center; }
+    .card3d .back h3 { margin: 0 0 6px; font-family: var(--serif); font-weight: 600; font-size: 40px; color: var(--gold-soft); text-align: center; }
+    .fact { padding-bottom: 18px; border-bottom: 1px solid rgba(214, 178, 110, .2); }
+    .fact:last-child { border-bottom: 0; padding-bottom: 0; }
+    .fact dt { font-size: 13px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+    .fact dd { margin: 6px 0 0; font-family: var(--serif); font-size: 28px; line-height: 1.25; }
+    .hint { font-size: 15px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream-dim); font-weight: 600; }
+
+    /* ---------- Map ---------- */
+    .map { width: 100%; height: auto; }
+    .map text { font-family: var(--serif); }
+    .map .route { fill: none; stroke: var(--rose); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1400; stroke-dashoffset: 1400; transition: stroke-dashoffset 3s ease; }
+    .slide.s1 .map .route { stroke-dashoffset: 0; }
+    .map .army { opacity: 0; transition: opacity .8s ease 2.6s; }
+    .slide.s1 .map .army { opacity: 1; }
+    .map .pin { animation: ping 2.4s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+    @keyframes ping { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(3); opacity: 0; } }
+
+    /* ---------- The scroll that wouldn't burn ---------- */
+    .scene { position: relative; flex: none; }
+    .scroll-scene { width: 680px; height: 600px; }
+    .scroll {
+      position: absolute;
+      left: 110px;
+      top: 40px;
+      width: 460px;
+      height: 340px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #efe2c2, #dcc79a);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+      padding: 36px 42px;
+      transition: transform 1.2s ease, opacity 1.2s ease, filter 1.2s ease;
+    }
+    .scroll::before, .scroll::after { content: ""; position: absolute; left: -14px; right: -14px; height: 22px; border-radius: 11px; background: linear-gradient(180deg, #a98452, #6f522c); }
+    .scroll::before { top: -11px; }
+    .scroll::after { bottom: -11px; }
+    .scroll .ln { height: 8px; margin: 16px 0; border-radius: 4px; background: #7a6040; opacity: .45; width: 0; }
+    .slide.current .scroll.old .ln { animation: write 3s ease forwards; }
+    .scroll .ln:nth-child(2) { animation-delay: .3s !important; }
+    .scroll .ln:nth-child(3) { animation-delay: .6s !important; }
+    .scroll .ln:nth-child(4) { animation-delay: .9s !important; }
+    .scroll .ln:nth-child(5) { animation-delay: 1.2s !important; }
+    .scroll .ln:nth-child(6) { animation-delay: 1.5s !important; }
+    .scroll .ln:nth-child(7) { animation-delay: 1.8s !important; }
+    @keyframes write { from { width: 0; } to { width: var(--w, 100%); } }
+    .slide.s3 .scroll.old { opacity: 0; transform: translateY(160px) scale(.3); filter: brightness(.2); }
+    .slide.s2 .scroll.old { clip-path: inset(0 0 45% 0); }
+    .piece { position: absolute; left: 140px; top: 230px; width: 110px; height: 80px; border-radius: 3px; background: linear-gradient(180deg, #efe2c2, #d6bd88); opacity: 0; }
+    .slide.s2 .piece { animation: toFire 1.8s ease-in forwards; }
+    .slide.s2 .piece:nth-of-type(2) { left: 280px; animation-delay: .4s; }
+    .slide.s2 .piece:nth-of-type(3) { left: 420px; animation-delay: .8s; }
+    .slide.s3 .piece { display: none; }
+    @keyframes toFire {
+      0% { opacity: 1; transform: none; }
+      60% { opacity: 1; transform: translate(var(--dx, 40px), 220px) rotate(30deg); }
+      100% { opacity: 0; transform: translate(var(--dx, 40px), 290px) rotate(60deg) scale(.4); filter: brightness(.2); }
+    }
+    .fire { position: absolute; left: 240px; bottom: 40px; width: 200px; height: 160px; opacity: 0; transition: opacity 1s ease; }
+    .slide.s1 .fire { opacity: 1; }
+    .fire .logs { position: absolute; left: 20px; right: 20px; bottom: 0; height: 18px; border-radius: 9px; background: #3d2a1a; }
+    .flame { position: absolute; bottom: 12px; width: 80px; height: 120px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: radial-gradient(ellipse at 50% 85%, #fff0c0 0%, #f0b04a 38%, #c8502e 72%, rgba(200, 80, 46, 0) 100%); filter: blur(2px); transform-origin: 50% 100%; animation: flicker .7s ease-in-out infinite alternate; mix-blend-mode: screen; opacity: .9; }
+    .flame:nth-child(2) { left: 22px; height: 96px; animation-duration: .6s; }
+    .flame:nth-child(3) { left: 60px; height: 140px; animation-duration: .8s; }
+    .flame:nth-child(4) { left: 98px; height: 104px; animation-duration: .7s; }
+    .slide.s3 .flame { height: 170px; }
+    @keyframes flicker { from { transform: scaleY(1) skewX(-2deg); } to { transform: scaleY(1.08) skewX(3deg); } }
+    .smoke { position: absolute; left: 290px; top: 170px; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle, rgba(200, 195, 210, .35), transparent 70%); opacity: 0; }
+    .slide.s3 .smoke { animation: smoke 3.6s ease-out infinite; }
+    @keyframes smoke { 0% { opacity: 0; transform: translateY(60px) scale(.6); } 30% { opacity: .8; } 100% { opacity: 0; transform: translateY(-140px) scale(1.8); } }
+    .king { position: absolute; right: 0; bottom: 34px; text-align: center; opacity: 0; transition: opacity .8s ease; }
+    .king .icon { width: 90px; height: 90px; margin: 0 auto 8px; }
+    .king span { font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: var(--cream-dim); font-weight: 600; }
+    .slide.s1 .king { opacity: 1; }
+    .slide.s5 .king, .slide.s5 .fire { opacity: .12; }
+    .scroll.new { opacity: 0; transform: scale(.7); height: 400px; top: 20px; }
+    .slide.s5 .scroll.new { opacity: 1; transform: none; animation: glow 3.4s ease-in-out 1.2s infinite; transition: transform 1.4s cubic-bezier(.2, .8, .2, 1), opacity 1.2s ease; }
+    .scroll.new .ln { width: var(--w, 100%); }
+    .scroll.new .ln.extra { background: #a8742e; opacity: .7; }
+    @keyframes glow { 0%, 100% { box-shadow: 0 0 30px 4px rgba(236, 217, 168, .25); } 50% { box-shadow: 0 0 70px 16px rgba(236, 217, 168, .45); } }
+
+    /* ---------- Silhouettes ---------- */
+    .fig { display: inline-block; width: 34px; height: 80px; fill: var(--cream); opacity: .85; }
+    .fig.gold { fill: var(--gold-soft); opacity: 1; }
+
+    /* ---------- The pit ---------- */
+    .pit-scene { width: 620px; height: 740px; --lift: 0; }
+    .pit-scene .ground { position: absolute; left: 0; right: 0; top: 0; height: 110px; border-top: 1px solid var(--hair); background: linear-gradient(180deg, rgba(120, 130, 100, .35), rgba(60, 66, 50, .25)); }
+    .pit-scene .shaft { position: absolute; left: 190px; width: 240px; top: 110px; bottom: 0; border-radius: 0 0 30px 30px; background: linear-gradient(90deg, #150f0b, #2a1d13 50%, #150f0b); box-shadow: inset 0 30px 40px rgba(0, 0, 0, .7); border: 1px solid rgba(214, 178, 110, .12); border-top: 0; }
+    .pit-scene .mud { position: absolute; left: 191px; width: 238px; bottom: 1px; height: 120px; border-radius: 0 0 30px 30px; background: linear-gradient(180deg, #4a3422, #2c1e13); z-index: 2; }
+    .pit-scene .bubble { position: absolute; top: 10px; width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(214, 178, 110, .35); animation: bubble 3.2s ease-in infinite; }
+    .pit-scene .bubble:nth-of-type(2) { left: 90px; animation-delay: 1s; }
+    .pit-scene .bubble:nth-of-type(3) { left: 170px; animation-delay: 2s; }
+    @keyframes bubble { 0% { transform: scale(.2); opacity: 0; } 70% { opacity: 1; transform: scale(1); } 100% { transform: scale(1.4); opacity: 0; } }
+    .pit-scene .jer { position: absolute; left: 280px; width: 60px; height: 140px; bottom: calc(40px + var(--lift) * 560px); z-index: 1; transition: bottom 1s cubic-bezier(.3, 1.3, .5, 1); }
+    .pit-scene .jer .fig { width: 60px; height: 140px; }
+    .pit-scene .rope { position: absolute; left: 309px; width: 2px; top: 66px; bottom: calc(176px + var(--lift) * 560px); background: var(--gold); opacity: 0; transition: bottom 1s cubic-bezier(.3, 1.3, .5, 1), opacity .5s ease; }
+    .slide.s3 .pit-scene .rope { opacity: .9; }
+    .pit-scene .rags { position: absolute; left: 330px; top: 44px; display: flex; gap: 8px; opacity: 0; transition: opacity .5s ease; }
+    .pit-scene .rags i { display: block; width: 26px; height: 18px; border: 1px solid var(--gold-soft); border-radius: 2px; transform: rotate(-8deg); }
+    .pit-scene .rags i + i { transform: rotate(10deg); }
+    .slide.s3 .pit-scene .rags { opacity: 1; }
+    .pit-scene .crew { position: absolute; top: 26px; right: 18px; display: flex; gap: 12px; opacity: 0; transform: translateX(40px); transition: opacity .8s ease, transform .8s ease; }
+    .pit-scene .crew .fig { width: 30px; height: 70px; }
+    .slide.s1 .pit-scene .crew { opacity: 1; transform: none; }
+    .pit-scene .crew.tug { animation: tug .6s ease; }
+    @keyframes tug { 50% { transform: translateX(16px); } }
+    .pull-btn {
+      position: absolute;
+      left: 0;
+      top: 150px;
+      z-index: 3;
+      padding: 14px 30px;
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .5s ease, transform .12s ease;
+    }
+    .slide.s3 .pull-btn { opacity: 1; pointer-events: auto; animation: breathe 2.4s ease-in-out infinite; }
+    .slide.s8 .pull-btn { opacity: 0; pointer-events: none; }
+    .pull-btn:active { transform: translateY(3px); }
+    @keyframes breathe { 50% { box-shadow: 0 0 0 10px rgba(214, 178, 110, .18), 0 12px 30px rgba(0, 0, 0, .35); } }
+    .pull-count { position: absolute; left: 4px; top: 222px; z-index: 3; font-family: var(--serif); font-size: 30px; font-style: italic; color: var(--gold-soft); opacity: 0; transition: opacity .5s ease; }
+    .slide.s3 .pull-count { opacity: 1; }
+    .slide.s8 .pull-count { opacity: 0; }
+
+    /* ---------- Choices ---------- */
+    .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 26px;
+      border-radius: 6px;
+      border: 1px solid rgba(245, 238, 223, .22);
+      background: var(--veil);
+      font-size: 28px;
+      font-weight: 500;
+      text-align: left;
+      backdrop-filter: blur(4px);
+      transition: background .4s ease, border-color .4s ease, opacity .4s ease;
+    }
+    .opt:hover { border-color: var(--gold); }
+    .opt .letter { flex: none; width: 40px; font-family: var(--serif); font-size: 34px; font-style: italic; color: var(--gold); text-align: center; }
+    .opt .letter .icon { width: 34px; height: 34px; margin: 0 auto; }
+    .opt.picked { border-color: var(--gold); background: rgba(214, 178, 110, .16); }
+    .choices.revealed .opt { pointer-events: none; }
+    .choices.revealed .opt:not([data-correct]) { opacity: .35; }
+    .choices.revealed .opt.picked:not([data-correct]) { opacity: .9; border-color: var(--bad); background: rgba(215, 122, 122, .14); }
+    .choices.revealed .opt[data-correct] { border-color: var(--good); background: rgba(127, 191, 152, .2); box-shadow: 0 0 0 1px var(--good) inset; }
+    .choices.revealed .opt[data-correct] .letter { color: var(--good); }
+
+    /* ---------- Quiz ---------- */
+    .quiz h2 { font-size: 62px; max-width: 1140px; }
+    .quiz .qnum { font-size: 16px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .timer { position: absolute; right: 110px; top: 150px; width: 120px; height: 120px; transition: opacity .5s ease; }
+    .timer svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .timer circle { fill: none; stroke-width: 3; }
+    .timer .track { stroke: rgba(245, 238, 223, .15); }
+    .timer .prog { stroke: var(--gold); stroke-linecap: round; stroke-dasharray: 409; stroke-dashoffset: 0; }
+    .timer.run .prog { animation: countdown 15s linear forwards; }
+    .timer .num { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--serif); font-size: 46px; font-weight: 600; }
+    .timer.done .prog { stroke: var(--bad); }
+    .timer.done .num { color: var(--bad); }
+    .slide.s1 .timer { opacity: 0; }
+    @keyframes countdown { 0% { stroke-dashoffset: 0; stroke: var(--gold); } 75% { stroke: var(--gold); } 100% { stroke-dashoffset: 409; stroke: var(--bad); } }
+    .answer-note { margin-top: 28px; font-family: var(--serif); font-size: 32px; font-style: italic; color: var(--gold-soft); text-shadow: 0 2px 12px rgba(0, 0, 0, .5); }
+
+    /* ---------- Scoreboard ---------- */
+    .score { position: absolute; right: 30px; top: 26px; z-index: 20; display: flex; gap: 12px; opacity: 0; transform: translateY(-14px); pointer-events: none; transition: opacity .5s ease, transform .5s ease; }
+    body.show-score .score { opacity: 1; transform: none; pointer-events: auto; }
+    .team { display: flex; align-items: center; gap: 12px; padding: 8px 10px 8px 18px; border-radius: 6px; background: rgba(9, 11, 26, .72); border: 1px solid var(--hair); }
+    .team .tname { font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; color: var(--cream-dim); }
+    .team .tscore { min-width: 40px; text-align: center; font-family: var(--serif); font-size: 40px; font-weight: 600; color: var(--gold-soft); }
+    .team .tscore.bump { animation: bump .5s ease; }
+    @keyframes bump { 40% { transform: scale(1.2); } }
+    .team button { width: 36px; height: 36px; border-radius: 4px; border: 1px solid var(--hair); background: transparent; font-size: 20px; line-height: 1; color: var(--cream); }
+    .team button.plus { border-color: var(--gold); color: var(--gold); }
+
+    .final-score { display: flex; gap: 50px; justify-content: center; margin-top: 30px; }
+    .final-score .fs { min-width: 340px; padding: 34px 40px; text-align: center; }
+    .final-score .fs b { display: block; font-family: var(--serif); font-size: 140px; line-height: 1; font-weight: 600; color: var(--gold-soft); }
+    .final-score .fs span { font-size: 16px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--cream-dim); }
+    .final-score .fs.win { border-color: var(--gold); box-shadow: 0 0 60px rgba(214, 178, 110, .25); }
+
+    /* ---------- Votes ---------- */
+    .votes { display: flex; gap: 16px; }
+    .vote { flex: 1; padding: 18px 24px; border-radius: 6px; border: 1px solid rgba(245, 238, 223, .22); background: var(--veil); text-align: left; transition: border-color .3s ease; }
+    .vote:hover { border-color: var(--gold); }
+    .vote .vlabel { font-size: 17px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+    .vote .vcount { float: right; font-family: var(--serif); font-size: 38px; font-weight: 600; line-height: .8; color: var(--gold-soft); }
+    .vote .vbar { clear: both; display: block; height: 3px; margin-top: 16px; background: rgba(245, 238, 223, .14); overflow: hidden; }
+    .vote .vbar i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .5s ease; }
+
+    /* ---------- Clay jar and seal ---------- */
+    .jar-scene { width: 300px; height: 290px; align-self: center; }
+    .jar { position: absolute; left: 70px; bottom: 0; width: 160px; height: 200px; border-radius: 40% 40% 30% 30% / 30% 30% 20% 20%; background: radial-gradient(circle at 35% 30%, #b98262, #7b4c33 60%, #4d2e1f); box-shadow: 0 24px 50px rgba(0, 0, 0, .45); }
+    .jar::before { content: ""; position: absolute; left: 38px; right: 38px; top: -22px; height: 32px; border-radius: 6px; background: linear-gradient(180deg, #a06c4d, #6a3f2a); }
+    .deed { position: absolute; left: 118px; top: -50px; width: 64px; height: 44px; border-radius: 3px; background: linear-gradient(180deg, #efe2c2, #d6bd88); opacity: 0; }
+    .slide.s1 .deed { animation: dropIn 1.8s cubic-bezier(.5, 0, .7, 1) forwards; }
+    @keyframes dropIn { 0% { opacity: 1; transform: translateY(-60px) rotate(-12deg); } 70% { opacity: 1; transform: translateY(110px) rotate(6deg); } 100% { opacity: 0; transform: translateY(140px); } }
+    .seal { position: absolute; left: 175px; top: 140px; z-index: 1; width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 40% 35%, #a5414a, #6e2229); box-shadow: 0 6px 18px rgba(0, 0, 0, .45), inset 0 0 0 5px rgba(0, 0, 0, .18); font-family: var(--serif); font-size: 21px; font-style: italic; color: #f3d9c9; opacity: 0; transform: scale(1.6) rotate(-10deg); }
+    .slide.s1 .seal { animation: stamp .45s cubic-bezier(.2, .9, .3, 1.2) 1.6s forwards; }
+    @keyframes stamp { to { opacity: 1; transform: rotate(-10deg); } }
+
+    /* ---------- Stone and heart ---------- */
+    .tablet { position: relative; width: 300px; height: 400px; border-radius: 150px 150px 10px 10px; background: linear-gradient(160deg, #8e8a98, #5c5868); box-shadow: inset 0 0 0 8px rgba(0, 0, 0, .1), 0 24px 60px rgba(0, 0, 0, .45); padding: 110px 40px 0; flex: none; }
+    .tablet .ln { height: 6px; margin: 26px 0; border-radius: 3px; background: rgba(30, 28, 40, .45); }
+    .heart { position: relative; width: 340px; height: 320px; flex: none; }
+    .heart svg { width: 100%; height: 100%; animation: beat 2.2s ease-in-out infinite; overflow: visible; transform-origin: center; }
+    .heart path { fill: rgba(201, 122, 126, .12); stroke: var(--rose); stroke-width: 1.2; transition: fill 1.4s ease, filter 1.4s ease; }
+    .slide.s2 .heart path { fill: rgba(201, 122, 126, .55); filter: drop-shadow(0 0 16px rgba(236, 160, 150, .6)); }
+    @keyframes beat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.04); } 24% { transform: scale(1); } 36% { transform: scale(1.025); } }
+    .stone-heart-label { margin-top: 18px; font-size: 15px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--cream-dim); }
+    .flyword { position: absolute; left: 0; font-family: var(--serif); font-size: 32px; font-style: italic; color: var(--cream); padding: 6px 18px; border-radius: 4px; border: 1px solid var(--hair); background: rgba(9, 11, 26, .7); white-space: nowrap; opacity: 0; }
+    .slide.s2 .flyword { animation: fly 2s cubic-bezier(.5, 0, .3, 1) forwards; }
+    .flyword:nth-of-type(2) { animation-delay: .4s !important; }
+    .flyword:nth-of-type(3) { animation-delay: .8s !important; }
+    .flyword:nth-of-type(4) { animation-delay: 1.2s !important; }
+    @keyframes fly { 0% { opacity: 1; transform: translate(0, 0) scale(1); } 80% { opacity: 1; transform: translate(var(--fx), var(--fy)) scale(.9); } 100% { opacity: 0; transform: translate(var(--fx), var(--fy)) scale(.3); } }
+
+    /* ---------- Sorter cards ---------- */
+    .sorter { position: relative; height: 460px; }
+    .sort-card { position: absolute; inset: 0; padding: 44px 54px; display: flex; flex-direction: column; gap: 30px; justify-content: center; }
+    .sort-card .scenario { font-family: var(--serif); font-size: 52px; font-weight: 600; line-height: 1.2; }
+    .sort-card .why { font-family: var(--serif); font-size: 32px; font-style: italic; color: var(--gold-soft); opacity: 0; transition: opacity .5s ease; }
+    .sort-card .choices.revealed + .why { opacity: 1; }
+    .sort-count { font-size: 15px; font-weight: 600; color: var(--gold); letter-spacing: .3em; text-transform: uppercase; }
+
+    /* ---------- Rising light ---------- */
+    .floaters { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .floater { position: absolute; bottom: -40px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 236, 190, .9), rgba(255, 220, 160, 0) 70%); opacity: 0; }
+    .slide.current .floater { animation: floatUp linear infinite; }
+    @keyframes floatUp { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: .7; } 100% { opacity: 0; transform: translateY(-960px); } }
+
+    /* ---------- Call + branch ---------- */
+    .voice { position: relative; width: 200px; height: 200px; margin: 0 auto 10px; display: grid; place-items: center; }
+    .voice .icon { width: 90px; height: 90px; }
+    .voice::before, .voice::after { content: ""; position: absolute; inset: 30px; border-radius: 50%; border: 1px solid var(--gold); animation: ripple 3s ease-out infinite; }
+    .voice::after { animation-delay: 1.5s; }
+    @keyframes ripple { from { transform: scale(.7); opacity: .8; } to { transform: scale(1.6); opacity: 0; } }
+    .branch-svg { width: 300px; height: 300px; display: block; margin: 0 auto; }
+    .branch-svg .stump { fill: none; stroke: var(--gold); stroke-width: 1.4; }
+    .branch-svg .stem { fill: none; stroke: var(--leaf); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 400; stroke-dashoffset: 400; transition: stroke-dashoffset 2.4s ease .3s; }
+    .slide.s2 .branch-svg .stem { stroke-dashoffset: 0; }
+    .branch-svg .leaf { fill: rgba(156, 196, 154, .25); stroke: var(--leaf); stroke-width: 1.4; transform-box: fill-box; transform-origin: center; transform: scale(0); transition: transform .8s cubic-bezier(.2, .8, .3, 1.3); }
+    .slide.s2 .branch-svg .leaf { transform: scale(1); }
+    .slide.s2 .branch-svg .leaf:nth-of-type(1) { transition-delay: 1.6s; }
+    .slide.s2 .branch-svg .leaf:nth-of-type(2) { transition-delay: 1.9s; }
+    .slide.s2 .branch-svg .leaf:nth-of-type(3) { transition-delay: 2.2s; }
+    .slide.s2 .branch-svg .leaf:nth-of-type(4) { transition-delay: 2.5s; }
+
+    /* ---------- City ---------- */
+    .city { position: relative; width: 1100px; height: 320px; margin: 0 auto; }
+    .city .bld { position: absolute; bottom: 0; background: #1f2140; border-top: 1px solid rgba(214, 178, 110, .25); transition: background 1.6s ease, transform 1.6s ease; }
+    .city .bld::after { content: ""; position: absolute; left: 22%; right: 22%; top: 18%; height: 10px; background: repeating-linear-gradient(90deg, rgba(236, 210, 150, .7) 0 10px, transparent 10px 24px); transition: opacity 1.2s ease; }
+    .city .wall { position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: #262848; border-top: 1px solid rgba(214, 178, 110, .3); transition: transform 1.6s ease; }
+    .slide.s1 .city .bld { background: #2b1a22; }
+    .slide.s1 .city .bld::after { opacity: 0; }
+    .slide.s1 .city .bld:nth-child(2n) { transform: rotate(-3deg) translateY(30px); }
+    .slide.s1 .city .wall { transform: translateY(16px) skewX(-5deg); }
+    .city .glow { position: absolute; inset: -40px; background: radial-gradient(ellipse at 50% 100%, rgba(200, 90, 50, .45), transparent 60%); opacity: 0; transition: opacity 1.6s ease; }
+    .slide.s1 .city .glow { opacity: 1; animation: flick 2s ease-in-out infinite alternate; }
+    @keyframes flick { from { opacity: .7; } to { opacity: 1; } }
+    .exiles { position: absolute; left: 0; bottom: 4px; display: flex; gap: 22px; opacity: 0; }
+    .exiles .fig { width: 22px; height: 52px; }
+    .slide.s2 .exiles { animation: walkOff 9s linear forwards; }
+    @keyframes walkOff { 0% { opacity: 1; transform: translateX(0); } 90% { opacity: 1; } 100% { opacity: 0; transform: translateX(1000px); } }
+
+    /* ---------- Recap tiles ---------- */
+    .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .tile { position: relative; height: 220px; perspective: 1400px; border: 0; padding: 0; background: none; }
+    .tile .in { position: absolute; inset: 0; transition: transform 1s cubic-bezier(.2, .8, .2, 1); transform-style: preserve-3d; }
+    .tile.flip .in { transform: rotateY(180deg); }
+    .tile .f, .tile .b { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border-radius: 6px; padding: 18px; backface-visibility: hidden; -webkit-backface-visibility: hidden; text-align: center; }
+    .tile .f { background: var(--veil); border: 1px solid rgba(245, 238, 223, .16); }
+    .tile .f .icon { width: 54px; height: 54px; stroke: var(--cream-dim); }
+    .tile .b { background: linear-gradient(170deg, #f3e8cf, #e2cfa4); color: var(--ink); transform: rotateY(180deg); border: 1px solid #f7edd5; }
+    .tile .t { font-family: var(--serif); font-size: 34px; font-weight: 600; line-height: 1.1; }
+    .tile .f .t { font-style: italic; font-weight: 500; color: var(--cream-dim); }
+    .tile .r { font-size: 12px; font-weight: 600; letter-spacing: .26em; color: #8a6a2e; }
+
+    /* ---------- Challenge cards ---------- */
+    .picks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .pick { padding: 40px 32px; border-radius: 6px; border: 1px solid rgba(245, 238, 223, .18); background: var(--veil); text-align: center; backdrop-filter: blur(4px); transition: transform .4s ease, background .4s ease, border-color .4s ease; }
+    .pick:hover { border-color: var(--gold); }
+    .pick .icon { width: 70px; height: 70px; margin: 0 auto; }
+    .pick h3 { margin: 22px 0 12px; font-family: var(--serif); font-size: 44px; font-weight: 600; }
+    .pick p { font-size: 22px; line-height: 1.5; color: var(--cream-dim); }
+    .pick .ref { display: block; margin-top: 18px; font-size: 13px; font-weight: 600; color: var(--gold); letter-spacing: .26em; }
+    /* ---------- In short ---------- */
+    .summary { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+    .summary li { display: flex; align-items: center; gap: 26px; padding-bottom: 18px; border-bottom: 1px solid rgba(214, 178, 110, .22); }
+    .summary li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .summary .icon { flex: none; width: 52px; height: 52px; }
+    .summary b { font-family: var(--serif); font-size: 40px; font-weight: 600; }
+    .summary span.ref { margin-left: 18px; font-size: 15px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+    .slide.current .summary li { animation: rise 1s cubic-bezier(.2, .7, .2, 1) both; }
+    .slide.current .summary li:nth-child(2) { animation-delay: .25s; }
+    .slide.current .summary li:nth-child(3) { animation-delay: .5s; }
+    .slide.current .summary li:nth-child(4) { animation-delay: .75s; }
+    .slide.current .summary li:nth-child(5) { animation-delay: 1s; }
+
+    .pick.chosen { border-color: var(--gold); background: rgba(214, 178, 110, .14); transform: translateY(-8px); box-shadow: 0 0 50px rgba(214, 178, 110, .2); }
+
+    /* ---------- Chrome around the stage ---------- */
+    .progress { position: fixed; left: 0; right: 0; bottom: 0; height: 2px; z-index: 30; background: rgba(255, 255, 255, .06); }
+    .progress i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .6s ease; }
+
+    .controls { position: fixed; right: 16px; bottom: 16px; z-index: 40; display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 8px; background: rgba(9, 11, 26, .78); border: 1px solid rgba(245, 238, 223, .14); backdrop-filter: blur(8px); transition: opacity .5s ease; }
+    body.idle .controls { opacity: 0; pointer-events: none; }
+    .controls button { min-width: 40px; height: 38px; padding: 0 12px; border-radius: 5px; border: 1px solid transparent; background: transparent; font-size: 13px; font-weight: 600; letter-spacing: .08em; color: var(--cream-dim); }
+    .controls button:hover { border-color: rgba(245, 238, 223, .2); color: var(--cream); }
+    .controls button[aria-pressed="true"] { color: var(--gold); border-color: rgba(214, 178, 110, .45); }
+    .controls .count { min-width: 64px; text-align: center; font-size: 13px; font-weight: 600; color: var(--cream-dim); font-variant-numeric: tabular-nums; letter-spacing: .08em; }
+
+    .notes-panel { position: fixed; left: 16px; bottom: 76px; z-index: 40; width: min(540px, calc(100vw - 32px)); max-height: 46vh; overflow: auto; padding: 20px 24px; border-radius: 8px; background: rgba(250, 246, 236, .97); color: #22202e; font-size: 16px; line-height: 1.55; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); display: none; user-select: text; -webkit-user-select: text; }
+    body.show-notes .notes-panel { display: block; }
+    .notes-panel h4 { margin: 0 0 10px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #8a6a2e; }
+    .notes-panel p { margin: 0; }
+    .notes-panel p + p { margin-top: .55rem; }
+
+    .overlay { position: fixed; inset: 0; z-index: 60; display: none; }
+    .blackout { background: #000; cursor: none; }
+    body.blackout .blackout { display: block; }
+    .help { display: none; place-items: center; background: rgba(5, 6, 14, .82); }
+    body.show-help .help { display: grid; }
+    .help .box { width: min(620px, calc(100vw - 32px)); max-height: 90vh; overflow: auto; padding: 30px 34px; border-radius: 8px; background: #121530; border: 1px solid var(--hair); font-size: 17px; line-height: 1.5; }
+    .help h3 { margin: 0 0 14px; font-family: var(--serif); font-size: 34px; font-weight: 600; }
+    .help table { width: 100%; border-collapse: collapse; }
+    .help td { padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, .08); vertical-align: top; }
+    .help td:first-child { width: 42%; color: var(--gold-soft); font-weight: 600; }
+    .help .close { margin-top: 20px; padding: 10px 22px; border-radius: 4px; border: 0; background: var(--gold); color: var(--ink); font-weight: 700; letter-spacing: .1em; }
+
+    .fx { position: fixed; inset: 0; z-index: 50; pointer-events: none; overflow: hidden; }
+    .dust { position: absolute; top: -12px; border-radius: 50%; opacity: 0; animation: fall linear forwards; }
+    @keyframes fall { 0% { opacity: 0; } 10% { opacity: 1; } 100% { opacity: 0; transform: translate3d(var(--drift), 105vh, 0); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+    }
+  </style>
+</head>
+<body data-mood="night">
+  <!-- Line icons and figures -->
+  <svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+    <defs>
+      <symbol id="i-scroll" viewBox="0 0 64 64"><path pathLength="1" d="M16 12h34a6 6 0 0 1 0 12H46M16 12a6 6 0 0 0 0 12h4V50a6 6 0 0 0 6 6h28a6 6 0 0 0 0-12H24M20 24v-6M28 22h14M28 30h14M28 38h10"/></symbol>
+      <symbol id="i-pit" viewBox="0 0 64 64"><path pathLength="1" d="M8 22h48M18 22v32h28V22M32 6v30M27 40l5-4 5 4M26 50h12"/></symbol>
+      <symbol id="i-ruins" viewBox="0 0 64 64"><path pathLength="1" d="M6 56h52M12 56V24h8v32M12 24l4-4 4 4M28 56V34l4-6 4 3v25M44 56V18h8v38M40 14h16M24 56l3-6"/></symbol>
+      <symbol id="i-wheat" viewBox="0 0 64 64"><path pathLength="1" d="M32 58V14M32 22c-6-2-9-7-9-12 6 1 9 6 9 12zm0 0c6-2 9-7 9-12-6 1-9 6-9 12zM32 34c-6-2-9-7-9-12 6 1 9 6 9 12zm0 0c6-2 9-7 9-12-6 1-9 6-9 12zM32 46c-6-2-9-7-9-12 6 1 9 6 9 12zm0 0c6-2 9-7 9-12-6 1-9 6-9 12z"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 64 64"><path pathLength="1" d="M32 54C16 42 8 33 8 23c0-8 6-13 13-13 5 0 9 3 11 7 2-4 6-7 11-7 7 0 13 5 13 13 0 10-8 19-24 31z"/></symbol>
+      <symbol id="i-tablet" viewBox="0 0 64 64"><path pathLength="1" d="M16 56V24a16 16 0 0 1 32 0v32zM24 30h16M24 38h16M24 46h10"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 64 64"><path pathLength="1" d="M6 44h52M18 44a14 14 0 0 1 28 0M32 18v-8M14 26l-5-5M50 26l5-5M10 36H4M60 36h-6M12 52h40M20 58h24"/></symbol>
+      <symbol id="i-branch" viewBox="0 0 64 64"><path pathLength="1" d="M18 58l4-16h20l4 16zM22 42c4-2 16-2 20 0M32 42c0-10-2-16 4-26M34 28c5-3 10-2 12 0-4 4-9 4-12 0zM33 20c-5-4-10-3-12-1 4 4 9 4 12 1z"/></symbol>
+      <symbol id="i-crown" viewBox="0 0 64 64"><path pathLength="1" d="M10 46l-2-26 13 12 11-18 11 18 13-12-2 26zM10 52h44"/></symbol>
+      <symbol id="i-voice" viewBox="0 0 64 64"><path pathLength="1" d="M20 32a12 12 0 0 1 24 0M14 32a18 18 0 0 1 36 0M8 32a24 24 0 0 1 48 0M32 32v24M24 56h16"/></symbol>
+      <symbol id="i-cloth" viewBox="0 0 64 64"><path pathLength="1" d="M12 18c8-4 14 4 20 0s12-4 20 0v28c-8-4-14 4-20 0s-12-4-20 0zM32 18v28"/></symbol>
+      <symbol id="i-star" viewBox="0 0 64 64"><path pathLength="1" d="M32 6l6 20h20L42 38l6 20-16-12-16 12 6-20L6 26h20z"/></symbol>
+      <symbol id="fig" viewBox="0 0 40 92"><circle cx="20" cy="11" r="9"/><path d="M5 92V42c0-13 6-20 15-20s15 7 15 20v50z"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="sky" aria-hidden="true">
+    <div class="layer night"></div>
+    <div class="layer dusk"></div>
+    <div class="layer dawn"></div>
+    <div class="layer day"></div>
+    <div class="stars" id="stars"></div>
+    <div class="sun"></div>
+  </div>
+
+  <main class="stage" id="stage" aria-live="polite">
+
+    <!-- 1. Title -->
+    <section class="slide center" data-mood="night">
+      <svg class="sunrise" viewBox="0 0 360 150" aria-hidden="true">
+        <defs><clipPath id="above"><rect x="0" y="0" width="360" height="120"/></clipPath></defs>
+        <g clip-path="url(#above)"><g class="lift">
+          <circle class="disc" cx="180" cy="120" r="56"/>
+          <line class="ray" x1="180" y1="44" x2="180" y2="22"/>
+          <line class="ray" x1="128" y1="66" x2="112" y2="50"/>
+          <line class="ray" x1="232" y1="66" x2="248" y2="50"/>
+          <line class="ray" x1="104" y1="104" x2="82" y2="98"/>
+          <line class="ray" x1="256" y1="104" x2="278" y2="98"/>
+        </g></g>
+        <line class="horizon" x1="20" y1="120" x2="340" y2="120"/>
+      </svg>
+      <h1>I Will Turn Their<br><span class="accent">Mourning into Joy</span></h1>
+      <p class="title-sub">Jeremiah 31–33; 36–39 · Lamentations 1; 3</p>
+      <p class="title-date">Come, Follow Me · October 26 – November 1</p>
+      <p class="press">Press → to begin</p>
+      <aside class="notes">
+        <p>Welcome everyone. The whole lesson is one big turnaround: from the worst day in Jerusalem's history to God's promise that sorrow does not get the last word.</p>
+        <p>Watch the background: it starts at night and grows lighter as the lesson goes, ending in full morning.</p>
+        <p>Press <b>?</b> anytime for the controls.</p>
+      </aside>
+    </section>
+
+    <!-- 2. Hook -->
+    <section class="slide" data-mood="night">
+      <span class="kicker">To begin</span>
+      <h2>A worst day, <span class="accent">turned around</span></h2>
+      <ol class="numbered">
+        <li data-step="1">Think of a time something went really wrong, and it ended up all right after all.</li>
+        <li data-step="2">What, or who, turned it around?</li>
+      </ol>
+      <p class="big gold" data-step="3" style="margin-top: 50px;">This week: a whole nation's worst day, and God's promise to turn it into joy.</p>
+      <aside class="notes">
+        <p>Let two or three people share. Keep it light: a lost game, a bad test, a broken phone.</p>
+        <p>Point out that when things turn around, someone usually helped. In these chapters, that someone is the Lord.</p>
+      </aside>
+    </section>
+
+    <!-- 3. Map -->
+    <section class="slide" data-mood="dusk">
+      <span class="kicker">About 600 B.C.</span>
+      <h2>An empire is coming</h2>
+      <svg class="map" viewBox="0 0 1400 420" role="img" aria-label="Map showing the Babylonian army marching from Babylon to Jerusalem">
+        <rect x="0" y="0" width="1400" height="420" rx="8" fill="rgba(9,11,26,.35)" stroke="rgba(214,178,110,.25)"/>
+        <path d="M0 40 C 90 60 150 140 170 220 C 185 300 140 370 0 400 Z" fill="rgba(120,150,200,.18)" stroke="rgba(160,190,230,.45)"/>
+        <text x="40" y="250" fill="#b9c8e4" font-size="24" font-style="italic" transform="rotate(-70 60 250)">Mediterranean Sea</text>
+        <path d="M900 30 C 960 120 1020 170 1080 240 C 1140 310 1180 360 1230 410" fill="none" stroke="rgba(160,190,230,.6)" stroke-width="3"/>
+        <text x="1120" y="170" fill="#b9c8e4" font-size="26" font-style="italic">Euphrates</text>
+        <path class="route" d="M1110 285 C 1000 60 520 30 290 255"/>
+        <circle cx="290" cy="260" r="9" fill="#ecd9a8"/>
+        <circle class="pin" cx="290" cy="260" r="9" fill="none" stroke="#ecd9a8" stroke-width="2"/>
+        <text x="230" y="312" fill="#f5eedf" font-size="46" font-weight="600">Jerusalem</text>
+        <circle cx="1110" cy="290" r="9" fill="#c97a7e"/>
+        <text x="1060" y="345" fill="#f5eedf" font-size="46" font-weight="600">Babylon</text>
+        <text class="army" x="560" y="95" fill="#e8b5b5" font-size="30" font-style="italic">the Babylonian army</text>
+      </svg>
+      <p class="lead" data-step="2" style="margin-top: 28px;">This is the same Jerusalem Lehi's family left. Nephi even mentions that the people "cast [Jeremiah] into prison" <span class="muted">(1 Nephi 7:14)</span>.</p>
+      <aside class="notes">
+        <p>Click once to send the Babylonian army toward Jerusalem. Click again for the Book of Mormon connection.</p>
+        <p>Lehi and Jeremiah were preaching at the same time in the same city. Lehi's family got out; Jeremiah stayed through the siege.</p>
+      </aside>
+    </section>
+
+    <!-- 4. Chapter: The scroll -->
+    <section class="slide chapter" data-mood="dusk">
+      <div class="chapter-in">
+        <svg class="icon"><use class="draw" href="#i-scroll"/></svg>
+        <span class="kicker">Story One</span>
+        <h1>The Scroll That<br>Would Not Stay Burned</h1>
+        <p class="ref">Jeremiah 36</p>
+      </div>
+      <aside class="notes"><p>Jeremiah 36 happens before the city falls, while King Jehoiakim is in charge.</p></aside>
+    </section>
+
+    <!-- 5. Scroll scene -->
+    <section class="slide" data-mood="dusk" data-steps="5">
+      <div class="row">
+        <div class="scene scroll-scene" aria-hidden="true">
+          <div class="scroll old">
+            <div class="ln" style="--w: 92%"></div><div class="ln" style="--w: 80%"></div><div class="ln" style="--w: 96%"></div>
+            <div class="ln" style="--w: 70%"></div><div class="ln" style="--w: 88%"></div><div class="ln" style="--w: 76%"></div><div class="ln" style="--w: 60%"></div>
+          </div>
+          <div class="piece" style="--dx: 160px"></div>
+          <div class="piece" style="--dx: 30px"></div>
+          <div class="piece" style="--dx: -110px"></div>
+          <div class="scroll new">
+            <div class="ln" style="--w: 92%"></div><div class="ln" style="--w: 80%"></div><div class="ln" style="--w: 96%"></div>
+            <div class="ln" style="--w: 70%"></div><div class="ln" style="--w: 88%"></div><div class="ln" style="--w: 76%"></div>
+            <div class="ln extra" style="--w: 94%"></div><div class="ln extra" style="--w: 82%"></div><div class="ln extra" style="--w: 64%"></div>
+          </div>
+          <div class="fire"><div class="logs"></div><div class="flame"></div><div class="flame"></div><div class="flame"></div><div class="flame"></div></div>
+          <div class="smoke"></div>
+          <div class="king"><svg class="icon"><use href="#i-crown"/></svg><span>Jehoiakim</span></div>
+        </div>
+        <div class="grow swap" style="height: 540px;">
+          <div data-until="1">
+            <span class="kicker">I</span>
+            <p class="big">Jeremiah speaks the Lord's words. His scribe, <span class="accent">Baruch</span>, writes every one on a scroll.</p>
+            <p class="hint" style="margin-top: 22px;">Jeremiah 36:4</p>
+          </div>
+          <div data-step="1" data-until="2">
+            <span class="kicker">II</span>
+            <p class="big">The scroll is read to <span class="accent">King Jehoiakim</span>, who sits in his winter house beside a fire.</p>
+            <p class="hint" style="margin-top: 22px;">Jeremiah 36:21–22</p>
+          </div>
+          <div data-step="2" data-until="3">
+            <span class="kicker">III</span>
+            <p class="verse small">When Jehudi had read three or four leaves, he cut it with the penknife, and cast it into the fire.<cite>Jeremiah 36:23</cite></p>
+          </div>
+          <div data-step="3" data-until="4">
+            <span class="kicker">IV</span>
+            <p class="big">…"until <span class="accent">all the roll</span> was consumed in the fire."</p>
+            <p class="lead" style="margin-top: 20px;">And they "were not afraid." <span class="muted">(36:23–24)</span></p>
+          </div>
+          <div data-step="4" data-until="5">
+            <span class="kicker">Consider</span>
+            <p class="big">What does the Lord do now?</p>
+            <p class="lead" style="margin-top: 20px;">Give up? Find another prophet? Something else?</p>
+          </div>
+          <div data-step="5">
+            <span class="kicker">The answer</span>
+            <p class="verse small">Take thee again another roll, and write in it all the former words… and there were added besides unto them <mark>many like words</mark>.<cite>Jeremiah 36:28, 32</cite></p>
+            <p class="big gold" style="margin-top: 30px;">God's word cannot be burned away.</p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>Click through slowly; each click is one part of the story. On "Consider," let the class answer before you reveal.</p>
+        <p>The new scroll had everything the old one had, plus more.</p>
+      </aside>
+    </section>
+
+    <!-- 6. Chapter: The pit -->
+    <section class="slide chapter" data-mood="night">
+      <div class="chapter-in">
+        <svg class="icon"><use class="draw" href="#i-pit"/></svg>
+        <span class="kicker">Story Two</span>
+        <h1>Down in the Pit</h1>
+        <p class="ref">Jeremiah 37–38</p>
+      </div>
+      <aside class="notes"><p>Now King Zedekiah is in charge, and Babylon's army is outside the walls.</p></aside>
+    </section>
+
+    <!-- 7. Pit scene -->
+    <section class="slide" data-mood="night" id="pit" data-steps="8">
+      <div class="row" style="align-items: flex-start;">
+        <div class="scene pit-scene">
+          <div class="ground" aria-hidden="true"></div>
+          <div class="shaft" aria-hidden="true"></div>
+          <div class="jer" aria-hidden="true"><svg class="fig gold"><use href="#fig"/></svg></div>
+          <div class="rope" aria-hidden="true"></div>
+          <div class="mud" aria-hidden="true"><div class="bubble" style="left: 30px"></div><div class="bubble"></div><div class="bubble"></div></div>
+          <div class="crew" aria-hidden="true"><svg class="fig"><use href="#fig"/></svg><svg class="fig"><use href="#fig"/></svg><svg class="fig"><use href="#fig"/></svg></div>
+          <div class="rags" aria-hidden="true"><i></i><i></i></div>
+          <button class="pull-btn" type="button" data-action="next">Pull</button>
+          <div class="pull-count" id="pullCount">0 of 5</div>
+        </div>
+        <div class="grow swap" style="height: 740px;">
+          <div data-until="1">
+            <span class="kicker">Jeremiah 38:6</span>
+            <p class="big">Jerusalem's leaders hated Jeremiah's warnings, so they lowered him with ropes into a deep dungeon.</p>
+            <p class="verse small" style="margin-top: 30px;">In the dungeon there was no water, but mire: so Jeremiah <mark>sunk in the mire</mark>.<cite>Jeremiah 38:6</cite></p>
+          </div>
+          <div data-step="1" data-until="2">
+            <span class="kicker">Jeremiah 38:7–10</span>
+            <p class="big">Then <span class="accent">Ebed-melech</span>, an Ethiopian servant in the king's house, heard what had happened.</p>
+            <p class="lead" style="margin-top: 22px;">No one else spoke up. He did, and went straight to the king.</p>
+            <p class="lead" style="margin-top: 14px;">The king answered: take thirty men and bring him up.</p>
+          </div>
+          <div data-step="2" data-until="4">
+            <span class="kicker">A question</span>
+            <p class="big" style="margin-bottom: 26px;">Besides ropes, Ebed-melech brought something else. What was it?</p>
+            <div class="choices" data-reveal="3" style="grid-template-columns: 1fr;">
+              <button class="opt" type="button"><span class="letter">a</span>A ladder</button>
+              <button class="opt" type="button"><span class="letter">b</span>A bucket of water</button>
+              <button class="opt" type="button" data-correct><span class="letter">c</span>Old rags</button>
+              <button class="opt" type="button"><span class="letter">d</span>A sword</button>
+            </div>
+            <p class="verse xs" data-step="3" style="margin-top: 22px;">Put now these old cast clouts and rotten rags under thine armholes under the cords.<cite>Jeremiah 38:12</cite></p>
+          </div>
+          <div data-step="4" data-until="8">
+            <span class="kicker">Why the rags?</span>
+            <p class="big">So the ropes would not cut into Jeremiah's arms.</p>
+            <p class="lead" style="margin-top: 22px;">Ebed-melech didn't only rescue him. He thought about how the rescue would <em>feel</em>.</p>
+            <p class="big gold" style="margin-top: 44px;">Now, everyone: pull.</p>
+          </div>
+          <div data-step="8">
+            <span class="kicker">Rescued</span>
+            <p class="verse small">So they drew up Jeremiah with cords, and took him up out of the dungeon.<cite>Jeremiah 38:13</cite></p>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>Story first, then the question: let the class call out a–d, then click the answer (or press →) to reveal.</p>
+        <p>Then press → or click <b>Pull</b> five times. Have the class make a pulling motion together each time.</p>
+        <p>Ebed-melech was a foreigner and a servant, yet he was the one with the courage to speak up.</p>
+      </aside>
+    </section>
+
+    <!-- 8. Be an Ebed-melech -->
+    <section class="slide" data-mood="night">
+      <div class="row" style="align-items: flex-start; gap: 80px;">
+        <div class="col grow">
+          <span class="kicker">Jeremiah 39:15–18</span>
+          <h2 style="margin-bottom: 6px;">The Lord did not forget <span class="accent">Ebed-melech</span></h2>
+          <p class="verse small">I will surely deliver thee… <mark>because thou hast put thy trust in me</mark>, saith the Lord.<cite>Jeremiah 39:18</cite></p>
+          <p class="big" data-step="1" style="margin-top: 12px;">Who might be "in a pit" around you?</p>
+          <p class="lead muted" data-step="1">Lonely. Left out. Picked on. Having a hard time at home.</p>
+        </div>
+        <div class="col" style="width: 520px; padding-top: 30px;">
+          <p class="big gold" data-step="2">Your "old rags"</p>
+          <p class="lead" data-step="2" style="font-size: 26px;">Small, thoughtful things that make help hurt less:</p>
+          <div class="chips">
+            <span class="chip" data-step="3">Sit by someone eating alone</span>
+            <span class="chip" data-step="3">Ask, "Are you okay?"</span>
+            <span class="chip" data-step="4">Speak up when someone is mocked</span>
+            <span class="chip" data-step="4">Invite them in</span>
+            <span class="chip" data-step="5">Pray for them by name</span>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>Ask for more "old rags" ideas from the class before revealing the list.</p>
+        <p>Ebed-melech spoke up when it was risky. Sometimes kindness takes courage.</p>
+      </aside>
+    </section>
+
+    <!-- 9. Chapter: The worst day -->
+    <section class="slide chapter" data-mood="night">
+      <div class="chapter-in">
+        <svg class="icon"><use class="draw" href="#i-ruins"/></svg>
+        <span class="kicker">Story Three</span>
+        <h1>The Worst Day</h1>
+        <p class="ref">Jeremiah 39 · Lamentations 1</p>
+      </div>
+      <aside class="notes"><p>Everything Jeremiah warned about now happens.</p></aside>
+    </section>
+
+    <!-- 10. City falls -->
+    <section class="slide" data-mood="night" data-steps="4">
+      <span class="kicker">About 587 B.C. · Jeremiah 39:8–9</span>
+      <h2>Jerusalem falls</h2>
+      <div class="city" aria-hidden="true">
+        <div class="glow"></div>
+        <div class="bld" style="left: 40px; width: 120px; height: 200px;"></div>
+        <div class="bld" style="left: 180px; width: 90px; height: 150px;"></div>
+        <div class="bld" style="left: 290px; width: 160px; height: 260px;"></div>
+        <div class="bld" style="left: 470px; width: 200px; height: 300px;"></div>
+        <div class="bld" style="left: 690px; width: 110px; height: 180px;"></div>
+        <div class="bld" style="left: 820px; width: 140px; height: 230px;"></div>
+        <div class="bld" style="left: 980px; width: 90px; height: 160px;"></div>
+        <div class="wall"></div>
+        <div class="exiles"><svg class="fig"><use href="#fig"/></svg><svg class="fig"><use href="#fig"/></svg><svg class="fig"><use href="#fig"/></svg><svg class="fig"><use href="#fig"/></svg><svg class="fig"><use href="#fig"/></svg><svg class="fig"><use href="#fig"/></svg><svg class="fig"><use href="#fig"/></svg></div>
+      </div>
+      <div class="swap" style="height: 140px; margin-top: 40px;">
+        <p class="lead" data-until="1">The Babylonian army has been camped outside the walls for more than a year…</p>
+        <p class="lead" data-step="1" data-until="2">They break through the walls and burn the houses, the king's palace, and the temple.</p>
+        <p class="lead" data-step="2" data-until="3">Most of the people are marched hundreds of miles away to Babylon.</p>
+        <p class="big gold" data-step="3" data-until="4">Just as Jeremiah warned. Yet the Lord protected Jeremiah <span class="muted" style="font-size: 32px;">(39:11–12)</span>.</p>
+        <p class="verse xs" data-step="4">How doth the city sit solitary, that was full of people!… She weepeth sore in the night, and her tears are on her cheeks.<cite>Lamentations 1:1–2</cite></p>
+      </div>
+      <aside class="notes">
+        <p>Click to bring down the city, then lead the people away to Babylon. The last click is Lamentations 1, a book of sorrowful poems written after the fall.</p>
+        <p>The temple was burned too (Jeremiah 52:13; 2 Kings 25:9).</p>
+      </aside>
+    </section>
+
+    <!-- 11. New every morning -->
+    <section class="slide center" data-mood="dawn" data-fx-enter="chime">
+      <span class="kicker">Lamentations 3:22–24</span>
+      <h2>But then, morning</h2>
+      <p class="verse" style="max-width: 1180px; text-align: left;">
+        It is of the Lord's mercies that we are not consumed, because his compassions fail not.
+        <span data-step="1" style="display: inline;"> They are <mark>new every morning</mark>: great is thy faithfulness.</span>
+        <span data-step="2" style="display: inline;"> The Lord is my portion… therefore will I hope in him.</span>
+        <cite>Lamentations 3:22–24</cite>
+      </p>
+      <p class="big gold" data-step="3" style="margin-top: 40px;">Every morning is a fresh start from the Lord.</p>
+      <p class="lead" data-step="4" style="margin-top: 16px;">What is one mercy you noticed today?</p>
+      <aside class="notes">
+        <p>The background just changed from night to sunrise. Point it out: same book, same author, but now he's looking for hope.</p>
+        <p>Go around the room for the "mercy" question. Small things count: breakfast, a friend, sunshine.</p>
+      </aside>
+    </section>
+
+    <!-- 12. Chapter: The field -->
+    <section class="slide chapter" data-mood="dawn">
+      <div class="chapter-in">
+        <svg class="icon"><use class="draw" href="#i-wheat"/></svg>
+        <span class="kicker">Story Four</span>
+        <h1>A Field Bought<br>in Wartime</h1>
+        <p class="ref">Jeremiah 32</p>
+      </div>
+      <aside class="notes"><p>This one happens during the siege, before the city falls. Jeremiah is locked in the prison court.</p></aside>
+    </section>
+
+    <!-- 13. Would you buy it? -->
+    <section class="slide" data-mood="dawn" data-steps="3" style="padding-top: 50px; padding-bottom: 50px;">
+      <div class="row" style="align-items: flex-start;">
+        <div class="col grow">
+          <span class="kicker">Would you buy it?</span>
+          <ol class="numbered panel" style="padding: 28px 34px; gap: 14px;">
+            <li style="font-size: 27px;">You are locked in the palace prison.</li>
+            <li style="font-size: 27px;">Babylon's army is right outside the walls.</li>
+            <li style="font-size: 27px;"><span>Your cousin Hanameel offers to sell you his family field in Anathoth for <span class="gold">seventeen pieces of silver</span>.</span></li>
+          </ol>
+          <div class="votes">
+            <button class="vote" type="button"><span class="vcount">0</span><span class="vlabel">Buy it</span><span class="vbar"><i></i></span></button>
+            <button class="vote" type="button"><span class="vcount">0</span><span class="vlabel">Walk away</span><span class="vbar"><i></i></span></button>
+          </div>
+          <p class="hint">Tap once for each raised hand</p>
+        </div>
+        <div class="col" style="width: 520px;">
+          <div class="scene jar-scene" aria-hidden="true" data-step="1">
+            <div class="jar"></div>
+            <div class="deed"></div>
+            <div class="seal">sealed</div>
+          </div>
+          <p class="lead" data-step="1" style="font-size: 27px;"><span class="gold">Jeremiah bought it.</span> Signed, sealed, witnessed, and the deed placed in a clay jar to last "many days" <span class="muted">(32:9–14)</span>.</p>
+        </div>
+      </div>
+      <div class="swap" style="height: 120px;">
+        <p class="verse xs" data-step="2" data-until="3">Houses and fields and vineyards shall be possessed again in this land.<cite>Jeremiah 32:15</cite></p>
+        <p class="verse xs" data-step="3">Ah Lord God!… there is <mark>nothing too hard for thee</mark>.<cite>Jeremiah 32:17</cite></p>
+      </div>
+      <aside class="notes">
+        <p>Take the vote first. Then reveal: Jeremiah bought it.</p>
+        <p>Why? It was a promise you could see: people will live, farm, and buy land here again. He believed God before it happened.</p>
+        <p>Ask: What's a way you can show you believe good days are coming, even when things look bad?</p>
+      </aside>
+    </section>
+
+    <!-- 14. Chapter: New covenant -->
+    <section class="slide chapter" data-mood="dawn">
+      <div class="chapter-in">
+        <svg class="icon"><use class="draw" href="#i-heart"/></svg>
+        <span class="kicker">The Great Promise</span>
+        <h1>Written in<br>the Heart</h1>
+        <p class="ref">Jeremiah 31:31–34</p>
+      </div>
+      <aside class="notes"><p>This is one of the best-known promises in Jeremiah: a new covenant.</p></aside>
+    </section>
+
+    <!-- 15. Stone vs heart -->
+    <section class="slide" data-mood="dawn" data-steps="3">
+      <div class="row" style="justify-content: center; align-items: flex-end; gap: 160px; position: relative;">
+        <div class="col center" style="gap: 0;">
+          <div class="tablet" aria-hidden="true"><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+          <p class="stone-heart-label">On stone</p>
+        </div>
+        <div style="position: absolute; left: 260px; top: 150px;" aria-hidden="true">
+          <span class="flyword" style="top: 0; --fx: 640px; --fy: 30px;">love God</span>
+          <span class="flyword" style="top: 64px; --fx: 640px; --fy: -20px;">love others</span>
+          <span class="flyword" style="top: 128px; --fx: 660px; --fy: -70px;">be honest</span>
+          <span class="flyword" style="top: 192px; --fx: 650px; --fy: -120px;">forgive</span>
+        </div>
+        <div class="col center" style="gap: 0;">
+          <div class="heart" aria-hidden="true"><svg viewBox="0 0 100 92"><path d="M50 88 C 22 67 4 50 4 29 C 4 14 15 4 28 4 C 38 4 46 10 50 18 C 54 10 62 4 72 4 C 85 4 96 14 96 29 C 96 50 78 67 50 88 Z"/></svg></div>
+          <p class="stone-heart-label">In the heart</p>
+        </div>
+      </div>
+      <div class="swap" style="height: 200px; margin-top: 34px;">
+        <p class="verse small" data-step="1" data-until="3">I will put my law in their inward parts, and <mark>write it in their hearts</mark>; and will be their God, and they shall be my people.<cite>Jeremiah 31:33</cite></p>
+        <p class="big" data-step="3" style="text-align: center;">God wants more than rules kept on the <span class="accent">outside</span>.<br>He wants to change who we are on the <span class="accent">inside</span>.</p>
+      </div>
+      <aside class="notes">
+        <p>Click 1: the verse. Click 2: the words move from the stone into the heart. Click 3: the main idea.</p>
+        <p>Ask: What's the difference between keeping a rule because you have to and because you want to?</p>
+      </aside>
+    </section>
+
+    <!-- 16. Call unto me + Branch -->
+    <section class="slide" data-mood="day" data-steps="3">
+      <div class="row" style="align-items: flex-end; gap: 70px;">
+        <div class="col grow">
+          <div class="voice" aria-hidden="true"><svg class="icon"><use href="#i-voice"/></svg></div>
+          <p class="verse small" data-step="1">Call unto me, and I will answer thee, and shew thee great and mighty things, which thou knowest not.<cite>Jeremiah 33:3</cite></p>
+        </div>
+        <div class="col grow" data-step="2">
+          <svg class="branch-svg" viewBox="0 0 200 200" aria-hidden="true">
+            <path class="stump" d="M55 196 L64 140 L136 140 L145 196 Z"/>
+            <ellipse class="stump" cx="100" cy="140" rx="36" ry="8"/>
+            <path class="stem" d="M100 140 C 100 100 90 80 110 40"/>
+            <ellipse class="leaf" cx="122" cy="96" rx="16" ry="7"/>
+            <ellipse class="leaf" cx="82" cy="78" rx="16" ry="7"/>
+            <ellipse class="leaf" cx="126" cy="54" rx="14" ry="6"/>
+            <ellipse class="leaf" cx="108" cy="32" rx="12" ry="6"/>
+          </svg>
+          <p class="verse small">I will cause the <mark>Branch of righteousness</mark> to grow up unto David.<cite>Jeremiah 33:15</cite></p>
+        </div>
+      </div>
+      <p class="big gold" data-step="3" style="text-align: center; margin-top: 40px;">The Branch is Jesus Christ. Through Him, mourning turns to joy.</p>
+      <aside class="notes">
+        <p>Click 1: Jeremiah 33:3, God invites us to call on Him. Ask: what's something you could call on Him about this week?</p>
+        <p>Click 2: a new branch grows from a stump. Israel's family tree looked cut down, but a new Branch would grow from David's family: Jesus Christ.</p>
+      </aside>
+    </section>
+
+    <!-- 17–20. Quiz -->
+    <section class="slide quiz" data-mood="day" data-score data-steps="1">
+      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">15</div></div>
+      <p class="qnum">Question one of four</p>
+      <h2>What did King Jehoiakim do with Jeremiah's scroll?</h2>
+      <div class="choices" data-reveal="1">
+        <button class="opt" type="button"><span class="letter">a</span>Hid it in a cave</button>
+        <button class="opt" type="button" data-correct><span class="letter">b</span>Cut it up and burned it</button>
+        <button class="opt" type="button"><span class="letter">c</span>Framed it in the palace</button>
+        <button class="opt" type="button"><span class="letter">d</span>Sent it to Babylon</button>
+      </div>
+      <p class="answer-note" data-step="1">Jeremiah 36:23</p>
+      <aside class="notes"><p>Split the class into two teams. Scores are in the top-right corner: click + after each question, and click a team name to rename it.</p><p>Click the answer a team gives, or press → to reveal.</p></aside>
+    </section>
+
+    <section class="slide quiz" data-mood="day" data-score data-steps="1">
+      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">15</div></div>
+      <p class="qnum">Question two of four</p>
+      <h2>What did Ebed-melech put under Jeremiah's arms so the ropes wouldn't hurt?</h2>
+      <div class="choices" data-reveal="1">
+        <button class="opt" type="button"><span class="letter">a</span>Pillows</button>
+        <button class="opt" type="button" data-correct><span class="letter">b</span>Old rags</button>
+        <button class="opt" type="button"><span class="letter">c</span>Palm leaves</button>
+        <button class="opt" type="button"><span class="letter">d</span>His own coat</button>
+      </div>
+      <p class="answer-note" data-step="1">Jeremiah 38:11–12</p>
+      <aside class="notes"><p>Bonus question: where was Ebed-melech from? (Ethiopia)</p></aside>
+    </section>
+
+    <section class="slide quiz" data-mood="day" data-score data-steps="1">
+      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">15</div></div>
+      <p class="qnum">Question three of four</p>
+      <h2>In the new covenant, where does the Lord write His law?</h2>
+      <div class="choices" data-reveal="1">
+        <button class="opt" type="button"><span class="letter">a</span>On stone tablets</button>
+        <button class="opt" type="button"><span class="letter">b</span>On the temple walls</button>
+        <button class="opt" type="button"><span class="letter">c</span>On a golden scroll</button>
+        <button class="opt" type="button" data-correct><span class="letter">d</span>In our hearts</button>
+      </div>
+      <p class="answer-note" data-step="1">Jeremiah 31:33</p>
+      <aside class="notes"><p>Ask: what's one commandment you're starting to keep because you want to?</p></aside>
+    </section>
+
+    <section class="slide quiz" data-mood="day" data-score data-steps="1">
+      <div class="timer" aria-hidden="true"><svg viewBox="0 0 150 150"><circle class="track" cx="75" cy="75" r="65"/><circle class="prog" cx="75" cy="75" r="65"/></svg><div class="num">15</div></div>
+      <p class="qnum">Question four of four</p>
+      <h2>Complete the verse: "His compassions fail not. They are new every ____."</h2>
+      <div class="choices" data-reveal="1">
+        <button class="opt" type="button"><span class="letter">a</span>Day</button>
+        <button class="opt" type="button"><span class="letter">b</span>Sabbath</button>
+        <button class="opt" type="button" data-correct><span class="letter">c</span>Morning</button>
+        <button class="opt" type="button"><span class="letter">d</span>Year</button>
+      </div>
+      <p class="answer-note" data-step="1">Lamentations 3:22–23</p>
+      <aside class="notes"><p>Last question. The next slide shows the final score.</p></aside>
+    </section>
+
+    <!-- 21. Results -->
+    <section class="slide center" data-mood="day" id="results" data-fx-enter="fanfare">
+      <span class="kicker">Final score</span>
+      <h2 id="winner">And the winner is…</h2>
+      <div class="final-score">
+        <div class="fs panel"><b id="fs0">0</b><span id="fn0">Team 1</span></div>
+        <div class="fs panel"><b id="fs1">0</b><span id="fn1">Team 2</span></div>
+      </div>
+      <p class="lead" style="margin-top: 40px;">Well played, everyone.</p>
+      <aside class="notes"><p>A little gold dust falls automatically. Congratulate both teams.</p></aside>
+    </section>
+
+    <!-- 22. In short (press W from any slide to jump here) -->
+    <section class="slide" data-mood="day" id="summary">
+      <span class="kicker">In short</span>
+      <h2 style="margin-bottom: 36px;">The Lord turns <span class="accent">mourning into joy</span></h2>
+      <ol class="summary">
+        <li><svg class="icon"><use href="#i-scroll"/></svg><p><b>His word can't be burned away.</b><span class="ref">Jeremiah 36</span></p></li>
+        <li><svg class="icon"><use href="#i-pit"/></svg><p><b>We can lift others out of the pit.</b><span class="ref">Jeremiah 38</span></p></li>
+        <li><svg class="icon"><use href="#i-sun"/></svg><p><b>His mercies are new every morning.</b><span class="ref">Lamentations 3</span></p></li>
+        <li><svg class="icon"><use href="#i-wheat"/></svg><p><b>Nothing is too hard for Him.</b><span class="ref">Jeremiah 32</span></p></li>
+        <li><svg class="icon"><use href="#i-heart"/></svg><p><b>He writes His law in our hearts, through Jesus Christ.</b><span class="ref">Jeremiah 31; 33</span></p></li>
+      </ol>
+      <aside class="notes">
+        <p><b>On time?</b> Point to the list and move on (30 seconds).</p>
+        <p><b>Out of time?</b> Press <b>W</b> from any slide to jump here, then read this aloud (about 2 minutes):</p>
+        <p>"Here's the whole lesson in two minutes. Jeremiah spent about forty years warning Jerusalem to turn back to God, and most people wouldn't listen. When the king heard the Lord's words, he cut up the scroll and burned it. But the Lord simply had Jeremiah write it again, with even more. God's word can't be burned away, and He doesn't give up on people.</p>
+        <p>"Later, Jeremiah's enemies lowered him into a muddy pit and left him there. Nobody spoke up except Ebed-melech, a servant from Ethiopia. He went to the king, gathered thirty men, and even brought old rags so the ropes wouldn't hurt Jeremiah's arms. The Lord protected Ebed-melech because he trusted the Lord. We can be like him: notice who's in a pit, and help kindly.</p>
+        <p>"Then the worst day came. Babylon broke through the walls, burned the city and the temple, and carried the people away. The book of Lamentations is full of tears about it. But right in the middle of that sadness it says, 'His compassions fail not. They are new every morning.'</p>
+        <p>"Even before the city fell, the Lord had Jeremiah buy a field, to show that people would live in the land again. Nothing is too hard for Him.</p>
+        <p>"And He made His biggest promise: someday He would write His law not on stone, but in our hearts, and a Branch would grow from David's family. That Branch is Jesus Christ.</p>
+        <p>"So here's the main point: whatever your worst day is, it doesn't get the last word. Through Jesus Christ, the Lord turns mourning into joy."</p>
+      </aside>
+    </section>
+
+    <!-- 23. Challenge -->
+    <section class="slide" data-mood="day">
+      <span class="kicker">This week</span>
+      <h2>Choose one</h2>
+      <div class="picks">
+        <button class="pick" type="button"><svg class="icon"><use href="#i-cloth"/></svg><h3>Be an Ebed-melech</h3><p>Notice someone "in a pit" and help them out, gently.</p><span class="ref">JEREMIAH 38</span></button>
+        <button class="pick" type="button"><svg class="icon"><use href="#i-voice"/></svg><h3>Call unto Him</h3><p>Pray about something real, and watch for His answer.</p><span class="ref">JEREMIAH 33:3</span></button>
+        <button class="pick" type="button"><svg class="icon"><use href="#i-sun"/></svg><h3>Morning mercies</h3><p>Each morning, write down one thing God has given you.</p><span class="ref">LAMENTATIONS 3:23</span></button>
+      </div>
+      <aside class="notes"><p>Have each person silently choose one. Volunteers can come tap the card they picked.</p></aside>
+    </section>
+
+    <!-- 24. Finale -->
+    <section class="slide center" data-mood="day" data-fx-enter="dust">
+      <svg class="sunrise" viewBox="0 0 360 150" aria-hidden="true" style="margin-bottom: 24px;">
+        <defs><clipPath id="above2"><rect x="0" y="0" width="360" height="120"/></clipPath></defs>
+        <g clip-path="url(#above2)"><g class="lift">
+          <circle class="disc" cx="180" cy="120" r="56"/>
+          <line class="ray" x1="180" y1="44" x2="180" y2="22"/>
+          <line class="ray" x1="128" y1="66" x2="112" y2="50"/>
+          <line class="ray" x1="232" y1="66" x2="248" y2="50"/>
+          <line class="ray" x1="104" y1="104" x2="82" y2="98"/>
+          <line class="ray" x1="256" y1="104" x2="278" y2="98"/>
+        </g></g>
+        <line class="horizon" x1="20" y1="120" x2="340" y2="120"/>
+      </svg>
+      <p class="verse" style="max-width: 1200px; text-align: left;">Then shall the virgin rejoice in the dance, both young men and old together: for <mark>I will turn their mourning into joy</mark>, and will comfort them, and make them rejoice from their sorrow.<cite>Jeremiah 31:13</cite></p>
+      <p class="big gold" style="margin-top: 40px;">Whatever your hardest day is, it does not get the last word.</p>
+      <aside class="notes">
+        <p>Close with your testimony that Jesus Christ is the one who turns mourning into joy.</p>
+      </aside>
+    </section>
+
+    <div class="score" id="score">
+      <div class="team"><span class="tname" title="Click to rename">Team 1</span><span class="tscore">0</span><button type="button" data-team="0" data-delta="-1" aria-label="Minus one">−</button><button class="plus" type="button" data-team="0" data-delta="1" aria-label="Plus one">+</button></div>
+      <div class="team"><span class="tname" title="Click to rename">Team 2</span><span class="tscore">0</span><button type="button" data-team="1" data-delta="-1" aria-label="Minus one">−</button><button class="plus" type="button" data-team="1" data-delta="1" aria-label="Plus one">+</button></div>
+    </div>
+  </main>
+
+  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+  <nav class="controls" aria-label="Presentation controls">
+    <button type="button" id="prevBtn" aria-label="Previous">‹</button>
+    <span class="count" id="count">1 / 1</span>
+    <button type="button" id="nextBtn" aria-label="Next">›</button>
+    <button type="button" id="notesBtn" aria-pressed="false" title="Teacher notes (N)">Notes</button>
+    <button type="button" id="scoreBtn" aria-pressed="false" title="Scoreboard (S)">Score</button>
+    <button type="button" id="soundBtn" aria-pressed="true" title="Sound (M)">Sound on</button>
+    <button type="button" id="fullBtn" title="Full screen (F)">Full screen</button>
+    <button type="button" id="wrapBtn" title="Jump to the summary (W)">Wrap up</button>
+    <button type="button" id="helpBtn" title="Help (?)">?</button>
+  </nav>
+
+  <aside class="notes-panel" id="notesPanel" aria-live="polite"></aside>
+
+  <div class="overlay blackout" id="blackout"></div>
+  <div class="overlay help" id="help" role="dialog" aria-modal="true" aria-label="Controls">
+    <div class="box">
+      <h3>Controls</h3>
+      <table>
+        <tr><td>→ · Space · Page Down · click</td><td>Next (reveals the next part of a slide first)</td></tr>
+        <tr><td>← · Page Up</td><td>Back</td></tr>
+        <tr><td>Click the left edge</td><td>Back</td></tr>
+        <tr><td>Home / End</td><td>First / last slide</td></tr>
+        <tr><td>N</td><td>Teacher notes (visible on the TV as well)</td></tr>
+        <tr><td>S</td><td>Show or hide the team scoreboard</td></tr>
+        <tr><td>B or .</td><td>Black screen</td></tr>
+        <tr><td>F</td><td>Full screen</td></tr>
+        <tr><td>M</td><td>Sound on or off</td></tr>
+        <tr><td>W</td><td>Out of time: jump to the "In short" summary</td></tr>
+      </table>
+      <p style="margin-top: 14px;">Most presentation clickers work as they are. Your place and team scores survive a refresh.</p>
+      <p style="margin-top: 8px;">Full teacher script: <a href="2026-10-26-jeremiah-31-39-notes.html" target="_blank" rel="noopener" style="color: var(--gold-soft);">notes.html</a></p>
+      <button class="close" type="button" id="helpClose">Close</button>
+    </div>
+  </div>
+
+  <div class="fx" id="fx" aria-hidden="true"></div>
+
+  <script>
+    (() => {
+      const stage = document.getElementById("stage");
+      const slides = [...stage.querySelectorAll(".slide")];
+      const $ = (id) => document.getElementById(id);
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let cur = 0;
+      let step = 0;
+
+      // Session storage can throw (private mode, blocked storage); never let that break the lesson.
+      const store = {
+        get(key, fallback) { try { const v = sessionStorage.getItem(key); return v === null ? fallback : JSON.parse(v); } catch { return fallback; } },
+        set(key, value) { try { sessionStorage.setItem(key, JSON.stringify(value)); } catch { /* ignore */ } }
+      };
+
+      /* ---------- Scale the 1600×900 stage to the screen ---------- */
+      function fit() {
+        const s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+        document.documentElement.style.setProperty("--scale", s);
+      }
+      window.addEventListener("resize", fit);
+      fit();
+
+      /* ---------- Stars ---------- */
+      const stars = $("stars");
+      for (let i = 0; i < 110; i++) {
+        const st = document.createElement("i");
+        st.className = "star";
+        st.style.left = Math.random() * 100 + "%";
+        st.style.top = Math.random() * 70 + "%";
+        st.style.animationDelay = (Math.random() * 5).toFixed(2) + "s";
+        stars.appendChild(st);
+      }
+
+      /* ---------- Rising motes of light ---------- */
+      document.querySelectorAll(".floaters").forEach((box) => {
+        for (let i = 0; i < 26; i++) {
+          const m = document.createElement("span");
+          const size = (6 + Math.random() * 16).toFixed(0) + "px";
+          m.className = "floater";
+          m.style.width = m.style.height = size;
+          m.style.left = Math.random() * 100 + "%";
+          m.style.animationDuration = (10 + Math.random() * 10).toFixed(1) + "s";
+          m.style.animationDelay = (-Math.random() * 16).toFixed(1) + "s";
+          box.appendChild(m);
+        }
+      });
+
+      /* ---------- Sound (tiny Web Audio synth, no files) ---------- */
+      let soundOn = store.get("cfm-sound", true);
+      let audio;
+      function tone(freq, start, dur, type = "sine", vol = .1) {
+        if (!soundOn) return;
+        try {
+          audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+          const t = audio.currentTime + start;
+          const o = audio.createOscillator();
+          const g = audio.createGain();
+          o.type = type;
+          o.frequency.setValueAtTime(freq, t);
+          g.gain.setValueAtTime(0, t);
+          g.gain.linearRampToValueAtTime(vol, t + .03);
+          g.gain.exponentialRampToValueAtTime(.001, t + dur);
+          o.connect(g).connect(audio.destination);
+          o.start(t);
+          o.stop(t + dur + .05);
+        } catch { /* audio unavailable */ }
+      }
+      const sounds = {
+        ding() { tone(659, 0, .9, "sine", .09); tone(988, .06, 1.1, "sine", .05); },
+        buzz() { tone(196, 0, .6, "triangle", .07); tone(185, .02, .6, "triangle", .05); },
+        pop() { tone(440, 0, .35, "sine", .08); },
+        chime() { [392, 494, 587, 784].forEach((f, i) => tone(f, i * .28, 2, "sine", .06)); },
+        fanfare() { [523, 659, 784, 1047].forEach((f, i) => tone(f, i * .16, 1.6, "sine", .07)); }
+      };
+
+      /* ---------- Gold dust ---------- */
+      function dust(count = 70, spread = [0, 100]) {
+        if (reduceMotion) return;
+        const fx = $("fx");
+        const colors = ["#ecd9a8", "#d6b26e", "#f5eedf"];
+        for (let i = 0; i < count; i++) {
+          const d = document.createElement("i");
+          const size = (3 + Math.random() * 5).toFixed(1) + "px";
+          d.className = "dust";
+          d.style.width = d.style.height = size;
+          d.style.left = spread[0] + Math.random() * (spread[1] - spread[0]) + "vw";
+          d.style.background = colors[i % colors.length];
+          d.style.boxShadow = "0 0 8px " + colors[i % colors.length];
+          d.style.animationDuration = (4 + Math.random() * 3).toFixed(2) + "s";
+          d.style.animationDelay = (Math.random() * 1.2).toFixed(2) + "s";
+          d.style.setProperty("--drift", (Math.random() * 160 - 80).toFixed(0) + "px");
+          fx.appendChild(d);
+          setTimeout(() => d.remove(), 8500);
+        }
+      }
+      function effect(name) {
+        if (name === "dust" || name === "fanfare") { dust(); sounds.fanfare(); }
+        else if (sounds[name]) sounds[name]();
+      }
+
+      /* ---------- Steps ---------- */
+      function maxStep(s) {
+        let m = +s.dataset.steps || 0;
+        s.querySelectorAll("[data-step]").forEach((e) => { m = Math.max(m, +e.dataset.step); });
+        return m;
+      }
+
+      const hooks = {
+        pit(s, n) {
+          const pulls = Math.max(0, Math.min(5, n - 3));
+          s.querySelector(".pit-scene").style.setProperty("--lift", pulls / 5);
+          $("pullCount").textContent = pulls + " of 5";
+        },
+        results() {
+          const t = teams();
+          t.forEach((team, i) => { $("fs" + i).textContent = team.score; $("fn" + i).textContent = team.name; });
+          const boxes = document.querySelectorAll("#results .fs");
+          boxes.forEach((b) => b.classList.remove("win"));
+          if (t[0].score === t[1].score) {
+            $("winner").textContent = "A tie";
+          } else {
+            const w = t[0].score > t[1].score ? 0 : 1;
+            $("winner").textContent = t[w].name + " wins";
+            boxes[w].classList.add("win");
+          }
+        }
+      };
+
+      function applyStep(s) {
+        const m = maxStep(s);
+        for (let k = 1; k <= m; k++) s.classList.toggle("s" + k, step >= k);
+        s.querySelectorAll("[data-step]").forEach((e) => e.classList.toggle("on", step >= +e.dataset.step));
+        s.querySelectorAll("[data-until]").forEach((e) => e.classList.toggle("gone", step >= +e.dataset.until));
+        s.querySelectorAll(".choices").forEach((c) => {
+          const shown = step >= +c.dataset.reveal;
+          c.classList.toggle("revealed", shown);
+          if (!shown) c.querySelectorAll(".picked").forEach((o) => o.classList.remove("picked"));
+        });
+        s.querySelectorAll("[data-flip]").forEach((t) => t.classList.toggle("flip", step >= +t.dataset.flip));
+        if (hooks[s.id]) hooks[s.id](s, step);
+      }
+
+      function onStepForward(s) {
+        // Sounds and effects for what just appeared
+        s.querySelectorAll(".choices").forEach((c) => {
+          if (+c.dataset.reveal === step) {
+            const picked = c.querySelector(".picked");
+            if (picked && !picked.hasAttribute("data-correct")) sounds.buzz(); else sounds.ding();
+          }
+        });
+        if (s.id === "pit") {
+          if (step >= 4 && step <= 7) { sounds.pop(); tug(); }
+          if (step === 8) { tug(); effect("dust"); }
+        }
+        if (s.querySelector(`[data-flip="${step}"]`)) sounds.pop();
+      }
+
+      function tug() {
+        const crew = document.querySelector(".pit-scene .crew");
+        crew.classList.remove("tug");
+        void crew.offsetWidth;
+        crew.classList.add("tug");
+      }
+
+      /* ---------- Quiz timers ---------- */
+      let timerTick;
+      function startTimer(s) {
+        clearInterval(timerTick);
+        const timer = s.querySelector(".timer");
+        if (!timer) return;
+        const num = timer.querySelector(".num");
+        timer.classList.remove("run", "done");
+        void timer.offsetWidth;
+        if (step > 0) return;
+        timer.classList.add("run");
+        let left = 15;
+        num.textContent = left;
+        timerTick = setInterval(() => {
+          if (slides[cur] !== s || step > 0) { clearInterval(timerTick); return; }
+          left -= 1;
+          num.textContent = Math.max(left, 0);
+          if (left <= 3 && left > 0) tone(880, 0, .15, "sine", .04);
+          if (left <= 0) { clearInterval(timerTick); timer.classList.add("done"); sounds.buzz(); }
+        }, 1000);
+      }
+
+      /* ---------- Navigation ---------- */
+      function render(entering) {
+        const s = slides[cur];
+        slides.forEach((el, i) => {
+          el.classList.toggle("current", i === cur);
+          el.classList.toggle("past", i < cur);
+          el.setAttribute("aria-hidden", i === cur ? "false" : "true");
+          if (i === cur) el.removeAttribute("inert"); else el.setAttribute("inert", "");
+        });
+        document.body.dataset.mood = s.dataset.mood || "night";
+        applyStep(s);
+        updateScoreVisibility();
+        $("count").textContent = (cur + 1) + " / " + slides.length;
+        $("bar").style.width = ((cur + 1) / slides.length * 100) + "%";
+        $("notesPanel").innerHTML = "<h4>Teacher notes · slide " + (cur + 1) + "</h4>" + (s.querySelector(".notes")?.innerHTML || "<p>No notes for this slide.</p>");
+        if (entering) {
+          // Restart entrance animations
+          s.querySelectorAll(".chapter-in > *, .draw, .sunrise .lift, .sunrise .ray").forEach((e) => { e.style.animation = "none"; void e.getBoundingClientRect(); e.style.animation = ""; });
+          startTimer(s);
+          if (s.dataset.fxEnter) setTimeout(() => { if (slides[cur] === s) effect(s.dataset.fxEnter); }, 500);
+        }
+        const hash = "#" + (cur + 1);
+        if (location.hash !== hash) history.replaceState(null, "", hash);
+        store.set("cfm-pos", [cur, step]);
+      }
+
+      function go(index, atEnd) {
+        if (index < 0 || index >= slides.length) return;
+        cur = index;
+        step = atEnd ? maxStep(slides[cur]) : 0;
+        render(true);
+      }
+
+      function next() {
+        const s = slides[cur];
+        if (step < maxStep(s)) {
+          step += 1;
+          applyStep(s);
+          onStepForward(s);
+          store.set("cfm-pos", [cur, step]);
+        } else {
+          go(cur + 1, false);
+        }
+      }
+
+      function prev() {
+        const s = slides[cur];
+        if (step > 0) {
+          step -= 1;
+          applyStep(s);
+          if (s.querySelector(".timer") && step === 0) startTimer(s);
+          store.set("cfm-pos", [cur, step]);
+        } else {
+          go(cur - 1, true);
+        }
+      }
+
+      function jumpTo(n) {
+        const s = slides[cur];
+        if (n <= step) return;
+        step = Math.min(n, maxStep(s));
+        applyStep(s);
+        onStepForward(s);
+        store.set("cfm-pos", [cur, step]);
+      }
+
+      /* ---------- Clicks inside slides ---------- */
+      stage.addEventListener("click", (e) => {
+        const opt = e.target.closest(".opt");
+        if (opt) {
+          const group = opt.closest(".choices");
+          if (group.classList.contains("revealed")) return;
+          group.querySelectorAll(".picked").forEach((o) => o.classList.remove("picked"));
+          opt.classList.add("picked");
+          setTimeout(() => jumpTo(+group.dataset.reveal), 400);
+          return;
+        }
+        const vote = e.target.closest(".vote");
+        if (vote) {
+          const count = vote.querySelector(".vcount");
+          count.textContent = +count.textContent + 1;
+          sounds.pop();
+          const all = [...vote.parentElement.querySelectorAll(".vote")];
+          const total = all.reduce((sum, v) => sum + +v.querySelector(".vcount").textContent, 0);
+          all.forEach((v) => { v.querySelector(".vbar i").style.width = (+v.querySelector(".vcount").textContent / total * 100) + "%"; });
+          return;
+        }
+        const tile = e.target.closest(".tile");
+        if (tile) { tile.classList.toggle("flip"); sounds.pop(); return; }
+        const pick = e.target.closest(".pick");
+        if (pick) {
+          pick.classList.toggle("chosen");
+          if (pick.classList.contains("chosen")) { sounds.ding(); dust(24, [30, 70]); }
+          return;
+        }
+        if (e.target.closest(".card3d")) {
+          if (step === 0) next(); else { step = 0; applyStep(slides[cur]); }
+          return;
+        }
+        if (e.target.closest('[data-action="next"]')) { next(); return; }
+        if (e.target.closest(".score")) return;
+        if (e.target.closest("button, a")) return;
+        // Clicking empty space: left edge goes back, anywhere else goes forward
+        if (e.clientX < window.innerWidth * .15) prev(); else next();
+      });
+
+      /* ---------- Swipe (tablets and phones) ---------- */
+      let touchX = null;
+      stage.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener("touchend", (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) > 60) { e.preventDefault(); if (dx < 0) next(); else prev(); }
+      });
+
+      /* ---------- Scoreboard ---------- */
+      function teams() { return store.get("cfm-teams", [{ name: "Team 1", score: 0 }, { name: "Team 2", score: 0 }]); }
+      function drawTeams(bump) {
+        const t = teams();
+        document.querySelectorAll("#score .team").forEach((el, i) => {
+          el.querySelector(".tname").textContent = t[i].name;
+          const sc = el.querySelector(".tscore");
+          sc.textContent = t[i].score;
+          if (bump === i) { sc.classList.remove("bump"); void sc.offsetWidth; sc.classList.add("bump"); }
+        });
+      }
+      $("score").addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-team]");
+        const t = teams();
+        if (btn) {
+          const i = +btn.dataset.team;
+          t[i].score = Math.max(0, t[i].score + +btn.dataset.delta);
+          store.set("cfm-teams", t);
+          drawTeams(i);
+          if (+btn.dataset.delta > 0) sounds.ding();
+          return;
+        }
+        const nameEl = e.target.closest(".tname");
+        if (nameEl) {
+          const i = [...document.querySelectorAll("#score .tname")].indexOf(nameEl);
+          const name = prompt("Team name:", t[i].name);
+          if (name && name.trim()) { t[i].name = name.trim().slice(0, 18); store.set("cfm-teams", t); drawTeams(); }
+        }
+      });
+      let scoreForced = null;
+      function updateScoreVisibility() {
+        const show = scoreForced === null ? slides[cur].hasAttribute("data-score") && slides[cur].id !== "results" : scoreForced;
+        document.body.classList.toggle("show-score", show);
+        $("scoreBtn").setAttribute("aria-pressed", String(show));
+      }
+      function toggleScore() {
+        scoreForced = !document.body.classList.contains("show-score");
+        updateScoreVisibility();
+      }
+      drawTeams();
+
+      /* ---------- Chrome ---------- */
+      function toggleNotes() {
+        const on = document.body.classList.toggle("show-notes");
+        $("notesBtn").setAttribute("aria-pressed", String(on));
+      }
+      function drawSound() {
+        $("soundBtn").setAttribute("aria-pressed", String(soundOn));
+        $("soundBtn").textContent = soundOn ? "Sound on" : "Sound off";
+      }
+      function toggleSound() {
+        soundOn = !soundOn;
+        store.set("cfm-sound", soundOn);
+        drawSound();
+      }
+      function toggleFull() {
+        if (document.fullscreenElement) document.exitFullscreen?.();
+        else document.documentElement.requestFullscreen?.().catch(() => {});
+      }
+      function toggleHelp(force) { document.body.classList.toggle("show-help", force); }
+      function wrapUp() { go(slides.indexOf($("summary")), false); }
+      drawSound();
+
+      $("prevBtn").addEventListener("click", prev);
+      $("nextBtn").addEventListener("click", next);
+      $("notesBtn").addEventListener("click", toggleNotes);
+      $("scoreBtn").addEventListener("click", toggleScore);
+      $("soundBtn").addEventListener("click", toggleSound);
+      $("fullBtn").addEventListener("click", toggleFull);
+      $("wrapBtn").addEventListener("click", wrapUp);
+      $("helpBtn").addEventListener("click", () => toggleHelp(true));
+      $("helpClose").addEventListener("click", () => toggleHelp(false));
+      $("help").addEventListener("click", (e) => { if (e.target.id === "help") toggleHelp(false); });
+      $("blackout").addEventListener("click", () => document.body.classList.remove("blackout"));
+
+      document.addEventListener("keydown", (e) => {
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        const k = e.key;
+        if (document.body.classList.contains("show-help")) { if (k === "Escape" || k === "?") toggleHelp(false); return; }
+        if (document.body.classList.contains("blackout") && !["b", "B", "."].includes(k)) { document.body.classList.remove("blackout"); return; }
+        if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].includes(k)) { e.preventDefault(); next(); }
+        else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(k)) { e.preventDefault(); prev(); }
+        else if (k === "Home") go(0, false);
+        else if (k === "End") go(slides.length - 1, false);
+        else if (k === "n" || k === "N") toggleNotes();
+        else if (k === "s" || k === "S") toggleScore();
+        else if (k === "m" || k === "M") toggleSound();
+        else if (k === "f" || k === "F") toggleFull();
+        else if (k === "b" || k === "B" || k === ".") document.body.classList.toggle("blackout");
+        else if (k === "w" || k === "W") wrapUp();
+        else if (k === "?") toggleHelp(true);
+        else if (k === "Escape") document.body.classList.remove("show-notes", "blackout");
+      });
+
+      // Hide the control bar when the mouse is still
+      let idleTimer;
+      function wake() {
+        document.body.classList.remove("idle");
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => document.body.classList.add("idle"), 2500);
+      }
+      ["mousemove", "touchstart", "keydown"].forEach((ev) => document.addEventListener(ev, wake, { passive: true }));
+      wake();
+
+      /* ---------- Start where we left off ---------- */
+      const fromHash = parseInt(location.hash.slice(1), 10);
+      const saved = store.get("cfm-pos", [0, 0]);
+      if (fromHash >= 1 && fromHash <= slides.length) {
+        cur = fromHash - 1;
+        step = saved[0] === cur ? Math.min(saved[1], maxStep(slides[cur])) : 0;
+      } else if (Array.isArray(saved) && saved[0] < slides.length) {
+        cur = saved[0];
+        step = Math.min(saved[1], maxStep(slides[cur]));
+      }
+      render(true);
+      window.addEventListener("hashchange", () => {
+        const n = parseInt(location.hash.slice(1), 10);
+        if (n >= 1 && n <= slides.length && n - 1 !== cur) go(n - 1, false);
+      });
+    })();
+  </script>
+</body>
+</html>
